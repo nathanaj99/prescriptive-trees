@@ -28,10 +28,10 @@
 # else x_4 = 1 
 # 
 # I have  generated 5 set of (training,test) datasets as follows. For each set I have also included the original data where I haven’t binarized the continues columns.
-    # Run=1 N_train = 300
+    # Run=1 N_train = 400
     # Run=2 N_train = 400
-    # Run=3 N_train = 500
-    # Run=4 N_train = 300
+    # Run=3 N_train = 400
+    # Run=4 N_train = 400
     # Run=5 N_train = 400
 
 
@@ -49,7 +49,7 @@ setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/")
 ##########################################################################################################
 # Choose the seeds
 seeds = c(123,156,67,1,43)
-N_train_set = c(300,400,500,300,400)
+N_train_set = c(400,400,400,400,400)
 Run = 5
 set.seed(seeds[Run])
 
