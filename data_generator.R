@@ -3,13 +3,13 @@
 # Section 1
 # In this section we generate synthetic data in the following fashion:
 # 1- We pick a seed number
-# 2- we genereate the data with n= 1000 (training) + 60000(test) datapoints
+# 2- we genereate the data with n= N_training + N_test datapoints
 # # x_ij ~ N(0,1) if j is odd
 # # x_ij ~ Bernoulli(0.5) if j is even
 # # j \in {1,...,20}
 # 3- y_0(x) = baseline(x) - 0.5 effect(x) #This is the true outcome under treatment 0
 # 4- y_1(x) = baseline(x) + 0.5 effect(x) #This is the true outcome under treatment 1
-# 5- if P(t=1|x) = [1+exp(-y_0(x))]^-1 > 0.5 then t=1 else t=0 # This is the treatment that each datapoint receives
+# 5- we compute P(t=1|x) = [1+exp(-y_0(x))]^-1 then  t=Bernoulli(P(t=1|x)) # This is the treatment that each datapoint receives
 # 6- For the training set we add noise eps_i ~ N(mean = 0  , sd = 0.1) to the outcome
 # 
 # 
@@ -27,7 +27,12 @@
 # else x <= q_75 then x_3 = x_4 = 1
 # else x_4 = 1 
 # 
-# I have  generated 5 set of (training,test) datasets. For each set I have also included the original data where I haven’t binarized the continues columns.
+# I have  generated 5 set of (training,test) datasets as follows. For each set I have also included the original data where I haven’t binarized the continues columns.
+    # Run=1 N_train = 300
+    # Run=2 N_train = 400
+    # Run=3 N_train = 500
+    # Run=4 N_train = 300
+    # Run=5 N_train = 400
 
 
 library(data.table)
@@ -44,11 +49,12 @@ setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/")
 ##########################################################################################################
 # Choose the seeds
 seeds = c(123,156,67,1,43)
+N_train_set = c(300,400,500,300,400)
 Run = 5
 set.seed(seeds[Run])
 
 
-N_training = 1000
+N_training = N_train_set[Run]
 N_test = 60000
 N  = N_training + N_test
 d = 20 #dimension of the data
@@ -73,12 +79,20 @@ effect <- function (x) {
 }
 
 
+setTreatment <- function (x) {
+  x = as.numeric(x)
+  treatment = rbinom(1,size =1, prob = sigmoid(x))
+  
+  treatment
+}
+
+
 ##########################################################################################################
 # Generating the data
 ##########################################################################################################
 #Generating odd and even columns from normal and bernoulli distribution respectiveley
-odd_cols <- matrix(data = rnorm((N_training + N_test)*d/2, mean=0, sd=1), nrow = N, ncol = d/2)
-even_cols <- matrix(data = rbinom((N_training + N_test)*d/2,size =1, prob = 0.5), nrow = N, ncol = d/2)
+odd_cols <- matrix(data = rnorm((N)*d/2, mean=0, sd=1), nrow = N, ncol = d/2)
+even_cols <- matrix(data = rbinom((N)*d/2,size =1, prob = 0.5), nrow = N, ncol = d/2)
 
 
 mat <- matrix(NA, nrow=N, ncol=d)
@@ -93,9 +107,7 @@ data$y0  =  apply(data, 1, function(x) baseline(x) - 0.5* effect(x) )
 data$y1  =  apply(data, 1, function(x) baseline(x) + 0.5* effect(x) )
 
 # Genreating the treatment each person receives
-data$t = 0
-index <- sigmoid(data$y0) > 0.5
-data$t[index] <- 1
+data$t =  apply(data,1, function(x) setTreatment(x[which(colnames(data)=="y0")]))
 
 
 # Generating the outcome column y
@@ -123,7 +135,6 @@ t_test_data = data[,!(names(data) %in% c("y0","y1","y"))]
 glm.fit <- glm(t ~ ., data = t_train_data, family = "binomial")
 data$prop_score <- predict(glm.fit,newdata = t_test_data,type = "response")
 rm(t_train_data,t_test_data)
-
 
 
 ##########################################################################################################
@@ -186,11 +197,11 @@ data_test_enc = data_enc[(N_training+1):N,]
 
 
 # Save files
-write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
-write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
+write.csv(data_train,paste("data_train",toString(Run),"N",toString(N_training),".csv",sep='_'),row.names = FALSE)
+write.csv(data_test,paste("data_test",toString(Run),"N",toString(N_test),".csv",sep='_'),row.names = FALSE)
 
-write.csv(data_train_enc,paste("data_train_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
-write.csv(data_test_enc,paste("data_test_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
+write.csv(data_train_enc,paste("data_train_enc",toString(Run),"N",toString(N_training),".csv",sep='_'),row.names = FALSE)
+write.csv(data_test_enc,paste("data_test_enc",toString(Run),"N",toString(N_test),".csv",sep='_'),row.names = FALSE)
 
 
 
