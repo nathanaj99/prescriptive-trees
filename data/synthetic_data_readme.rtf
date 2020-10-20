@@ -22,10 +22,24 @@ Section 1\
 \
 \
 Section 2\
-  For the training data, we fit a logisitc regression model to learn the propensity score P(t=1|x) for each entry; we fit the model only on the training data. Column  prop_score shows the predicted propensity score. The true propensity score is [1+exp(-y_0(x))]^-1\
+  For the training data, we fit a logisitc regression model to learn the propensity score P(t=1|x) for each entry; we fit the model only on the training data. The true propensity score is [1+exp(-y_0(x))]^-1.\
+we use the propensity score to predict  P(t|x) for each  datapoint.  \
+\
+prop_score_t  = prop_score*t + (1-t)* (1- prop_score)\
+\
+ Column  prop_score_t shows the predicted P(t | x)\
 \
 \
-Section 3\
+\
+Section 3 \
+We scale y0 and y1 to [0,1]\
+\
+\
+\
+\
+\
+\
+Section 4\
   \
   In this section we categorize the odd columns which are derived from standard normal distribution:\
     (q_25 = qnrom(0.25,mean=0,sd=1) )\

@@ -1,9 +1,10 @@
 # I generate the data through following sections:
-# 
-# Section 1
+#   
+#   
+#   Section 1
 # In this section we generate synthetic data in the following fashion:
-# 1- We pick a seed number
-# 2- we genereate the data with n= N_training + N_test datapoints
+#   1- We pick a seed number
+# 2- we genereate the data with n= N_train + N_test datapoints
 # # x_ij ~ N(0,1) if j is odd
 # # x_ij ~ Bernoulli(0.5) if j is even
 # # j \in {1,...,20}
@@ -14,25 +15,45 @@
 # 
 # 
 # Section 2
-# For the training data, we fit a logisitc regression model to learn the propensity score P(t=1|x) for each entry; we fit the model only on the training data. Column  prop_score shows the predicted propensity score. The true propensity score is [1+exp(-y_0(x))]^-1
+# For the training data, we fit a logisitc regression model to learn the propensity score P(t=1|x) for each entry; we fit the model only on the training data. The true propensity score is [1+exp(-y_0(x))]^-1.
+# we use the propensity score to predict  P(t|x) for each  datapoint.  
+# 
+# prop_score_t  = prop_score*t + (1-t)* (1- prop_score)
+# 
+# Column  prop_score_t shows the predicted P(t | x)
 # 
 # 
-# Section 3
+# 
+# Section 3 
+# We scale y0 and y1 to [0,1]
+# 
+# 
+# 
+# 
+# 
+# 
+# Section 4
 # 
 # In this section we categorize the odd columns which are derived from standard normal distribution:
-# (q_25 = qnrom(0.25,mean=0,sd=1) )
+#   (q_25 = qnrom(0.25,mean=0,sd=1) )
 # 1- first for each column x we create 4 binary columns x_1, x_2, x_3 and x_4
 # if x <= q_25 then x_1 = x_2 = x_3 = x_4 = 1
 # else x <= q_50 then x_2 = x_3 = x_4 = 1
 # else x <= q_75 then x_3 = x_4 = 1
 # else x_4 = 1 
 # 
+# 
+# 
 # I have  generated 5 set of (training,test) datasets as follows. For each set I have also included the original data where I haven’t binarized the continues columns.
-    # Run=1 N_train = 400
-    # Run=2 N_train = 400
-    # Run=3 N_train = 400
-    # Run=4 N_train = 400
-    # Run=5 N_train = 400
+      # # Run=1 N_train = 400
+      # # Run=2 N_train = 400
+      # # Run=3 N_train = 400
+      # # Run=4 N_train = 400
+      # # Run=5 N_train = 400
+
+
+
+
 
 
 library(data.table)
@@ -110,6 +131,19 @@ data$y1  =  apply(data, 1, function(x) baseline(x) + 0.5* effect(x) )
 data$t =  apply(data,1, function(x) setTreatment(x[which(colnames(data)=="y0")]))
 
 
+
+
+#Scaling y0 and y1 to [0,1]
+y0_min_val = min(data$y0)
+y0_max_val = max(data$y0)
+data$y0 <- (data$y0 - y0_min_val)/(y0_max_val-y0_min_val)
+
+y1_min_val = min(data$y1)
+y1_max_val = max(data$y1)
+data$y1 <- (data$y1 - y1_min_val)/(y1_max_val-y1_min_val)
+
+
+
 # Generating the outcome column y
 data$y = data$t*data$y1 + (1-data$t)*data$y0 
 
@@ -133,10 +167,11 @@ t_train_data = data[1:N_training,!(names(data) %in% c("y0","y1","y"))]
 t_test_data = data[,!(names(data) %in% c("y0","y1","y"))]
 
 glm.fit <- glm(t ~ ., data = t_train_data, family = "binomial")
-data$prop_score <- predict(glm.fit,newdata = t_test_data,type = "response")
+data$prop_score_1 <- predict(glm.fit,newdata = t_test_data,type = "response")
 rm(t_train_data,t_test_data)
 
-
+data$prop_score_t <- as.numeric(as.character(data$t))*data$prop_score_1 + (1-as.numeric(as.character(data$t)))*(1-data$prop_score_1)
+data$prop_score_1 <- NULL
 ##########################################################################################################
 # Binarized the odd columns
 ##########################################################################################################
