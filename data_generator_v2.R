@@ -1,49 +1,3 @@
-# I generate the data through following sections:
-#   
-#   
-#   Section 1
-# In this section we generate synthetic data in the following fashion:
-#   1- We pick a seed number
-# 2- we genereate the data with n= N_train + N_test datapoints
-# # x_ij \in {-1,+1} with probability 0.5 if j is odd
-# # x_ij ~ Bernoulli(0.5) if j is even
-# # j \in {1,…,10}
-# 3- y_0(x) = baseline(x) - 0.5 effect(x) #This is the true outcome under treatment 0
-# 4- y_1(x) = baseline(x) + 0.5 effect(x) #This is the true outcome under treatment 1
-# 5- we compute P(t=1|x) = [1+exp(-y_0(x))]^-1 then  t=Bernoulli(P(t=1|x)) # This is the treatment that each datapoint receives
-# 6- For the training set we add noise eps_i ~ N(mean = 0  , sd = 0.1) to the outcome
-# 
-# 
-# Section 2
-# For the training data, we fit a logistic regression model to learn the propensity score P(t=1|x) for each entry; we fit the model only on the training data. The true propensity score is [1+exp(-y_0(x))]^-1.
-# we use the propensity score to predict  P(t|x) for each  datapoint.  
-# 
-# prop_score_t  = prop_score*t + (1-t)* (1- prop_score)
-# 
-# Column  prop_score_t shows the predicted P(t | x)
-# 
-# 
-# 
-# Section 3 
-# We scale y0 and y1 to [0,1]
-# 
-# 
-# 
-# 
-# 
-# I have  generated 5 set of (training,test) datasets as follows. For each set I have also included the original data where I haven’t binarized the continues columns.
-# # Run=1 N_train = 100
-# # Run=2 N_train = 100
-# # Run=3 N_train = 100
-# # Run=4 N_train = 100
-# # Run=5 N_train = 100
-
-
-
-
-
-
-
 library(data.table)
 library(Publish)
 library(caret)
@@ -96,6 +50,19 @@ setTreatment <- function (x) {
 }
 
 
+scalefunc <- function(x){
+  y0_min_val = min(x$y0)
+  y0_max_val = max(x$y0)
+  x$y0 <- (x$y0 - y0_min_val)/(y0_max_val-y0_min_val)
+  
+  y1_min_val = min(x$y1)
+  y1_max_val = max(x$y1)
+  x$y1 <- (x$y1 - y1_min_val)/(y1_max_val-y1_min_val)
+  
+  x
+}
+
+
 ##########################################################################################################
 # Generating the data
 ##########################################################################################################
@@ -119,51 +86,6 @@ data$y1  =  apply(data, 1, function(x) baseline(x) + 0.5* effect(x) )
 data$t =  apply(data,1, function(x) setTreatment(x[which(colnames(data)=="y0")]))
 
 
-
-
-#Scaling y0 and y1 to [0,1]
-y0_min_val = min(data$y0)
-y0_max_val = max(data$y0)
-data$y0 <- (data$y0 - y0_min_val)/(y0_max_val-y0_min_val)
-
-y1_min_val = min(data$y1)
-y1_max_val = max(data$y1)
-data$y1 <- (data$y1 - y1_min_val)/(y1_max_val-y1_min_val)
-
-
-
-# Generating the outcome column y
-data$y = data$t*data$y1 + (1-data$t)*data$y0 
-
-# Some minor steps
-data$t <- as.factor(as.character(data$t))
-for(i in seq(2, d, 2)){
-  data[,i] <- as.factor(as.character(data[,i]))
-}
-
-
-
-# Adding noise to the training data y (the first 1000 indices)
-index = 1:N_training
-data$y[index] = data$y[index] + rnorm(N_training,mean = 0 , sd = 0.1)
-
-
-##########################################################################################################
-# Learning propensity score P(t=1|x) for each entry
-##########################################################################################################
-t_train_data = data[1:N_training,!(names(data) %in% c("y0","y1","y"))]
-t_test_data = data[,!(names(data) %in% c("y0","y1","y"))]
-
-glm.fit <- glm(t ~ ., data = t_train_data, family = "binomial")
-data$prop_score_1 <- predict(glm.fit,newdata = t_test_data,type = "response")
-rm(t_train_data,t_test_data)
-
-data$prop_score_t <- as.numeric(as.character(data$t))*data$prop_score_1 + (1-as.numeric(as.character(data$t)))*(1-data$prop_score_1)
-data$prop_score_1 <- NULL
-
-
-
-
 ##########################################################################################################
 # Splitting data into training and test and save the files
 ##########################################################################################################
@@ -172,6 +94,64 @@ data$prop_score_1 <- NULL
 data_train = data[1:N_training,]
 data_test = data[(N_training+1):N,]
 
+
+
+##########################################################################################################
+# Adding the noise to the  training data
+##########################################################################################################
+
+# Adding noise to the training data y0 and y1
+data_train$y0= data_train$y0 + rnorm(N_training,mean = 0 , sd = 0.1)
+data_train$y1 = data_train$y1 + rnorm(N_training,mean = 0 , sd = 0.1)
+
+
+##########################################################################################################
+# Scaling y0 and y1 to [0,1]
+##########################################################################################################
+data_train <- scalefunc(data_train)
+data_test <- scalefunc(data_test)
+
+##########################################################################################################
+# Generating the outcome column y
+##########################################################################################################
+data_train$y = data_train$t*data_train$y1 + (1-data_train$t)*data_train$y0 
+data_test$y = data_test$t*data_test$y1 + (1-data_test$t)*data_test$y0 
+
+# Some minor steps
+data_train$t <- as.factor(as.character(data_train$t))
+data_test$t <- as.factor(as.character(data_test$t))
+for(i in seq(2, d, 2)){
+  data_train[,i] <- as.factor(as.character(data_train[,i]))
+  data_test[,i] <- as.factor(as.character(data_test[,i]))
+}
+
+
+
+
+##########################################################################################################
+# Learning propensity score P(t=1|x) for each entry
+##########################################################################################################
+t_train_data = data_train[,!(names(data_train) %in% c("y0","y1","y"))]
+t_test_data = data_test[,!(names(data_test) %in% c("y0","y1","y"))]
+
+glm.fit <- glm(t ~ ., data = t_train_data, family = "binomial")
+
+data_train$prop_score_1 <- predict(glm.fit,newdata = t_train_data,type = "response")
+data_test$prop_score_1 <- predict(glm.fit,newdata = t_test_data,type = "response")
+rm(t_train_data,t_test_data)
+
+data_train$prop_score_t <- as.numeric(as.character(data_train$t))*data_train$prop_score_1 + (1-as.numeric(as.character(data_train$t)))*(1-data_train$prop_score_1)
+data_train$prop_score_1 <- NULL
+
+
+data_test$prop_score_t <- as.numeric(as.character(data_test$t))*data_test$prop_score_1 + (1-as.numeric(as.character(data_test$t)))*(1-data_test$prop_score_1)
+data_test$prop_score_1 <- NULL
+
+
+
+##########################################################################################################
+# Save the filess
+##########################################################################################################
 
 # Save files
 write.csv(data_train,paste("data_train",toString(Run),"N",toString(N_training),".csv",sep='_'),row.names = FALSE)
