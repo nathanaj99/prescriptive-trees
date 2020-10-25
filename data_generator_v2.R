@@ -82,7 +82,7 @@ baseline <- function (x) {
 
 effect <- function (x) {
   x = as.numeric(x)
-  value =  (x[1] > 1)*5 - 5
+  value =  (x[1] >= 1)*5 - 5
   
   value 
 }
