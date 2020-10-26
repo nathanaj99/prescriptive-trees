@@ -86,6 +86,17 @@ data$y1  =  apply(data, 1, function(x) baseline(x) + 0.5* effect(x) )
 data$t =  apply(data,1, function(x) setTreatment(x[which(colnames(data)=="y0")]))
 
 
+data$prop_score_t = data$t*sigmoid(data$y0) + (1-data$t)*(1-sigmoid(data$y0))
+
+
+##########################################################################################################
+# Adding the noise to the  data
+##########################################################################################################
+# Adding noise to the data y0 and y1
+data$y0= data$y0 + rnorm(N,mean = 0 , sd = 0.1)
+data$y1 = data$y1 + rnorm(N,mean = 0 , sd = 0.1)
+
+
 ##########################################################################################################
 # Splitting data into training and test and save the files
 ##########################################################################################################
@@ -94,15 +105,6 @@ data$t =  apply(data,1, function(x) setTreatment(x[which(colnames(data)=="y0")])
 data_train = data[1:N_training,]
 data_test = data[(N_training+1):N,]
 
-
-
-##########################################################################################################
-# Adding the noise to the  training data
-##########################################################################################################
-
-# Adding noise to the training data y0 and y1
-data_train$y0= data_train$y0 + rnorm(N_training,mean = 0 , sd = 0.1)
-data_train$y1 = data_train$y1 + rnorm(N_training,mean = 0 , sd = 0.1)
 
 
 ##########################################################################################################
@@ -131,8 +133,8 @@ for(i in seq(2, d, 2)){
 ##########################################################################################################
 # Learning propensity score P(t=1|x) for each entry
 ##########################################################################################################
-t_train_data = data_train[,!(names(data_train) %in% c("y0","y1","y"))]
-t_test_data = data_test[,!(names(data_test) %in% c("y0","y1","y"))]
+t_train_data = data_train[,!(names(data_train) %in% c("y0","y1","y","prop_score_t"))]
+t_test_data = data_test[,!(names(data_test) %in% c("y0","y1","y","prop_score_t"))]
 
 glm.fit <- glm(t ~ ., data = t_train_data, family = "binomial")
 
@@ -140,11 +142,11 @@ data_train$prop_score_1 <- predict(glm.fit,newdata = t_train_data,type = "respon
 data_test$prop_score_1 <- predict(glm.fit,newdata = t_test_data,type = "response")
 rm(t_train_data,t_test_data)
 
-data_train$prop_score_t <- as.numeric(as.character(data_train$t))*data_train$prop_score_1 + (1-as.numeric(as.character(data_train$t)))*(1-data_train$prop_score_1)
+data_train$prop_score_t_pred <- as.numeric(as.character(data_train$t))*data_train$prop_score_1 + (1-as.numeric(as.character(data_train$t)))*(1-data_train$prop_score_1)
 data_train$prop_score_1 <- NULL
 
 
-data_test$prop_score_t <- as.numeric(as.character(data_test$t))*data_test$prop_score_1 + (1-as.numeric(as.character(data_test$t)))*(1-data_test$prop_score_1)
+data_test$prop_score_t_pred <- as.numeric(as.character(data_test$t))*data_test$prop_score_1 + (1-as.numeric(as.character(data_test$t)))*(1-data_test$prop_score_1)
 data_test$prop_score_1 <- NULL
 
 
