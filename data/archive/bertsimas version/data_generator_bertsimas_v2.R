@@ -13,7 +13,7 @@ setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/")
 # Choose the seeds
 seeds = c(123,156,67,1,43)
 N_train_set = c(100,100,100,100,100)
-Run = 5
+Run = 1
 set.seed(seeds[Run])
 
 
@@ -28,7 +28,7 @@ d = 10 #dimension of the data
 ##########################################################################################################
 baseline <- function (x) {
   x = as.numeric(x)
-  value =  x[1] + x[3] + x[5] + x[7] + x[8] + x[9] -2
+  value =  x[1] + x[3] + x[5] + x[7] + x[9] -2.5
   value
 }
 
@@ -36,15 +36,16 @@ baseline <- function (x) {
 
 effect <- function (x) {
   x = as.numeric(x)
-  value =  (x[1] >= 1)*5 - 5
+  value =  (x[1] >= 1)*5 - 2.5
   
   value 
 }
 
 
 setTreatment <- function (x) {
-  x = as.numeric(x)
-  treatment = rbinom(1,size =1, prob = sigmoid(x))
+  y0 = as.numeric(x[1])
+  y1 = as.numeric(x[2])
+  treatment = rbinom(1,size =1, prob = exp(y1)/(exp(y0) + exp(y1)))
   
   treatment
 }
@@ -67,7 +68,7 @@ scalefunc <- function(x){
 # Generating the data
 ##########################################################################################################
 #Generating odd and even columns from normal and bernoulli distribution respectiveley
-odd_cols <- matrix(data = rbinom((N)*d/2,size =1, prob = 0.5), nrow = N, ncol = d/2) * 2 -1
+odd_cols <- matrix(data = rbinom((N)*d/2,size =1, prob = 0.5), nrow = N, ncol = d/2) 
 even_cols <- matrix(data = rbinom((N)*d/2,size =1, prob = 0.5), nrow = N, ncol = d/2)
 
 
@@ -83,11 +84,12 @@ data$y0  =  apply(data, 1, function(x) baseline(x) - 0.5* effect(x) )
 data$y1  =  apply(data, 1, function(x) baseline(x) + 0.5* effect(x) )
 
 # Genreating the treatment each person receives
-data$t =  apply(data,1, function(x) setTreatment(x[which(colnames(data)=="y0")]))
+data$t =  apply(data,1, function(x) setTreatment(x[which(colnames(data)%in% c("y0","y1"))]))
 
 
-data$prop_score_t = data$t*sigmoid(data$y0) + (1-data$t)*(1-sigmoid(data$y0))
-
+data$prop_1 = exp(data$y1)/(exp(data$y0)+exp(data$y1))
+data$prop_score_t = data$t*data$prop_1 + (1-data$t)*(1-data$prop_1)
+data$prop_1 = NULL
 
 ##########################################################################################################
 # Adding the noise to the  data
@@ -156,8 +158,8 @@ data_test$prop_score_1 <- NULL
 ##########################################################################################################
 
 # Save files
-write.csv(data_train,paste("data_train",toString(Run),"N",toString(N_training),".csv",sep='_'),row.names = FALSE)
-write.csv(data_test,paste("data_test",toString(Run),"N",toString(N_test),".csv",sep='_'),row.names = FALSE)
-
+# write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
+# write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
+# 
 
 
