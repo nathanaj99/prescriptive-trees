@@ -11,22 +11,24 @@
 Section 1\
   In this section we generate synthetic data in the following fashion:\
     1- We pick a seed number\
-    2- we genereate the data with n= N_train + N_test datapoints\
+    2- we generate the data with n= N_train + N_test data-points\
         # x_ij ~ N(0,1) if \
         # j \\in \{1,2\}\
     3- y_0(x) = baseline(x) - 0.5 effect(x) #This is the true outcome under treatment 0\
     4- y_1(x) = baseline(x) + 0.5 effect(x) #This is the true outcome under treatment 1\
-    5- we compute P(t=1|x) =threshold # This is the treatment that each datapoint receives\
-    6- We add noise eps_i ~ N(mean = 0  , sd = 0.1) to the outcomes\
+    5- We add noise eps_i ~ N(mean = 0  , sd = 0.1) to the outcomes\
+    6- We have a threshold between 0 and 1. For each person we generate a uniformly random number between 0 and 1. If that random number was <= the threshold then that person would\
+        receive the best treatment suited for that person otherwise he/she get no treatment.\
+    7- so if the person receives the best treatment t then (P(t|x)= threshold) otherwise  P(t|x)=1- threshold\
 \
 \
 Section 2\
-  For the training data, we fit a logisitc regression model to learn the propensity score P(t=1|x) for each entry; we fit the model only on the training data. The true propensity score is [1+exp(-y_0(x))]^-1.\
-we use the propensity score to predict  P(t|x) for each  datapoint.  \
+  For the training data, we fit a logistic regression model to learn the propensity scpre P(t=1|x) for each entry; we fit the model only on the training data. The true propensity score  is explained in item 7 in section 1\
+we use the propensity score to predict  prob_t P(t|x) for each  datapoint.  \
 \
-prop_score_t  = prop_score*t + (1-t)* (1- prop_score)\
+prob_t  = prop_score*t + (1-t)* (1- prop_score)\
 \
- Column  prop_score_t shows the predicted P(t | x)\
+ Column  prob_t shows the predicted P(t | x)\
 \
 \
 \
@@ -53,8 +55,8 @@ Section 4\
 \
 \
 I generate 5 set of (data_train, data_test) (data_train_enc, data_test_enc) for following cases\
-	1) p_threshold = 0.5 N_trian = 100\
-	2) p_threshold = 0.9 N_trian = 100\
+	1) p_threshold = 0.5 N_trian = 100, N_test = 10000\
+	2) p_threshold = 0.9 N_trian = 100, N_test = 10000\
 	\
 	\
 \

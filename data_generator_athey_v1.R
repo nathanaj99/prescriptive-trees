@@ -42,10 +42,6 @@ effect <- function (x) {
 }
 
 
-setTreatment <- function (threshold) {
-  treatment =  rbinom(1,size =1, prob = threshold)
-  treatment
-}
 
 
 scalefunc <- function(x){
@@ -103,13 +99,6 @@ rm(mat)
 data$y0  =  apply(data, 1, function(x) baseline(x) - 0.5* effect(x) )
 data$y1  =  apply(data, 1, function(x) baseline(x) + 0.5* effect(x) )
 
-# Genreating the treatment each person receives
-data$t =  apply(data,1, function(x) setTreatment(threshold))
-
-
-data$prop_1 = threshold
-data$prop_score_t = data$t*data$prop_1 + (1-data$t)*(1-data$prop_1)
-data$prop_1 = NULL
 
 ##########################################################################################################
 # Adding the noise to the  data
@@ -117,6 +106,31 @@ data$prop_1 = NULL
 # Adding noise to the data y0 and y1
 data$y0= data$y0 + rnorm(N,mean = 0 , sd = 0.1)
 data$y1 = data$y1 + rnorm(N,mean = 0 , sd = 0.1)
+
+
+###########################################################
+# Genreating the treatment each person receives
+###########################################################
+# Finding the best possible treatment for each person
+data$best_treatment <- 1
+index <- data$y0 > data$y1
+data$best_treatment[index] <- 0
+# if prob_best <= threshold then that person would receive the best treatment
+data$prob_best <- runif(n=N,min=0,max=1)
+data$threshold <- threshold
+# assigning the treatment using prob_best and best_treatment
+data$t =  1 - data$best_treatment
+index <- data$prob_best <= threshold
+data$t[index] =  data$best_treatment[index]
+
+###########################################################
+# generating the true prob_t P(t|x)
+###########################################################
+data$prob_t = (1-abs(data$best_treatment - data$t))*threshold + abs(data$best_treatment - data$t)*(1-threshold)
+
+data$best_treatment <- NULL
+data$prob_best <- NULL
+data$threshold <- NULL
 
 
 ##########################################################################################################
@@ -157,11 +171,11 @@ data_train$prop_score_1 <- predict(glm.fit,newdata = t_train_data,type = "respon
 data_test$prop_score_1 <- predict(glm.fit,newdata = t_test_data,type = "response")
 rm(t_train_data,t_test_data)
 
-data_train$prop_score_t_pred <- as.numeric(as.character(data_train$t))*data_train$prop_score_1 + (1-as.numeric(as.character(data_train$t)))*(1-data_train$prop_score_1)
+data_train$prob_t_pred <- as.numeric(as.character(data_train$t))*data_train$prop_score_1 + (1-as.numeric(as.character(data_train$t)))*(1-data_train$prop_score_1)
 data_train$prop_score_1 <- NULL
 
 
-data_test$prop_score_t_pred <- as.numeric(as.character(data_test$t))*data_test$prop_score_1 + (1-as.numeric(as.character(data_test$t)))*(1-data_test$prop_score_1)
+data_test$prob_t_pred <- as.numeric(as.character(data_test$t))*data_test$prop_score_1 + (1-as.numeric(as.character(data_test$t)))*(1-data_test$prop_score_1)
 data_test$prop_score_1 <- NULL
 
 
