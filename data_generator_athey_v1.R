@@ -1,7 +1,7 @@
-library(data.table)
-library(Publish)
-library(caret)
-library(sigmoid)
+# library(data.table)
+# library(Publish)
+# library(caret)
+# library(sigmoid)
 
 rm(list=ls())
 graphics.off()
@@ -12,7 +12,7 @@ setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/")
 ##########################################################################################################
 # Choose the seeds
 seeds = c(123,156,67,1,43)
-N_train_set = c(100,100,100,100,100)
+N_train_set = c(500,500,500,500,500)
 Run = 5
 set.seed(seeds[Run])
 threshold = 0.9
