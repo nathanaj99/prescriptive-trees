@@ -101,12 +101,12 @@ class Primal:
             self.model.addConstrs(self.zeta[i, n] == self.z[i, n] for i in self.datapoints)
 
         # self.model.addConstrs(self.z[i, 1] <=1 for i in self.datapoints)
-        # self.model.addConstr(self.b[1, 'V1'] == 1)
+        # self.model.addConstr(self.b[1, 'V1.8'] == 1)
 
 
         # define objective function
         obj = LinExpr(0)
         for i in self.datapoints:
-            obj.add(self.z[i, 1]*(1-self.data.at[i, self.outcome])/self.data.at[i, self.prob_t])
+            obj.add(self.z[i, 1]*(self.data.at[i, self.outcome])/self.data.at[i, self.prob_t])
 
         self.model.setObjective(obj, GRB.MAXIMIZE)

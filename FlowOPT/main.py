@@ -76,13 +76,13 @@ def get_error(primal, tree, b, w, p, local_data, true_outcome_cols):
     for i in local_data.index:
         treatment_i_pred = get_predicted_value(primal, tree, b, w, p, local_data, i)
         pred_outcome = local_data.at[i, true_outcome_cols[treatment_i_pred]]
-        best_outcome = np.inf
+        best_outcome = 0
         for t in primal.treatments_set:
-            if local_data.at[i, true_outcome_cols[t]] < best_outcome:
+            if local_data.at[i, true_outcome_cols[t]] > best_outcome:
                 best_outcome = local_data.at[i, true_outcome_cols[t]]
                 best_treatment = t
 
-        err_i = pred_outcome - best_outcome
+        err_i = best_outcome - pred_outcome
         err += err_i
         if err_i == 0:
             best_found += 1
@@ -141,16 +141,17 @@ def main(argv):
     ##########################################################
     # DataSet specific settings
     ##########################################################
-    features = ['V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9', 'V10']
+    features = ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10',
+                'V2.1', 'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10']
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
     true_outcome_cols = ['y0', 'y1']
     outcome = 'y'
     if prob_type_pred:
-        prob_t = 'prop_score_t_pred'
-        data_train = data_train[data_train.columns[data_train.columns != 'prop_score_t']]
+        prob_t = 'prob_t_pred'
+        data_train = data_train[data_train.columns[data_train.columns != 'prob_t']]
     else:
-        prob_t = 'prop_score_t'
-        data_train = data_train[data_train.columns[data_train.columns != 'prop_score_t_pred']]
+        prob_t = 'prob_t'
+        data_train = data_train[data_train.columns[data_train.columns != 'prob_t_pred']]
     ##########################################################
     # Creating and Solving the problem
     ##########################################################
