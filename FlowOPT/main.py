@@ -70,11 +70,15 @@ def get_predicted_value(primal, tree, b, w, p, local_data, i):
                 current = tree.get_left_children(current)
 
 
-def get_error(primal, tree, b, w, p, local_data, true_outcome_cols):
-    err = 0
+def get_metrics(primal, tree, b, w, p, local_data, true_outcome_cols, treatment_col):
+    regret = 0
     best_found = 0
+    treatment_classification_acc = 0
     for i in local_data.index:
         treatment_i_pred = get_predicted_value(primal, tree, b, w, p, local_data, i)
+        received_treatment = local_data.at[i, treatment_col]
+        if treatment_i_pred == received_treatment:
+            treatment_classification_acc += 1
         pred_outcome = local_data.at[i, true_outcome_cols[treatment_i_pred]]
         best_outcome = 0
         for t in primal.treatments_set:
@@ -82,12 +86,12 @@ def get_error(primal, tree, b, w, p, local_data, true_outcome_cols):
                 best_outcome = local_data.at[i, true_outcome_cols[t]]
                 best_treatment = t
 
-        err_i = best_outcome - pred_outcome
-        err += err_i
-        if err_i == 0:
+        regret_i = best_outcome - pred_outcome
+        regret += regret_i
+        if regret_i == 0:
             best_found += 1
 
-    return err, best_found / len(local_data) * 100
+    return regret, (best_found / len(local_data) * 100), (treatment_classification_acc / len(local_data) * 100)
 
 
 def main(argv):
@@ -120,12 +124,10 @@ def main(argv):
         elif opt in ("-p", "--pred"):
             prob_type_pred = int(arg)
 
-    path = os.getcwd() + '/../data/'
-    print(path)
-    os.chdir(path)
+    data_path = os.getcwd() + '/../data/Athey_N_500/'
 
-    data_train = pd.read_csv(training_file)
-    data_test = pd.read_csv(test_file)
+    data_train = pd.read_csv(data_path + training_file)
+    data_test = pd.read_csv(data_path + test_file)
 
     ##########################################################
     # output setting
@@ -136,7 +138,6 @@ def main(argv):
         branching_limit) + '_pred_' + str(prob_type_pred)
     out_put_path = os.getcwd() + '/../Results/'
     sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
-
 
     ##########################################################
     # DataSet specific settings
@@ -181,20 +182,27 @@ def main(argv):
     ##########################################################
     # Evaluation
     ##########################################################
-    error_train, best_found_train = get_error(primal, tree,
-                                              primal.model.getAttr("X", primal.b),
-                                              primal.model.getAttr("X", primal.w),
-                                              primal.model.getAttr("X", primal.p),
-                                              data_train, true_outcome_cols)
-    error_test, best_found_test = get_error(primal, tree,
-                                            primal.model.getAttr("X", primal.b),
-                                            primal.model.getAttr("X", primal.w),
-                                            primal.model.getAttr("X", primal.p),
-                                            data_test, true_outcome_cols)
-    print("Policy Error train", error_train)
-    print("Best Treatment Found train", best_found_train)
-    print("Policy Error test", error_test)
-    print("Best Treatment Found test", best_found_test)
+    regret_train, best_found_train, treatment_classification_acc_train = get_metrics(primal, tree,
+                                                                                     primal.model.getAttr("X",
+                                                                                                          primal.b),
+                                                                                     primal.model.getAttr("X",
+                                                                                                          primal.w),
+                                                                                     primal.model.getAttr("X",
+                                                                                                          primal.p),
+                                                                                     data_train, true_outcome_cols,
+                                                                                     treatment_col)
+    regret_test, best_found_test, treatment_classification_acc_test = get_metrics(primal, tree,
+                                                                                  primal.model.getAttr("X", primal.b),
+                                                                                  primal.model.getAttr("X", primal.w),
+                                                                                  primal.model.getAttr("X", primal.p),
+                                                                                  data_test, true_outcome_cols,
+                                                                                  treatment_col)
+    print("Policy Regret train (Sum)", regret_train)
+    print("Best Treatment Found train (%)", best_found_train)
+    print("treatment classification acc train (%)", treatment_classification_acc_train)
+    print("Policy Regret test (Sum)", regret_test)
+    print("Best Treatment Found test (%)", best_found_test)
+    print("treatment classification acc test (%)", treatment_classification_acc_test)
 
     ##########################################################
     # writing info to the file
@@ -210,10 +218,13 @@ def main(argv):
              primal.model.getAttr("ObjVal"),
              primal.model.getAttr("MIPGap") * 100,
              solving_time,
-             error_train,
+             regret_train,
              best_found_train,
-             error_test,
-             best_found_test, prob_type_pred
+             treatment_classification_acc_train,
+             regret_test,
+             best_found_test,
+             treatment_classification_acc_test,
+             prob_type_pred
              ])
 
 

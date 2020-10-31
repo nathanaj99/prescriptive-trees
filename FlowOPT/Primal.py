@@ -109,6 +109,10 @@ class Primal:
         # self.model.addConstr(self.w[6, 0] == 1)
         # self.model.addConstr(self.w[7, 1] == 1)
 
+        # self.model.addConstr(self.b[1, 'V1.3'] == 1)
+        # self.model.addConstr(self.w[2, 1] == 1)
+        # self.model.addConstr(self.w[3, 0] == 1)
+
 
 
         # define objective function

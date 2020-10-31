@@ -1,0 +1,92 @@
+Changed value of parameter TimeLimit to 3600.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 10014 rows, 7081 columns and 50098 nonzeros
+Variable types: 7014 continuous, 67 integer (67 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [8e-02, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective -0.0000000
+Presolve removed 4065 rows and 4039 columns
+Presolve time: 0.07s
+Presolved: 5949 rows, 3042 columns, 39301 nonzeros
+Variable types: 2982 continuous, 60 integer (60 binary)
+
+Root relaxation: objective 5.450906e+02, 4186 iterations, 0.31 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  545.09059    0    6   -0.00000  545.09059      -     -    0s
+H    0     0                     280.7313289  545.09059  94.2%     -    0s
+     0     0  544.88392    0   10  280.73133  544.88392  94.1%     -    0s
+     0     0  544.76145    0   14  280.73133  544.76145  94.1%     -    0s
+     0     0  544.70408    0   10  280.73133  544.70408  94.0%     -    0s
+     0     0  544.68762    0   12  280.73133  544.68762  94.0%     -    0s
+     0     0  544.67446    0   11  280.73133  544.67446  94.0%     -    0s
+     0     0  544.65871    0   12  280.73133  544.65871  94.0%     -    0s
+     0     0  544.65080    0   11  280.73133  544.65080  94.0%     -    0s
+     0     0  544.63842    0   12  280.73133  544.63842  94.0%     -    0s
+     0     0  544.63449    0   13  280.73133  544.63449  94.0%     -    0s
+     0     0  544.59661    0   14  280.73133  544.59661  94.0%     -    0s
+     0     0  544.59661    0   14  280.73133  544.59661  94.0%     -    0s
+     0     0  544.59056    0   15  280.73133  544.59056  94.0%     -    0s
+     0     0  544.57814    0   15  280.73133  544.57814  94.0%     -    0s
+     0     0  544.56875    0   14  280.73133  544.56875  94.0%     -    0s
+     0     0  544.56679    0   14  280.73133  544.56679  94.0%     -    0s
+     0     0  544.56642    0   15  280.73133  544.56642  94.0%     -    1s
+     0     0  544.56582    0   16  280.73133  544.56582  94.0%     -    1s
+     0     0  544.56582    0   16  280.73133  544.56582  94.0%     -    1s
+     0     0  544.56582    0   16  280.73133  544.56582  94.0%     -    1s
+H    0     0                     281.4748808  544.56582  93.5%     -    1s
+     0     2  544.56582    0   16  281.47488  544.56582  93.5%     -    1s
+H   27    23                     293.4589620  544.04882  85.4%   301    1s
+H   55    30                     298.4518557  544.04882  82.3%   204    1s
+*   79    28              24     300.0329480  544.04882  81.3%   221    1s
+H  267    65                     300.6558560  542.23592  80.4%   157    3s
+*  331    79              18     307.2011546  541.07645  76.1%   148    3s
+   936   185     cutoff   36       307.20115  535.57821  74.3%   124    5s
+* 2361   332              25     313.2129211  522.22898  66.7%   116    8s
+  3136   375  349.02904   27    2  313.21292  484.21078  54.6%   112   10s
+  5590   211  324.95244   34    2  313.21292  368.20613  17.6%  98.5   15s
+
+Cutting planes:
+  Gomory: 4
+  MIR: 24
+  Flow cover: 2
+
+Explored 6945 nodes (607409 simplex iterations) in 16.46 seconds
+Thread count was 4 (of 4 available processors)
+
+Solution count 9: 313.213 307.201 300.656 ... -0
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.132129210893e+02, best bound 3.132129210893e+02, gap 0.0000%
+
+
+
+#########node  1
+V2.6
+#########node  2
+V2.9
+#########node  3
+V1.9
+#########node  4
+leaf 0
+#########node  5
+leaf 1
+#########node  6
+leaf 1
+#########node  7
+leaf 0
+
+
+Total Solving Time 17.069839000701904
+obj value 313.21292108931823
+Policy Regret train (Sum) 11.158137503034647
+Best Treatment Found train (%) 57.8
+treatment classification acc train (%) 56.8
+Policy Regret test (Sum) 215.47889511700166
+Best Treatment Found test (%) 48.9
+treatment classification acc test (%) 49.519999999999996

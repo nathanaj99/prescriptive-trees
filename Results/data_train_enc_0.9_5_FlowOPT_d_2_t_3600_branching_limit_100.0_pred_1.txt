@@ -1,0 +1,83 @@
+Changed value of parameter TimeLimit to 3600.0
+   Prev: 1e+100  Min: 0.0  Max: 1e+100  Default: 1e+100
+Optimize a model with 10014 rows, 7081 columns and 50098 nonzeros
+Variable types: 7014 continuous, 67 integer (67 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [7e-02, 3e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective -0.0000000
+Presolve removed 4065 rows and 4039 columns
+Presolve time: 0.07s
+Presolved: 5949 rows, 3042 columns, 39301 nonzeros
+Variable types: 2982 continuous, 60 integer (60 binary)
+
+Root relaxation: objective 6.011784e+02, 4325 iterations, 0.43 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  601.17837    0    6   -0.00000  601.17837      -     -    0s
+H    0     0                     330.1162407  601.17837  82.1%     -    0s
+H    0     0                     331.5661483  601.17837  81.3%     -    0s
+     0     0  601.17837    0    7  331.56615  601.17837  81.3%     -    0s
+     0     0  601.11384    0    7  331.56615  601.11384  81.3%     -    0s
+     0     0  601.02008    0    8  331.56615  601.02008  81.3%     -    0s
+     0     0  600.95531    0   11  331.56615  600.95531  81.2%     -    0s
+     0     0  600.95531    0   11  331.56615  600.95531  81.2%     -    0s
+     0     0  600.95531    0    9  331.56615  600.95531  81.2%     -    0s
+     0     0  600.92251    0    9  331.56615  600.92251  81.2%     -    0s
+     0     0  600.92251    0    9  331.56615  600.92251  81.2%     -    0s
+     0     0  600.92251    0    9  331.56615  600.92251  81.2%     -    1s
+     0     2  600.92251    0    9  331.56615  600.92251  81.2%     -    1s
+*   38    24              10     351.6018373  600.45342  70.8%   251    1s
+H   90    39                     352.3068768  600.45342  70.4%   161    1s
+H  312    94                     362.8028703  598.41889  64.9%   142    2s
+*  691   184              20     363.1222318  594.11788  63.6%   132    3s
+*  821   192              30     372.2958125  591.95184  59.0%   128    3s
+  1229   255  442.84202   24    2  372.29581  584.09489  56.9%   121    5s
+H 1892   328                     376.5937155  572.53472  52.0%   114    6s
+* 2493   320              32     388.0293814  544.27081  40.3%   110    7s
+* 2959   298              33     391.1777768  524.11101  34.0%   106    8s
+* 3368   241              30     405.0862698  507.02737  25.2%   104    9s
+  3563   209     cutoff   29       405.08627  492.72034  21.6%   103   10s
+
+Cutting planes:
+  Gomory: 4
+  MIR: 11
+
+Explored 4550 nodes (431237 simplex iterations) in 10.98 seconds
+Thread count was 4 (of 4 available processors)
+
+Solution count 10: 405.086 391.178 388.029 ... 331.566
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.050862698230e+02, best bound 4.050862698230e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.5
+#########node  2
+V1.9
+#########node  3
+V1.2
+#########node  4
+leaf 0
+#########node  5
+leaf 1
+#########node  6
+leaf 0
+#########node  7
+leaf 1
+
+
+Total Solving Time 11.63048791885376
+obj value 405.08626982302144
+Policy Regret train (Sum) 17.40053138044034
+Best Treatment Found train (%) 50.8
+treatment classification acc train (%) 60.6
+Policy Regret test (Sum) 259.4930304665468
+Best Treatment Found test (%) 51.24999999999999
+treatment classification acc test (%) 59.41
