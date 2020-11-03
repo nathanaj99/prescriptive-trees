@@ -5,14 +5,14 @@
 
 rm(list=ls())
 graphics.off()
-setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/")
+setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/Athey_N_100/")
 
 ##########################################################################################################
 # Parameters
 ##########################################################################################################
 # Choose the seeds
 seeds = c(123,156,67,1,43)
-N_train_set = c(500,500,500,500,500)
+N_train_set = c(100,100,100,100,100)
 Run = 5
 set.seed(seeds[Run])
 threshold = 0.9
@@ -100,14 +100,6 @@ data$y0  =  apply(data, 1, function(x) baseline(x) - 0.5* effect(x) )
 data$y1  =  apply(data, 1, function(x) baseline(x) + 0.5* effect(x) )
 
 
-##########################################################################################################
-# Adding the noise to the  data
-##########################################################################################################
-# Adding noise to the data y0 and y1
-data$y0= data$y0 + rnorm(N,mean = 0 , sd = 0.1)
-data$y1 = data$y1 + rnorm(N,mean = 0 , sd = 0.1)
-
-
 ###########################################################
 # Genreating the treatment each person receives
 ###########################################################
@@ -131,6 +123,14 @@ data$prob_t = (1-abs(data$best_treatment - data$t))*threshold + abs(data$best_tr
 data$best_treatment <- NULL
 data$prob_best <- NULL
 data$threshold <- NULL
+
+
+##########################################################################################################
+# Adding the noise to the  data
+##########################################################################################################
+# Adding noise to the data y0 and y1
+data$y0= data$y0 + rnorm(N,mean = 0 , sd = 0.1)
+data$y1 = data$y1 + rnorm(N,mean = 0 , sd = 0.1)
 
 
 ##########################################################################################################
