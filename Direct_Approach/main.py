@@ -124,10 +124,10 @@ def main(argv):
         elif opt in ("-p", "--pred"):
             prob_type_pred = int(arg)
 
-    data_path = os.getcwd() + '/../data/Athey_N_500/'
+    data_path = '../data/direct_approach/'
 
     data_train = pd.read_csv(data_path + training_file)
-    data_test = pd.read_csv(data_path + test_file)
+    """data_test = pd.read_csv(data_path + test_file)
 
     ##########################################################
     # output setting
@@ -137,7 +137,7 @@ def main(argv):
         time_limit) + '_branching_limit_' + str(
         branching_limit) + '_pred_' + str(prob_type_pred)
     out_put_path = os.getcwd() + '/../Results_Direct/'
-    sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
+    sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')"""
 
     ##########################################################
     # DataSet specific settings
@@ -147,21 +147,30 @@ def main(argv):
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
     true_outcome_cols = ['y0', 'y1']
     outcome = 'y'
-    if prob_type_pred:
+    regression = ['reg0', 'reg1']
+    """if prob_type_pred:
         prob_t = 'prob_t_pred'
         data_train = data_train[data_train.columns[data_train.columns != 'prob_t']]
     else:
         prob_t = 'prob_t'
-        data_train = data_train[data_train.columns[data_train.columns != 'prob_t_pred']]
+        data_train = data_train[data_train.columns[data_train.columns != 'prob_t_pred']]"""
     ##########################################################
     # Creating and Solving the problem
     ##########################################################
     tree = Tree.Tree(depth)  # Tree structure: We create a complete binary tree of depth d
-    primal = Primal.Primal(data_train, features, treatment_col, true_outcome_cols, outcome, prob_t, tree,
+    primal = Primal.Primal(data_train, features, treatment_col, true_outcome_cols, outcome, regression, tree,
                            branching_limit,
                            time_limit)
+    primal.create_primal_problem()
+    primal.model.update()
+    primal.model.optimize()
+    print(primal.model.getAttr("X", primal.b))
+    print(primal.model.getAttr("X", primal.zeta))
+    print(primal.model.getAttr('X', primal.p))
+    print(primal.model.getAttr('X', primal.w))
 
-    start_time = time.time()
+
+    """start_time = time.time()
     primal.create_primal_problem()
     primal.model.update()
     primal.model.optimize()
@@ -225,7 +234,7 @@ def main(argv):
              best_found_test,
              treatment_classification_acc_test,
              prob_type_pred
-             ])
+             ])"""
 
 
 if __name__ == "__main__":

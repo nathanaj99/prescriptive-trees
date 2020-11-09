@@ -6,12 +6,12 @@ from gurobipy import *
 
 
 class Primal:
-    def __init__(self, data, features, treatment_col, true_outcome_cols, outcome, prob_t, tree, branching_limit,
+    def __init__(self, data, features, treatment_col, true_outcome_cols, outcome, regression, tree, branching_limit,
                  time_limit):
         self.data = data
         self.datapoints = data.index
         self.treatment = treatment_col
-        self.prob_t = prob_t
+        self.regression = regression
         self.true_outcome_cols = true_outcome_cols
         self.outcome = outcome
 
@@ -45,8 +45,8 @@ class Primal:
         self.p = self.model.addVars(self.tree.Nodes + self.tree.Terminals, vtype=GRB.BINARY, name='p')
         self.w = self.model.addVars(self.tree.Nodes + self.tree.Terminals, self.treatments_set, vtype=GRB.CONTINUOUS, lb=0,
                                     name='w')
-        self.zeta = self.model.addVars(self.datapoints, self.tree.Nodes + self.tree.Terminals, vtype=GRB.CONTINUOUS, lb=0,
-                                       name='zeta')
+        self.zeta = self.model.addVars(self.datapoints, self.tree.Nodes + self.tree.Terminals, self.treatments_set,
+                                       vtype=GRB.CONTINUOUS, lb=0, name='zeta')
         self.z = self.model.addVars(self.datapoints, self.tree.Nodes + self.tree.Terminals, vtype=GRB.CONTINUOUS, lb=0,
                                     name='z')
 
@@ -57,7 +57,7 @@ class Primal:
             n_left = int(self.tree.get_left_children(n))
             n_right = int(self.tree.get_right_children(n))
             self.model.addConstrs(
-                (self.z[i, n] == self.z[i, n_left] + self.z[i, n_right] + self.zeta[i, n]) for i in self.datapoints)
+                (self.z[i, n] == self.z[i, n_left] + self.z[i, n_right] + quicksum(self.zeta[i, n, k] for k in self.treatments_set)) for i in self.datapoints)
 
 
         # z[i,l(n)] <= sum(b[n,f], f if x[i,f]<=0)    forall i, n in Nodes
@@ -89,16 +89,22 @@ class Primal:
 
         # zeta[i,n] <= w[n,T[i]] for all n in N+L, i
         for n in self.tree.Nodes + self.tree.Terminals:
-            self.model.addConstrs(
-                self.zeta[i, n] <= self.w[n, self.data.at[i, self.treatment]] for i in self.datapoints)
+            for k in self.treatments_set:
+                self.model.addConstrs(
+                    self.zeta[i, n, k] <= self.w[n, k] for i in self.datapoints)
 
         # sum(w[n,k], k in treatments) = p[n]
         self.model.addConstrs(
             (quicksum(self.w[n, k] for k in self.treatments_set) == self.p[n]) for n in
             self.tree.Nodes + self.tree.Terminals)
 
+        # 2k
+        for n in self.tree.Nodes + self.tree.Terminals:
+            for i in self.datapoints:
+                self.model.addConstr(quicksum(self.zeta[i, n, k] for k in self.treatments_set) == self.p[n])
+
         for n in self.tree.Terminals:
-            self.model.addConstrs(self.zeta[i, n] == self.z[i, n] for i in self.datapoints)
+            self.model.addConstrs(quicksum(self.zeta[i, n, k] for k in self.treatments_set) == self.z[i, n] for i in self.datapoints)
 
         # self.model.addConstrs(self.z[i, 1] <=1 for i in self.datapoints)
         # self.model.addConstr(self.b[1, 'V1.1'] == 1)
@@ -114,10 +120,10 @@ class Primal:
         # self.model.addConstr(self.w[3, 0] == 1)
 
 
-
         # define objective function
         obj = LinExpr(0)
         for i in self.datapoints:
-            obj.add(self.z[i, 1]*(self.data.at[i, self.outcome])/self.data.at[i, self.prob_t])
-
+            for k in self.treatments_set:
+                for n in self.tree.Nodes + self.tree.Terminals:
+                    obj.add(self.zeta[i, n, k]*(self.data.at[i, self.regression[int(k)]]))
         self.model.setObjective(obj, GRB.MAXIMIZE)
