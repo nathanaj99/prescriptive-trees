@@ -127,7 +127,7 @@ def main(argv):
     data_path = '../data/direct_approach/'
 
     data_train = pd.read_csv(data_path + training_file)
-    """data_test = pd.read_csv(data_path + test_file)
+    data_test = pd.read_csv(data_path + test_file)
 
     ##########################################################
     # output setting
@@ -137,7 +137,7 @@ def main(argv):
         time_limit) + '_branching_limit_' + str(
         branching_limit) + '_pred_' + str(prob_type_pred)
     out_put_path = os.getcwd() + '/../Results_Direct/'
-    sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')"""
+    sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
 
     ##########################################################
     # DataSet specific settings
@@ -161,16 +161,16 @@ def main(argv):
     primal = Primal.Primal(data_train, features, treatment_col, true_outcome_cols, outcome, regression, tree,
                            branching_limit,
                            time_limit)
-    primal.create_primal_problem()
+    """primal.create_primal_problem()
     primal.model.update()
     primal.model.optimize()
     print(primal.model.getAttr("X", primal.b))
     print(primal.model.getAttr("X", primal.zeta))
     print(primal.model.getAttr('X', primal.p))
-    print(primal.model.getAttr('X', primal.w))
+    print(primal.model.getAttr('X', primal.w))"""
 
 
-    """start_time = time.time()
+    start_time = time.time()
     primal.create_primal_problem()
     primal.model.update()
     primal.model.optimize()
@@ -234,7 +234,7 @@ def main(argv):
              best_found_test,
              treatment_classification_acc_test,
              prob_type_pred
-             ])"""
+             ])
 
 
 if __name__ == "__main__":

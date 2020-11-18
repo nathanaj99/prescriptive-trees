@@ -82,6 +82,8 @@ class Primal:
                 self.p[m] for m in self.tree.get_ancestors(n)) == 1) for n in
             self.tree.Terminals)
 
+        #self.model.addConstr(self.p[1] == 0)
+
         # sum(sum(b[n,f], f), n) <= branching_limit
         # self.model.addConstr(
         #     (quicksum(
@@ -99,25 +101,14 @@ class Primal:
             self.tree.Nodes + self.tree.Terminals)
 
         # 2k
-        for n in self.tree.Nodes + self.tree.Terminals:
+        """for n in self.tree.Nodes + self.tree.Terminals:
             for i in self.datapoints:
-                self.model.addConstr(quicksum(self.zeta[i, n, k] for k in self.treatments_set) == self.p[n])
+                self.model.addConstr(quicksum(self.zeta[i, n, k] for k in self.treatments_set) == self.p[n])"""
 
         for n in self.tree.Terminals:
             self.model.addConstrs(quicksum(self.zeta[i, n, k] for k in self.treatments_set) == self.z[i, n] for i in self.datapoints)
 
-        # self.model.addConstrs(self.z[i, 1] <=1 for i in self.datapoints)
-        # self.model.addConstr(self.b[1, 'V1.1'] == 1)
-        # self.model.addConstr(self.b[2, 'V1.4'] == 1)
-        # self.model.addConstr(self.b[3, 'V2.6'] == 1)
-        # self.model.addConstr(self.w[4, 1] == 1)
-        # self.model.addConstr(self.w[5, 1] == 1)
-        # self.model.addConstr(self.w[6, 0] == 1)
-        # self.model.addConstr(self.w[7, 1] == 1)
-
-        # self.model.addConstr(self.b[1, 'V1.3'] == 1)
-        # self.model.addConstr(self.w[2, 1] == 1)
-        # self.model.addConstr(self.w[3, 0] == 1)
+        self.model.addConstrs(self.z[i, 1] ==1 for i in self.datapoints)
 
 
         # define objective function
