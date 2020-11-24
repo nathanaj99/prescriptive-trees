@@ -5,17 +5,17 @@
 
 rm(list=ls())
 graphics.off()
-setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/Athey_N_100/")
+setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/Athey_N_500/")
 
 ##########################################################################################################
 # Parameters
 ##########################################################################################################
 # Choose the seeds
 seeds = c(123,156,67,1,43)
-N_train_set = c(100,100,100,100,100)
-Run = 1
+N_train_set = c(500,500,500,500,500)
+Run = 5
 set.seed(seeds[Run])
-threshold = 0.9
+threshold = 0.1
 
 N_training = N_train_set[Run]
 N_test = 10000
@@ -191,11 +191,11 @@ data_test_enc <- binarize(data_test, names(data_test), d)
 ##########################################################################################################
 
 # Save files
-# write.csv(data_train,paste("data_train_",toString(threshold),'_',toString(Run),".csv",sep=''),row.names = FALSE)
-# write.csv(data_test,paste("data_test_",toString(threshold),'_',toString(Run),".csv",sep=''),row.names = FALSE)
-# 
-# 
-# write.csv(data_train_enc,paste("data_train_enc_",toString(threshold),'_',toString(Run),".csv",sep=''),row.names = FALSE)
-# write.csv(data_test_enc,paste("data_test_enc_",toString(threshold),'_',toString(Run),".csv",sep=''),row.names = FALSE)
-# 
+write.csv(data_train,paste("data_train_",toString(threshold),'_',toString(Run),".csv",sep=''),row.names = FALSE)
+write.csv(data_test,paste("data_test_",toString(threshold),'_',toString(Run),".csv",sep=''),row.names = FALSE)
+
+
+write.csv(data_train_enc,paste("data_train_enc_",toString(threshold),'_',toString(Run),".csv",sep=''),row.names = FALSE)
+write.csv(data_test_enc,paste("data_test_enc_",toString(threshold),'_',toString(Run),".csv",sep=''),row.names = FALSE)
+
 
