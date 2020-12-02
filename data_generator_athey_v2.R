@@ -6,7 +6,7 @@
 
 rm(list=ls())
 graphics.off()
-setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/Athey_v2_2000/")
+setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/Athey_v2_4000/")
 
 
 ##########################################################################################################
@@ -55,12 +55,12 @@ scalefunc <- function(x){
 # Choose the seeds
 seeds = c(123,156,67,1,43)
 
-N_training = 2000
+N_training = 4000
 N_test = 10000
 N  = N_training + N_test
 d = 3 #dimension of the data
 
-# threshold = 0.9
+# threshold = 0.6
 # Run = 1
 
 for(threshold in c(0.1,0.5,0.6,0.75,0.9)){
@@ -176,8 +176,15 @@ for(threshold in c(0.1,0.5,0.6,0.75,0.9)){
     t_train_data = data_train[,!(names(data_train) %in% c("y0","y1","y","prob_t","prob_t_pred_log"))]
     t_test_data = data_test[,!(names(data_test) %in% c("y0","y1","y","prob_t","prob_t_pred_log"))]
     
+    #model <- rpart(t ~ ., data = t_train_data, method = "class", control = rpart.control(maxdepth = 4, minsplit = 20, cp=0.01))
+    train_control<- trainControl(method="repeatedcv", number=10, repeats = 3)
+    model.cv <- train(t ~ ., 
+                      data = t_train_data,
+                      method = "rpart",
+                      trControl = train_control)
     
-    model <- rpart(t ~ ., data = t_train_data, method = "class")
+    model <- model.cv$finalModel
+    
     data_train$prop_score_1  <- predict(model, t_train_data, type = "prob")[,2]
     data_test$prop_score_1  <- predict(model, t_test_data, type = "prob")[,2]
     rm(t_train_data,t_test_data)
@@ -189,6 +196,14 @@ for(threshold in c(0.1,0.5,0.6,0.75,0.9)){
     data_test$prob_t_pred_tree <- as.numeric(as.character(data_test$t))*data_test$prop_score_1 + (1-as.numeric(as.character(data_test$t)))*(1-data_test$prop_score_1)
     data_test$prop_score_1 <- NULL
     
+    # par(xpd = TRUE)
+    # plot(model, compress = TRUE)
+    # text(model, use.n = TRUE)
+    # 
+    # summary(data_train$prob_t_pred_log)
+    # summary(data_train$prob_t_pred_tree)
+    # summary(data_train$prob_t_pred_log - data_train$prob_t)
+    # summary(data_train$prob_t_pred_tree - data_train$prob_t)
     rm(model)
     
     ##########################################################################################################
