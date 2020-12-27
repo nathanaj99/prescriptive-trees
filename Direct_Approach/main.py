@@ -103,11 +103,12 @@ def main(argv):
     branching_limit = None
     time_limit = None
     prob_type_pred = None
+    robust = None
 
     try:
-        opts, args = getopt.getopt(argv, "f:e:d:b:t:p:",
+        opts, args = getopt.getopt(argv, "f:e:d:b:t:p:r:",
                                    ["training_file=", "test_file=", "depth=", "branching_limit=", "time_limit=",
-                                    "pred="])
+                                    "pred=", "robust="])
     except getopt.GetoptError:
         sys.exit(2)
     for opt, arg in opts:
@@ -123,8 +124,10 @@ def main(argv):
             time_limit = int(arg)
         elif opt in ("-p", "--pred"):
             prob_type_pred = int(arg)
+        elif opt in ("-r", "--robust"):
+            robust = arg
 
-    data_path = '../data/direct_approach/'
+    data_path = '../data/direct_v1_500/'
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -136,7 +139,7 @@ def main(argv):
     out_put_name = training_file.split('.csv')[0] + '_' + approach_name + '_d_' + str(depth) + '_t_' + str(
         time_limit) + '_branching_limit_' + str(
         branching_limit) + '_pred_' + str(prob_type_pred)
-    out_put_path = os.getcwd() + '/../Results_Direct/'
+    out_put_path = os.getcwd() + '/../Results_Robust/v1_500/lasso_tree/'
     sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
 
     ##########################################################
@@ -144,21 +147,23 @@ def main(argv):
     ##########################################################
     features = ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10',
                 'V2.1', 'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10']
+
+    #features = ['V1', 'V2', 'V3']
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
     true_outcome_cols = ['y0', 'y1']
     outcome = 'y'
     regression = ['reg0', 'reg1']
-    """if prob_type_pred:
-        prob_t = 'prob_t_pred'
+    if prob_type_pred:
+        prob_t = 'prob_t_pred_tree'
         data_train = data_train[data_train.columns[data_train.columns != 'prob_t']]
     else:
         prob_t = 'prob_t'
-        data_train = data_train[data_train.columns[data_train.columns != 'prob_t_pred']]"""
+        data_train = data_train[data_train.columns[data_train.columns != 'prob_t_pred_tree']]
     ##########################################################
     # Creating and Solving the problem
     ##########################################################
     tree = Tree.Tree(depth)  # Tree structure: We create a complete binary tree of depth d
-    primal = Primal.Primal(data_train, features, treatment_col, true_outcome_cols, outcome, regression, tree,
+    primal = Primal.Primal(data_train, features, treatment_col, true_outcome_cols, outcome, regression, prob_t, robust, tree,
                            branching_limit,
                            time_limit)
     """primal.create_primal_problem()
@@ -216,7 +221,7 @@ def main(argv):
     ##########################################################
     # writing info to the file
     ##########################################################
-    primal.model.write(out_put_path + out_put_name + '.lp')
+    #primal.model.write(out_put_path + out_put_name + '.lp')
     result_file = out_put_name + '.csv'
     with open(out_put_path + result_file, mode='a') as results:
         results_writer = csv.writer(results, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)

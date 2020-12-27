@@ -6,7 +6,7 @@ from gurobipy import *
 
 
 class Primal:
-    def __init__(self, data, features, treatment_col, true_outcome_cols, outcome, regression, tree, branching_limit,
+    def __init__(self, data, features, treatment_col, true_outcome_cols, outcome, regression, prob_t, robust, tree, branching_limit,
                  time_limit):
         self.data = data
         self.datapoints = data.index
@@ -14,6 +14,8 @@ class Primal:
         self.regression = regression
         self.true_outcome_cols = true_outcome_cols
         self.outcome = outcome
+        self.prob_t = prob_t
+        self.robust = robust
 
         self.treatments_set = data[self.treatment].unique()  # set of possible treatments
 
@@ -110,11 +112,19 @@ class Primal:
 
         self.model.addConstrs(self.z[i, 1] ==1 for i in self.datapoints)
 
+        #self.model.addConstr(self.b[1, 'V1'] == 1)
+        #self.model.addConstr(self.b[2, 'V2'] == 1)
+
 
         # define objective function
         obj = LinExpr(0)
         for i in self.datapoints:
-            for k in self.treatments_set:
-                for n in self.tree.Nodes + self.tree.Terminals:
+            for n in self.tree.Nodes + self.tree.Terminals:
+                for k in self.treatments_set:
                     obj.add(self.zeta[i, n, k]*(self.data.at[i, self.regression[int(k)]]))
+                    treat = self.data.at[i, self.treatment]
+                    if self.robust:
+                        if int(treat) == int(k):
+                            obj.add(self.zeta[i, n, k]*(self.data.at[i, self.outcome] - self.data.at[i, self.regression[int(k)]])/self.data.at[i, self.prob_t])
+
         self.model.setObjective(obj, GRB.MAXIMIZE)
