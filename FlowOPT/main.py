@@ -124,7 +124,7 @@ def main(argv):
         elif opt in ("-p", "--pred"):
             prob_type_pred = int(arg)
 
-    data_path = os.getcwd() + '/../data/Athey_N_100/'
+    data_path = os.getcwd() + '/../data/Athey_v1_N_500/'
     # data_path = os.getcwd() + '/../data/Athey_v2_4000/'
 
     data_train = pd.read_csv(data_path + training_file)
@@ -152,11 +152,11 @@ def main(argv):
     true_outcome_cols = ['y0', 'y1']
     outcome = 'y'
     if prob_type_pred:
-        prob_t = 'prob_t_pred'
-        data_train = data_train[data_train.columns[data_train.columns != 'prob_t']]
+        prob_t = 'prob_t_pred_tree'
+        # data_train = data_train[data_train.columns[data_train.columns != 'prob_t']]
     else:
         prob_t = 'prob_t'
-        data_train = data_train[data_train.columns[data_train.columns != 'prob_t_pred']]
+        # data_train = data_train[data_train.columns[data_train.columns != 'prob_t_pred']]
     ##########################################################
     # Creating and Solving the problem
     ##########################################################
