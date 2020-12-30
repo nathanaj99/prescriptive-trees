@@ -220,8 +220,34 @@ def correl_analysis():
     subset = df[y_cols]
     print(subset.corr())
 
-correl_analysis()
+def take_y():
+    for i in range(1, 6):
+        l = []
+        name = '../data/IST/data_test_' + str(i) + '.csv'
+        df = pd.read_csv(name)
+        for index, row in df.iterrows():
+            # take the assigned treatment
+            t = row['t']
+            l.append(row['y' + str(int(t))])
 
+        df['y'] = l
+
+        df.to_csv(name, index=False)
+
+    for i in range(1, 6):
+        l = []
+        name = '../data/IST/data_train_' + str(i) + '.csv'
+        df = pd.read_csv(name)
+        for index, row in df.iterrows():
+            # take the assigned treatment
+            t = row['t']
+            l.append(row['y' + str(int(t))])
+
+        df['y'] = l
+
+        df.to_csv(name, index=False)
+
+take_y()
 
 
 

@@ -127,7 +127,7 @@ def main(argv):
         elif opt in ("-r", "--robust"):
             robust = arg
 
-    data_path = '../data/direct_v1_500/'
+    data_path = ''
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -139,20 +139,21 @@ def main(argv):
     out_put_name = training_file.split('.csv')[0] + '_' + approach_name + '_d_' + str(depth) + '_t_' + str(
         time_limit) + '_branching_limit_' + str(
         branching_limit) + '_pred_' + str(prob_type_pred)
-    out_put_path = os.getcwd() + '/../Results_Robust/v1_500/lasso_tree/'
+    out_put_path = os.getcwd() + '/../Results_IST/Direct/'
     sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
 
     ##########################################################
     # DataSet specific settings
     ##########################################################
-    features = ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10',
-                'V2.1', 'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10']
-
+    #features = ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10',
+     #           'V2.1', 'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10']
+    features = ['SEX', 'AGE', 'RVISINF', 'RSBP', 'RDEF1', 'RDEF2', 'RDEF3', 'RDEF4', 'RDEF5', 'RDEF6', 'RDEF7',
+                'RDEF8', 'RCONSC1', 'RCONSC2', 'RCONSC3', 'STYPE1', 'STYPE2', 'STYPE3', 'STYPE4', 'STYPE5']
     #features = ['V1', 'V2', 'V3']
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
-    true_outcome_cols = ['y0', 'y1']
+    true_outcome_cols = ['y1', 'y2', 'y3', 'y4', 'y5', 'y6']
     outcome = 'y'
-    regression = ['reg0', 'reg1']
+    regression = ['reg1', 'reg2', 'reg3', 'reg4', 'reg5', 'reg6']
     if prob_type_pred:
         prob_t = 'prob_t_pred_tree'
         data_train = data_train[data_train.columns[data_train.columns != 'prob_t']]
