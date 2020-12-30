@@ -12,4 +12,4 @@ probs = [0.1, 0.5, 0.9]
             test_file = 'data_test_enc_' + str(prob) + '_' + str(s) + '.csv'
             primal.main(["-f", training_file, "-e", test_file, "-d", d, "-b", 100, "-t", 3600, "-p", 1, "-r", True])"""
 
-primal.main(["-f", 'cleaned_IST_reg.csv', "-e", 'data_test_0.5_1.csv', "-d", 2, "-b", 100, "-t", 600, "-p", 0, "-r", False])
+primal.main(["-f", 'data_train_1.csv', "-e", 'data_test_1.csv', "-d", 0, "-b", 100, "-t", 3600, "-p", 0, "-r", False])

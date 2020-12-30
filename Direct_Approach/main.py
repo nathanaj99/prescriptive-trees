@@ -1,4 +1,5 @@
 #!/usr/bin/python
+
 from gurobipy import *
 import pandas as pd
 import sys
@@ -79,11 +80,11 @@ def get_metrics(primal, tree, b, w, p, local_data, true_outcome_cols, treatment_
         received_treatment = local_data.at[i, treatment_col]
         if treatment_i_pred == received_treatment:
             treatment_classification_acc += 1
-        pred_outcome = local_data.at[i, true_outcome_cols[treatment_i_pred]]
+        pred_outcome = local_data.at[i, true_outcome_cols[treatment_i_pred-1]]
         best_outcome = 0
         for t in primal.treatments_set:
-            if local_data.at[i, true_outcome_cols[t]] > best_outcome:
-                best_outcome = local_data.at[i, true_outcome_cols[t]]
+            if local_data.at[i, true_outcome_cols[t-1]] > best_outcome:
+                best_outcome = local_data.at[i, true_outcome_cols[t-1]]
                 best_treatment = t
 
         regret_i = best_outcome - pred_outcome
@@ -127,7 +128,7 @@ def main(argv):
         elif opt in ("-r", "--robust"):
             robust = arg
 
-    data_path = ''
+    data_path = '../data/IST/'
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -153,7 +154,7 @@ def main(argv):
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
     true_outcome_cols = ['y1', 'y2', 'y3', 'y4', 'y5', 'y6']
     outcome = 'y'
-    regression = ['reg1', 'reg2', 'reg3', 'reg4', 'reg5', 'reg6']
+    regression = ['ml1', 'ml2', 'ml3', 'ml4', 'ml5', 'ml6']
     if prob_type_pred:
         prob_t = 'prob_t_pred_tree'
         data_train = data_train[data_train.columns[data_train.columns != 'prob_t']]

@@ -247,7 +247,86 @@ def take_y():
 
         df.to_csv(name, index=False)
 
-take_y()
+def recalibrate():
+    file_path = '../data/IST/'
+    #m = {'y1': 'y0', 'y2': 'y1', 'y3': 'y2', 'y4': 'y3', 'y5': 'y4', 'y6': 'y5', 'ml1': 'ml0', 'ml2': 'ml1',
+         #'ml3': 'ml2', 'ml4': 'ml3', 'ml5': 'ml4', 'ml6': 'ml5'}
+    for i in range(1, 6):
+        file_name = 'data_train_' + str(i) + '.csv'
+        df = pd.read_csv(file_path + file_name)
+        df['t'] = df['t'] - 1
+        #df = df.rename(columns=m)
+        df.to_csv(file_path + file_name, index=False)
+
+    for i in range(1, 6):
+        file_name = 'data_test_' + str(i) + '.csv'
+        df = pd.read_csv(file_path + file_name)
+        df['t'] = df['t'] - 1
+       # df = df.rename(columns=m)
+        df.to_csv(file_path + file_name, index=False)
+
+def discretize():
+    # need to discretize age and blood pressure
+    file_dir = '../data/IST/'
+    for i in range(1, 6):
+        file_name = 'data_train_' + str(i) + '.csv'
+        df = pd.read_csv(file_dir + file_name)
+
+        X = df.iloc[:, :20]
+        rest = df.iloc[:, 20:]
+
+        ## DISCRETIZE AGE
+        bins = [0, 25, 64, 100]
+        labels = [1, 2, 3]
+        df['age_bins'] = pd.cut(df['AGE'], bins=bins, labels=labels)
+
+        lb = LabelBinarizer()
+        age = lb.fit_transform(df['age_bins'])
+        age = pd.DataFrame(data=age, columns=['AGE1', 'AGE2', 'AGE3'])
+
+        #print(df[['AGE', 'age_bins']])
+
+        bins = [0, 120, 139, 159, 300]
+        labels = [1, 2, 3, 4]
+        df['rsbp_bins'] = pd.cut(df['RSBP'], bins=bins, labels=labels)
+        rsbp = lb.fit_transform(df['rsbp_bins'])
+        rsbp = pd.DataFrame(data=rsbp, columns=['RSBP1', 'RSBP2', 'RSBP3', 'RSBP4'])
+
+        df = pd.concat([X, age, rsbp, rest], axis=1)
+        df = df.drop(columns=['AGE', 'RSBP'])
+
+        df.to_csv(file_dir + 'data_train_enc_' + str(i) + '.csv', index=False)
+
+    for i in range(1, 6):
+        file_name = 'data_test_' + str(i) + '.csv'
+        df = pd.read_csv(file_dir + file_name)
+
+        X = df.iloc[:, :20]
+        rest = df.iloc[:, 20:]
+
+        ## DISCRETIZE AGE
+        bins = [0, 25, 64, 100]
+        labels = [1, 2, 3]
+        df['age_bins'] = pd.cut(df['AGE'], bins=bins, labels=labels)
+
+        lb = LabelBinarizer()
+        age = lb.fit_transform(df['age_bins'])
+        age = pd.DataFrame(data=age, columns=['AGE1', 'AGE2', 'AGE3'])
+
+        # print(df[['AGE', 'age_bins']])
+
+        bins = [0, 120, 139, 159, 300]
+        labels = [1, 2, 3, 4]
+        df['rsbp_bins'] = pd.cut(df['RSBP'], bins=bins, labels=labels)
+        rsbp = lb.fit_transform(df['rsbp_bins'])
+        rsbp = pd.DataFrame(data=rsbp, columns=['RSBP1', 'RSBP2', 'RSBP3', 'RSBP4'])
+
+        df = pd.concat([X, age, rsbp, rest], axis=1)
+        df = df.drop(columns=['AGE', 'RSBP'])
+
+        df.to_csv(file_dir + 'data_test_enc_' + str(i) + '.csv', index=False)
+
+discretize()
 
 
 

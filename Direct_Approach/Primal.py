@@ -42,6 +42,7 @@ class Primal:
     def create_primal_problem(self):
 
         ############################### define variables
+        print(self.treatments_set)
 
         self.b = self.model.addVars(self.tree.Nodes, self.features, vtype=GRB.BINARY, name='b')
         self.p = self.model.addVars(self.tree.Nodes + self.tree.Terminals, vtype=GRB.BINARY, name='p')
@@ -121,10 +122,10 @@ class Primal:
         for i in self.datapoints:
             for n in self.tree.Nodes + self.tree.Terminals:
                 for k in self.treatments_set:
-                    obj.add(self.zeta[i, n, k]*(self.data.at[i, self.regression[int(k)]]))
+                    obj.add(self.zeta[i, n, k]*(self.data.at[i, self.regression[int(k)-1]]))
                     treat = self.data.at[i, self.treatment]
                     if self.robust:
                         if int(treat) == int(k):
-                            obj.add(self.zeta[i, n, k]*(self.data.at[i, self.outcome] - self.data.at[i, self.regression[int(k)]])/self.data.at[i, self.prob_t])
+                            obj.add(self.zeta[i, n, k]*(self.data.at[i, self.outcome] - self.data.at[i, self.regression[int(k)-1]])/self.data.at[i, self.prob_t])
 
         self.model.setObjective(obj, GRB.MAXIMIZE)
