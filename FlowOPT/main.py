@@ -124,8 +124,9 @@ def main(argv):
         elif opt in ("-p", "--pred"):
             prob_type_pred = int(arg)
 
-    data_path = os.getcwd() + '/../data/Athey_v1_N_500/'
+    # data_path = os.getcwd() + '/../data/Athey_v1_N_500/'
     # data_path = os.getcwd() + '/../data/Athey_v2_4000/'
+    data_path = os.getcwd() + '/../data/IST/'
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -143,13 +144,16 @@ def main(argv):
     ##########################################################
     # DataSet specific settings
     ##########################################################
-    features = ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10',
-                'V2.1', 'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10']
+    # features = ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10',
+    #             'V2.1', 'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10']
 
     # features = ['V1', 'V2', 'V3']
 
+    features = ['SEX', 'AGE', 'RVISINF', 'RSBP', 'RDEF1', 'RDEF2', 'RDEF3', 'RDEF4', 'RDEF5', 'RDEF6', 'RDEF7', 'RDEF8',
+                'RCONSC1', 'RCONSC2', 'RCONSC3', 'STYPE1', 'STYPE2', 'STYPE3', 'STYPE4', 'STYPE5']
+
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
-    true_outcome_cols = ['y0', 'y1']
+    true_outcome_cols = ['y0', 'y1', 'y2', 'y3', 'y4', 'y5']
     outcome = 'y'
     if prob_type_pred:
         prob_t = 'prob_t_pred_tree'

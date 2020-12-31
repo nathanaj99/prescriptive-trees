@@ -80,6 +80,12 @@ for(Run in c(1,2,3,4,5)){
   ##########################################################################################################
   
   # Save files
-  write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
-  write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
+  # write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
+  # write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
+}
+
+st = ""
+for(s in names(data)){
+  s = paste('\'',s,'\'',sep = "")
+  st = paste(st,",",s,sep = "")
 }
