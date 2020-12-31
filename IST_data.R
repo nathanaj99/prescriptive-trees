@@ -6,7 +6,7 @@
 
 rm(list=ls())
 graphics.off()
-setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/IST/")
+setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/IST_2000/")
 
 
 ##########################################################################################################
@@ -33,7 +33,8 @@ for(Run in c(1,2,3,4,5)){
   # Splitting data into training and test 
   ##########################################################################################################
   ## 75% of the sample size
-  smp_size <- floor(training_portion * nrow(data))
+  # smp_size <- floor(training_portion * nrow(data))
+  smp_size = 2000
   
   ## set the seed to make your partition reproducible
   train_ind <- sample(seq_len(nrow(data)), size = smp_size)
@@ -80,12 +81,12 @@ for(Run in c(1,2,3,4,5)){
   ##########################################################################################################
   
   # Save files
-  # write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
-  # write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
 }
 
-st = ""
-for(s in names(data)){
-  s = paste('\'',s,'\'',sep = "")
-  st = paste(st,",",s,sep = "")
-}
+# st = ""
+# for(s in names(data)){
+#   s = paste('\'',s,'\'',sep = "")
+#   st = paste(st,",",s,sep = "")
+# }
