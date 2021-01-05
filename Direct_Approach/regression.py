@@ -9,7 +9,7 @@ datasets = [1, 2, 3, 4, 5]
 for dataset in datasets:
     file_name = 'data_train_' + str(dataset) + '.csv'
     #file_name_enc = 'data_train_' + str(dataset) + '.csv'
-    df = pd.read_csv('../data/IST/' + file_name)
+    df = pd.read_csv('../data/IST_2000/' + file_name)
     #df_enc = pd.read_csv('../data/IST/' + file_name_enc)
     t_unique = df['t'].unique()
     test = {}
@@ -24,13 +24,13 @@ for dataset in datasets:
         test[i] = lr
 
 
-    for i in range(1, 7):
+    for i in range(6):
         model = test[i]
         X = df.iloc[:, :20]
         prediction = model.predict(X)
         df['ml' + str(i)] = prediction
 
-    df.to_csv('../data/IST/' + file_name, index=False)
+    df.to_csv('../data/IST_2000/' + file_name, index=False)
 
 
 """df = pd.read_csv('cleaned_IST1.csv')

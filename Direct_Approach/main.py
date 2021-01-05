@@ -80,11 +80,11 @@ def get_metrics(primal, tree, b, w, p, local_data, true_outcome_cols, treatment_
         received_treatment = local_data.at[i, treatment_col]
         if treatment_i_pred == received_treatment:
             treatment_classification_acc += 1
-        pred_outcome = local_data.at[i, true_outcome_cols[treatment_i_pred-1]]
+        pred_outcome = local_data.at[i, true_outcome_cols[treatment_i_pred]]
         best_outcome = 0
         for t in primal.treatments_set:
-            if local_data.at[i, true_outcome_cols[t-1]] > best_outcome:
-                best_outcome = local_data.at[i, true_outcome_cols[t-1]]
+            if local_data.at[i, true_outcome_cols[t]] > best_outcome:
+                best_outcome = local_data.at[i, true_outcome_cols[t]]
                 best_treatment = t
 
         regret_i = best_outcome - pred_outcome
@@ -128,7 +128,7 @@ def main(argv):
         elif opt in ("-r", "--robust"):
             robust = arg
 
-    data_path = '../data/IST/'
+    data_path = '../data/IST_2000/'
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -148,13 +148,13 @@ def main(argv):
     ##########################################################
     #features = ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10',
      #           'V2.1', 'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10']
-    features = ['SEX', 'AGE', 'RVISINF', 'RSBP', 'RDEF1', 'RDEF2', 'RDEF3', 'RDEF4', 'RDEF5', 'RDEF6', 'RDEF7',
+    features = ['SEX', 'AGE1', 'AGE2', 'AGE3', 'RVISINF', 'RSBP1', 'RSBP2', 'RSBP3', 'RDEF1', 'RDEF2', 'RDEF3', 'RDEF4', 'RDEF5', 'RDEF6', 'RDEF7',
                 'RDEF8', 'RCONSC1', 'RCONSC2', 'RCONSC3', 'STYPE1', 'STYPE2', 'STYPE3', 'STYPE4', 'STYPE5']
     #features = ['V1', 'V2', 'V3']
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
-    true_outcome_cols = ['y1', 'y2', 'y3', 'y4', 'y5', 'y6']
+    true_outcome_cols = ['y0', 'y1', 'y2', 'y3', 'y4', 'y5']
     outcome = 'y'
-    regression = ['ml1', 'ml2', 'ml3', 'ml4', 'ml5', 'ml6']
+    regression = ['ml0', 'ml1', 'ml2', 'ml3', 'ml4', 'ml5']
     if prob_type_pred:
         prob_t = 'prob_t_pred_tree'
         data_train = data_train[data_train.columns[data_train.columns != 'prob_t']]

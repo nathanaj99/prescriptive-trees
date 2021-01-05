@@ -136,7 +136,6 @@ def learn():
         print(lr.score(X_test, y_test))
         test_predict = lr.predict(X_test)
 
-
         error = y_test - test_predict
         mu, std = norm.fit(error)
         print(mu, std)
@@ -221,9 +220,9 @@ def correl_analysis():
     print(subset.corr())
 
 def take_y():
-    for i in range(1, 6):
+    """for i in range(1, 6):
         l = []
-        name = '../data/IST/data_test_' + str(i) + '.csv'
+        name = '../data/IST_2000/data_test_' + str(i) + '.csv'
         df = pd.read_csv(name)
         for index, row in df.iterrows():
             # take the assigned treatment
@@ -236,7 +235,7 @@ def take_y():
 
     for i in range(1, 6):
         l = []
-        name = '../data/IST/data_train_' + str(i) + '.csv'
+        name = '../data/IST_2000/data_train_' + str(i) + '.csv'
         df = pd.read_csv(name)
         for index, row in df.iterrows():
             # take the assigned treatment
@@ -245,29 +244,32 @@ def take_y():
 
         df['y'] = l
 
-        df.to_csv(name, index=False)
+        df.to_csv(name, index=False)"""
+
 
 def recalibrate():
-    file_path = '../data/IST/'
-    #m = {'y1': 'y0', 'y2': 'y1', 'y3': 'y2', 'y4': 'y3', 'y5': 'y4', 'y6': 'y5', 'ml1': 'ml0', 'ml2': 'ml1',
-         #'ml3': 'ml2', 'ml4': 'ml3', 'ml5': 'ml4', 'ml6': 'ml5'}
+    file_path = '../data/IST_2000/'
+    m = {'y1': 'y0', 'y2': 'y1', 'y3': 'y2', 'y4': 'y3', 'y5': 'y4', 'y6': 'y5', 'ml1': 'ml0', 'ml2': 'ml1',
+         'ml3': 'ml2', 'ml4': 'ml3', 'ml5': 'ml4', 'ml6': 'ml5'}
     for i in range(1, 6):
         file_name = 'data_train_' + str(i) + '.csv'
         df = pd.read_csv(file_path + file_name)
-        df['t'] = df['t'] - 1
-        #df = df.rename(columns=m)
+        #df['t'] = df['t'] - 1
+        df = df.rename(columns=m)
         df.to_csv(file_path + file_name, index=False)
 
     for i in range(1, 6):
         file_name = 'data_test_' + str(i) + '.csv'
         df = pd.read_csv(file_path + file_name)
-        df['t'] = df['t'] - 1
-       # df = df.rename(columns=m)
+        #df['t'] = df['t'] - 1
+        df = df.rename(columns=m)
         df.to_csv(file_path + file_name, index=False)
+
 
 def discretize():
     # need to discretize age and blood pressure
-    file_dir = '../data/IST/'
+
+    """file_dir = '../data/IST_2000/'
     for i in range(1, 6):
         file_name = 'data_train_' + str(i) + '.csv'
         df = pd.read_csv(file_dir + file_name)
@@ -278,19 +280,55 @@ def discretize():
         ## DISCRETIZE AGE
         bins = [0, 25, 64, 100]
         labels = [1, 2, 3]
+
         df['age_bins'] = pd.cut(df['AGE'], bins=bins, labels=labels)
+        buffer = df['age_bins'][0]
+        df['age_bins'][0] = 1
+        #print(df['age_bins'][0]
 
         lb = LabelBinarizer()
         age = lb.fit_transform(df['age_bins'])
-        age = pd.DataFrame(data=age, columns=['AGE1', 'AGE2', 'AGE3'])
+        for i in range(len(age)):
+            if age[i][0] == 1:
+                age[i] = [1, 1, 1]
+            elif age[i][1] == 1:
+                age[i] = [0, 1, 1]
 
-        #print(df[['AGE', 'age_bins']])
+        print(age)
+
+        age = pd.DataFrame(data=age, columns=['AGE1', 'AGE2', 'AGE3'])
+        # 001 --> 001
+        # 010 --> 011
+        # 100 --> 111
+
+
+        if buffer == 2:
+            age.iloc[0, :] = [0, 1, 1]
+        elif buffer == 3:
+            age.iloc[0, :] = [0, 0, 1]
+
 
         bins = [0, 120, 139, 159, 300]
         labels = [1, 2, 3, 4]
         df['rsbp_bins'] = pd.cut(df['RSBP'], bins=bins, labels=labels)
         rsbp = lb.fit_transform(df['rsbp_bins'])
+
+        for i in range(len(rsbp)):
+            if rsbp[i][0] == 1:
+                rsbp[i] = [1, 1, 1, 1]
+            elif rsbp[i][1] == 1:
+                rsbp[i] = [0, 1, 1, 1]
+            elif rsbp[i][2] == 1:
+                rsbp[i] = [0, 0, 1, 1]
+
         rsbp = pd.DataFrame(data=rsbp, columns=['RSBP1', 'RSBP2', 'RSBP3', 'RSBP4'])
+
+        print(rsbp)
+
+        # 0001 --> 0001
+        # 0010 --> 0011
+        # 0100 --> 0111
+        # 1000 --> 1111
 
         df = pd.concat([X, age, rsbp, rest], axis=1)
         df = df.drop(columns=['AGE', 'RSBP'])
@@ -311,6 +349,12 @@ def discretize():
 
         lb = LabelBinarizer()
         age = lb.fit_transform(df['age_bins'])
+
+        for i in range(len(age)):
+            if age[i][0] == 1:
+                age[i] = [1, 1, 1]
+            elif age[i][1] == 1:
+                age[i] = [0, 1, 1]
         age = pd.DataFrame(data=age, columns=['AGE1', 'AGE2', 'AGE3'])
 
         # print(df[['AGE', 'age_bins']])
@@ -319,15 +363,65 @@ def discretize():
         labels = [1, 2, 3, 4]
         df['rsbp_bins'] = pd.cut(df['RSBP'], bins=bins, labels=labels)
         rsbp = lb.fit_transform(df['rsbp_bins'])
+
+        for i in range(len(rsbp)):
+            if rsbp[i][0] == 1:
+                rsbp[i] = [1, 1, 1, 1]
+            elif rsbp[i][1] == 1:
+                rsbp[i] = [0, 1, 1, 1]
+            elif rsbp[i][2] == 1:
+                rsbp[i] = [0, 0, 1, 1]
         rsbp = pd.DataFrame(data=rsbp, columns=['RSBP1', 'RSBP2', 'RSBP3', 'RSBP4'])
+
+
 
         df = pd.concat([X, age, rsbp, rest], axis=1)
         df = df.drop(columns=['AGE', 'RSBP'])
 
-        df.to_csv(file_dir + 'data_test_enc_' + str(i) + '.csv', index=False)
+        df.to_csv(file_dir + 'data_test_enc_' + str(i) + '.csv', index=False)"""
+
+    df = pd.read_csv('cleaned_IST.csv')
+
+    X = df.iloc[:, :20]
+    rest = df.iloc[:, 20:]
+
+    ## DISCRETIZE AGE
+    bins = [0, 25, 64, 100]
+    labels = [1, 2, 3]
+    df['age_bins'] = pd.cut(df['AGE'], bins=bins, labels=labels)
+
+    lb = LabelBinarizer()
+    age = lb.fit_transform(df['age_bins'])
+
+    for i in range(len(age)):
+        if age[i][0] == 1:
+            age[i] = [1, 1, 1]
+        elif age[i][1] == 1:
+            age[i] = [0, 1, 1]
+    age = pd.DataFrame(data=age, columns=['AGE1', 'AGE2', 'AGE3'])
+
+    # print(df[['AGE', 'age_bins']])
+
+    bins = [0, 120, 139, 159, 300]
+    labels = [1, 2, 3, 4]
+    df['rsbp_bins'] = pd.cut(df['RSBP'], bins=bins, labels=labels)
+    rsbp = lb.fit_transform(df['rsbp_bins'])
+
+    for i in range(len(rsbp)):
+        if rsbp[i][0] == 1:
+            rsbp[i] = [1, 1, 1, 1]
+        elif rsbp[i][1] == 1:
+            rsbp[i] = [0, 1, 1, 1]
+        elif rsbp[i][2] == 1:
+            rsbp[i] = [0, 0, 1, 1]
+    rsbp = pd.DataFrame(data=rsbp, columns=['RSBP1', 'RSBP2', 'RSBP3', 'RSBP4'])
+
+    df = pd.concat([X, age, rsbp, rest], axis=1)
+    df = df.drop(columns=['AGE', 'RSBP'])
+
+    df.to_csv('cleaned_IST.csv', index=False)
 
 discretize()
-
 
 
 #prediction += error
