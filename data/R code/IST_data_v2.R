@@ -6,7 +6,7 @@
 
 rm(list=ls())
 graphics.off()
-setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/IST_5000/")
+setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/IST_2000_binary/")
 
 
 ##########################################################################################################
@@ -23,8 +23,8 @@ training_portion = 0.75
 ##########################################################################################################
 # read data
 ##########################################################################################################
-data <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approach/cleaned_IST.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
-data_enc <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approach/cleaned_IST_enc.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
+data <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approach/cleaned_IST_FDENNIS.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
+data_enc <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approach/cleaned_IST_FDENNIS_enc.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
 data$t <- as.factor(data$t)
 data_enc$t <- as.factor(data_enc$t)
 
@@ -35,7 +35,7 @@ for(Run in c(1,2,3,4,5)){
   ##########################################################################################################
   ## 75% of the sample size
   # smp_size <- floor(training_portion * nrow(data))
-  smp_size = 5000
+  smp_size = 2000
   
   ## set the seed to make your partition reproducible
   train_ind <- sample(seq_len(nrow(data)), size = smp_size)
