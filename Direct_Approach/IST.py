@@ -38,7 +38,7 @@ def preprocessing():
     df = df[~df['t'].isna()]
     df['t'] = df['t'].astype(int)
 
-    binary_map = {'Y': 1, 'N': 0, 'U': 0}
+    binary_map = {'Y': 1, 'N': 0, 'U': 0, 'y': 1, 'n': 0}
 
     y_cols = ['FRECOVER', 'DALIVE', 'FDENNIS', 'DRSISC', 'DRSH', 'DRSUNK', 'DPE', 'DSIDE']
 
@@ -64,14 +64,14 @@ def preprocessing():
     df['DRSUNK'] = df['DRSUNK'].fillna(0)
     df['DALIVE'] = df['DALIVE'].fillna(0)
 
-    df['y'] = 2 * df['FRECOVER'] + df['DALIVE'] - 2 * df['DIED'] - df['FDENNIS'] - df['recurrent'] - 0.5 * df['DPE'] - 0.3 * df['DSIDE']
+    """df['y'] = 2 * df['FRECOVER'] + df['DALIVE'] - 2 * df['DIED'] - df['FDENNIS'] - df['recurrent'] - 0.5 * df['DPE'] - 0.3 * df['DSIDE']
     maximum = max(df['y'])
     minimum = min(df['y'])
-    df['y'] = (df['y'] - minimum)/(maximum - minimum)
+    df['y'] = (df['y'] - minimum)/(maximum - minimum)"""
 
     X = df.iloc[:, :14].reset_index().drop(columns=['index'])
     #norm = Normalizer()
-    y = df['y'].reset_index().drop(columns=['index'])
+    #y = df['y'].reset_index().drop(columns=['index'])
     #print(y)
     t = df['t'].reset_index().drop(columns=['index'])
 
@@ -97,14 +97,18 @@ def preprocessing():
     X = X.drop(columns=['RCONSC', 'STYPE'])
     X = pd.concat([X, rconsc, stype], axis=1)
 
-    df = pd.concat([X, y, t], axis=1)
+    y_cols = ['FRECOVER', 'DALIVE', 'FDENNIS', 'DPE', 'DSIDE', 'DIED', 'recurrent']
+    y = df[y_cols]
+    print(t.iloc[60:70, :])
 
-    df.to_csv('IST_buffer.csv', index=False)
+    df = pd.concat([X, t, y], axis=1, join='inner')
 
+    df.to_csv('IST_buffer1.csv', index=False)
 
 
 def learn():
     df = pd.read_csv('IST_buffer.csv')
+    #df['t'] = df['t'] - 1
 
     t_unique = df['t'].unique()
     test = {}
@@ -202,6 +206,164 @@ def learn():
     #df = df.rename(columns={'DIED':'y'})
     df.to_csv('cleaned_IST.csv', index=False)
 
+def learn_binary():
+    df = pd.read_csv('IST_buffer1.csv')
+    y_col = 'FDENNIS'
+    #df['t'] = df['t'] - 1
+    t_unique = df['t'].unique()
+    print(t_unique)
+
+    test = {}
+    errors = {}
+    for i in t_unique:
+        buffer = df[df['t'] == i]
+        X = buffer.iloc[:, :20]
+        y = buffer[y_col]
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+        # Apply SMOTE to only training data
+        smote = SMOTE(sampling_strategy=1.0)
+        X_train, y_train = smote.fit_resample(X_train, y_train)
+
+        # ADASYN is promising
+        # KMeans SMOTE
+
+        parameters = {'max_depth': range(5, 30)}
+        clf = GridSearchCV(RandomForestClassifier(), parameters, n_jobs=-1, cv=5, scoring='accuracy')
+        #C = {'C': np.logspace(-4, 4, 20)}
+        #clf = GridSearchCV(LogisticRegression(max_iter=1000, solver='saga'), C, n_jobs=-1, cv=5, scoring='accuracy')
+        clf.fit(X_train, y_train)
+        lr = clf.best_estimator_
+        print(lr.score(X_test, y_test))
+        test_predict = lr.predict(X_test)
+
+        tn, fp, fn, tp = skm.confusion_matrix(y_test, test_predict).ravel()
+        # print(tn, fp, fn, tp)
+        tpr = tp / float(tp + fn)
+        tnr = tn / float(tn + fp)
+        print(tpr, tnr)
+
+        test[i] = lr
+        errors[i] = [tpr, tnr]
+
+    # Predict on current training set, and find the respective errors
+    # visualize errors on train and test set (split first)
+    # pred_y = lr.predict(X)
+
+    for i in range(len(t_unique)):
+        model = test[i]
+        X = df.iloc[:, :20]
+        prediction = model.predict(X)
+
+        """for idx, pred in enumerate(prediction):
+            if pred == 1:
+                error = np.random.binomial(1, errors[i][0]) # tpr
+            else:
+                error = np.random.binomial(1, errors[i][1]) #tnr
+            #print(pred)
+
+            # if error 1, don't change, if 0, then change
+            if error == 0:
+                pred ^= 1
+                prediction[idx] = pred
+            #print(error, pred)"""
+
+        df['y' + str(i)] = prediction
+
+    l = []
+    X = df.iloc[:, :20]
+    for index, row in df.iterrows():
+        # take the assigned treatment
+        t = row['t']
+        l.append(row['y' + str(int(t))])
+
+    df['y'] = l
+    y = df['y']
+    real = df[['y0', 'y1', 'y2', 'y3', 'y4', 'y5']]
+    t = df['t']
+    df1 = pd.concat([X, y, t, real], axis=1)
+    df1.to_csv('cleaned_IST_FDENNIS.csv', index=False)
+
+
+
+def correl_binary():
+    df = pd.read_csv('IST_buffer1.csv')
+    y_cols = ['FRECOVER', 'DALIVE', 'FDENNIS', 'DSIDE', 'DIED', 'recurrent']
+    #y_cols = ['DSIDE', 'DIED', 'recurrent']
+    txt = open('binary_results_logit.txt', 'a+')
+    #y_cols = ['DIED']
+    t_unique = df['t'].unique()
+    # For each column, learn the binary problem
+    for col in y_cols:
+        txt.write(col + '\n')
+        test = {}
+        errors = {}
+        for i in t_unique:
+            buffer = df[df['t'] == i]
+            X = buffer.iloc[:, :20]
+            y = buffer[col]
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+            # Apply SMOTE to only training data
+            smote = SMOTE(sampling_strategy=1.0)
+            X_train, y_train = smote.fit_resample(X_train, y_train)
+
+            # ADASYN is promising
+            # KMeans SMOTE
+
+            #parameters = {'max_depth': range(5, 30)}
+            #clf = GridSearchCV(RandomForestClassifier(), parameters, n_jobs=-1, cv=5, scoring='accuracy')
+            C = {'C': np.logspace(-4, 4, 20)}
+            clf = GridSearchCV(LogisticRegression(max_iter=1000, solver='saga'), C, n_jobs=-1, cv=5, scoring='accuracy')
+            clf.fit(X_train, y_train)
+            lr = clf.best_estimator_
+            print(lr.score(X_test, y_test))
+            test_predict = lr.predict(X_test)
+
+
+            tn, fp, fn, tp = skm.confusion_matrix(y_test, test_predict).ravel()
+            #print(tn, fp, fn, tp)
+            tpr = tp / float(tp + fn)
+            tnr = tn / float(tn + fp)
+            txt.write('--- t = ' + str(i) + ' ---\n')
+            txt.write('TPR: ' + str(tpr) + '\n')
+            txt.write('TNR: ' + str(tnr) + '\n')
+            print(tpr, tnr)
+
+            test[i] = lr
+            errors[i] = [tpr, tnr]
+
+    # Predict on current training set, and find the respective errors
+    # visualize errors on train and test set (split first)
+    # pred_y = lr.predict(X)
+
+        for i in range(len(t_unique)):
+            model = test[i]
+            X = df.iloc[:, :20]
+            prediction = model.predict(X)
+
+            """for idx, pred in enumerate(prediction):
+                if pred == 1:
+                    error = np.random.binomial(1, errors[i][0]) # tpr
+                else:
+                    error = np.random.binomial(1, errors[i][1]) #tnr
+                #print(pred)
+    
+                # if error 1, don't change, if 0, then change
+                if error == 0:
+                    pred ^= 1
+                    prediction[idx] = pred
+                #print(error, pred)"""
+
+            df['y' + str(i)] = prediction
+
+        # correlation analysis of the prediction model
+        subset = df[['y0', 'y1', 'y2', 'y3', 'y4', 'y5']]
+        subset.to_csv('IST_' + col + '_log.csv', index=False)
+        print(col)
+        print(str(subset.corr()))
+        txt.write(str(subset.corr()) + '\n\n')
+    txt.close()
 
 
 def correl_analysis():
@@ -380,7 +542,7 @@ def discretize():
 
         df.to_csv(file_dir + 'data_test_enc_' + str(i) + '.csv', index=False)"""
 
-    df = pd.read_csv('cleaned_IST.csv')
+    df = pd.read_csv('cleaned_IST_FDENNIS.csv')
 
     X = df.iloc[:, :20]
     rest = df.iloc[:, 20:]
@@ -419,10 +581,9 @@ def discretize():
     df = pd.concat([X, age, rsbp, rest], axis=1)
     df = df.drop(columns=['AGE', 'RSBP'])
 
-    df.to_csv('cleaned_IST.csv', index=False)
+    df.to_csv('cleaned_IST_FDENNIS_enc.csv', index=False)
 
 discretize()
-
 
 #prediction += error
 #df['y' + str(i)] = prediction
