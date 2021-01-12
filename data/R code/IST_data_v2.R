@@ -67,12 +67,14 @@ for(Run in c(1,2,3,4,5)){
   for(t in levels(data$t)){
     index <- data_train$t == t
     data_train_enc$prob_t_pred_tree[index]  <- predict(model, t_train_data, type = "prob")[index,t]
+    data_train$prob_t_pred_tree[index]  <- predict(model, t_train_data, type = "prob")[index,t]
     
     index <- data_test$t == t
     data_test_enc$prob_t_pred_tree[index]  <- predict(model, t_test_data, type = "prob")[index,t]
+    data_test$prob_t_pred_tree[index]  <- predict(model, t_test_data, type = "prob")[index,t]
   }
   
-  rm(t_train_data,t_test_data,data_train,data_test)
+  rm(t_train_data,t_test_data)
   
   # par(xpd = TRUE)
   # plot(model, compress = TRUE)
@@ -87,6 +89,8 @@ for(Run in c(1,2,3,4,5)){
   # Save files
   write.csv(data_train_enc,paste("data_train_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
   write.csv(data_test_enc,paste("data_test_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
 }
 
 # st = ""
