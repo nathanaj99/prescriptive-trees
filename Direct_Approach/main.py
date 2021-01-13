@@ -128,7 +128,8 @@ def main(argv):
         elif opt in ("-r", "--robust"):
             robust = arg
 
-    data_path = '../data/IST_2000/'
+    # ---- CHANGE FILE PATH ----
+    data_path = '../data/IST_2000_binary/'
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -140,7 +141,7 @@ def main(argv):
     out_put_name = training_file.split('.csv')[0] + '_' + approach_name + '_d_' + str(depth) + '_t_' + str(
         time_limit) + '_branching_limit_' + str(
         branching_limit) + '_pred_' + str(prob_type_pred)
-    out_put_path = os.getcwd() + '/../Results_IST/Direct/'
+    out_put_path = os.getcwd() + '/../Results_IST_binary/Direct1/'
     sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
 
     ##########################################################
@@ -148,8 +149,7 @@ def main(argv):
     ##########################################################
     #features = ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10',
      #           'V2.1', 'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10']
-    features = ['SEX', 'AGE1', 'AGE2', 'AGE3', 'RVISINF', 'RSBP1', 'RSBP2', 'RSBP3', 'RDEF1', 'RDEF2', 'RDEF3', 'RDEF4', 'RDEF5', 'RDEF6', 'RDEF7',
-                'RDEF8', 'RCONSC1', 'RCONSC2', 'RCONSC3', 'STYPE1', 'STYPE2', 'STYPE3', 'STYPE4', 'STYPE5']
+    features = ['AGE2', 'AGE3', 'RVISINF', 'RSBP2', 'RSBP3', 'RSBP4', 'RDEF3', 'RDEF4', 'RDEF5', 'RCONSC1', 'RCONSC2']
     #features = ['V1', 'V2', 'V3']
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
     true_outcome_cols = ['y0', 'y1', 'y2', 'y3', 'y4', 'y5']

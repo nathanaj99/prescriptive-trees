@@ -42,7 +42,6 @@ class Primal:
     def create_primal_problem(self):
 
         ############################### define variables
-        print(self.treatments_set)
 
         self.b = self.model.addVars(self.tree.Nodes, self.features, vtype=GRB.BINARY, name='b')
         self.p = self.model.addVars(self.tree.Nodes + self.tree.Terminals, vtype=GRB.BINARY, name='p')

@@ -5285,3 +5285,232 @@ treatment classification acc train (%) 12.2
 Policy Regret test (Sum) 1881.6584826636374
 Best Treatment Found test (%) 26.520163378013002
 treatment classification acc test (%) 11.378933440717944
+Using license file /Users/nathanjo/gurobi.lic
+Academic license - for non-commercial use only
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (mac64)
+Optimize a model with 16002 rows, 14007 columns and 40008 nonzeros
+Model fingerprint: 0x63ee75f0
+Variable types: 14006 continuous, 1 integer (1 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 15560 rows and 13623 columns
+Presolve time: 0.03s
+Presolved: 442 rows, 384 columns, 1140 nonzeros
+Variable types: 384 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 1.519000e+03, 310 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1519.0000000 1519.00000  0.00%     -    0s
+
+Explored 0 nodes (310 simplex iterations) in 0.04 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 1519 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.519000000000e+03, best bound 1.519000000000e+03, gap 0.0000%
+
+
+
+#########node  1
+leaf 0
+
+
+Total Solving Time 0.5775716304779053
+obj value 1519.0
+Policy Regret train (Sum) 724
+Best Treatment Found train (%) 63.800000000000004
+treatment classification acc train (%) 11.3
+Policy Regret test (Sum) 6142
+Best Treatment Found test (%) 64.56879146235939
+treatment classification acc test (%) 11.577732910297087
+['-f', 'data_train_enc_1.csv', '-e', 'data_test_enc_1.csv', '-d', 1, '-b', 100, '-t', 3600, '-p', 1, '-r', False]
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (mac64)
+Optimize a model with 48006 rows, 42045 columns and 172050 nonzeros
+Model fingerprint: 0x50e799a0
+Variable types: 42018 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 27118 rows and 23842 columns
+Presolve time: 0.34s
+Presolved: 20888 rows, 18203 columns, 76318 nonzeros
+Variable types: 18178 continuous, 25 integer (25 binary)
+
+Root relaxation: objective 1.922333e+03, 14306 iterations, 3.59 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1922.33333    0    4          - 1922.33333      -     -    4s
+H    0     0                    1519.0000000 1922.33333  26.6%     -    4s
+H    0     0                    1530.0000000 1922.33333  25.6%     -    4s
+     0     0 1922.33333    0    6 1530.00000 1922.33333  25.6%     -    5s
+     0     0 1920.05556    0    8 1530.00000 1920.05556  25.5%     -    5s
+     0     0 1919.88889    0    8 1530.00000 1919.88889  25.5%     -    5s
+     0     0 1919.88889    0    8 1530.00000 1919.88889  25.5%     -    5s
+     0     0 1916.35714    0    8 1530.00000 1916.35714  25.3%     -    6s
+     0     0 1899.90845    0    8 1530.00000 1899.90845  24.2%     -    7s
+     0     0 1887.30097    0    9 1530.00000 1887.30097  23.4%     -    8s
+     0     0 1887.21951    0    9 1530.00000 1887.21951  23.3%     -    8s
+     0     0 1887.21951    0    9 1530.00000 1887.21951  23.3%     -    8s
+     0     0 1887.21951    0    9 1530.00000 1887.21951  23.3%     -    9s
+     0     0 1887.21951    0    9 1530.00000 1887.21951  23.3%     -    9s
+     0     2 1887.21951    0    9 1530.00000 1887.21951  23.3%     -    9s
+     3     2 1887.21951    2   12 1530.00000 1887.21951  23.3%  3480   10s
+*    8     2               4    1595.0000000 1887.21951  18.3%  2911   11s
+    19     2 1786.14706   10    6 1595.00000 1815.45833  13.8%  3093   15s
+*   24     2              12    1621.0000000 1746.83333  7.76%  2964   15s
+
+Cutting planes:
+  MIR: 10
+  RLT: 21
+  Relax-and-lift: 6
+
+Explored 35 nodes (104685 simplex iterations) in 17.30 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 4: 1621 1595 1530 1519 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.621000000000e+03, best bound 1.621000000000e+03, gap 0.0000%
+
+
+
+#########node  1
+STYPE1
+#########node  2
+leaf 4
+#########node  3
+leaf 2
+
+
+Total Solving Time 19.5821270942688
+obj value 1621.0
+Policy Regret train (Sum) 576
+Best Treatment Found train (%) 71.2
+treatment classification acc train (%) 15.35
+Policy Regret test (Sum) 4667
+Best Treatment Found test (%) 73.07758869339487
+treatment classification acc test (%) 14.387078165561004
+['-f', 'data_train_enc_1.csv', '-e', 'data_test_enc_1.csv', '-d', 2, '-b', 100, '-t', 3600, '-p', 1, '-r', False]
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (mac64)
+Optimize a model with 112014 rows, 98121 columns and 436138 nonzeros
+Model fingerprint: 0x55c67dfe
+Variable types: 98042 continuous, 79 integer (79 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 62064 rows and 54420 columns
+Presolve time: 1.04s
+Presolved: 49950 rows, 43701 columns, 196258 nonzeros
+Variable types: 43626 continuous, 75 integer (75 binary)
+Found heuristic solution: objective 1560.0000000
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   12642    1.9182508e+03   9.986230e-01   8.751610e+07      5s
+   21742    1.7865717e+03   4.983370e-01   1.411520e+08     55s
+
+
+Root relaxation: interrupted, 26602 iterations, 57.73 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0          -    0      1560.00000 55174.0000  3437%     -   59s
+
+Explored 0 nodes (26602 simplex iterations) in 59.30 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 1560 
+
+Solve interrupted
+Best objective 1.560000000000e+03, best bound 5.517400000000e+04, gap 3436.7949%
+
+
+
+#########node  1
+SEX
+#########node  2
+SEX
+#########node  3
+SEX
+#########node  4
+leaf 0
+#########node  5
+leaf 1
+#########node  6
+leaf 1
+#########node  7
+leaf 4
+
+
+Total Solving Time 64.63637781143188
+obj value 1560.0
+Policy Regret train (Sum) 556
+Best Treatment Found train (%) 72.2
+treatment classification acc train (%) 11.450000000000001
+Policy Regret test (Sum) 4589
+Best Treatment Found test (%) 73.5275454283242
+treatment classification acc test (%) 11.629650995096625
+['-f', 'data_train_enc_2.csv', '-e', 'data_test_enc_2.csv', '-d', 0, '-b', 100, '-t', 3600, '-p', 1, '-r', False]
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (mac64)
+Optimize a model with 16002 rows, 14007 columns and 40008 nonzeros
+Model fingerprint: 0x1c2e4aa6
+Variable types: 14006 continuous, 1 integer (1 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 15588 rows and 13647 columns
+Presolve time: 0.03s
+Presolved: 414 rows, 360 columns, 1068 nonzeros
+Variable types: 360 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 1.532000e+03, 291 iterations, 0.00 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1532.0000000 1532.00000  0.00%     -    0s
+
+Explored 0 nodes (291 simplex iterations) in 0.04 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 1532 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.532000000000e+03, best bound 1.532000000000e+03, gap 0.0000%
+
+
+
+#########node  1
+leaf 4
+
+
+Total Solving Time 0.5680499076843262

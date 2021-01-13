@@ -583,7 +583,59 @@ def discretize():
 
     df.to_csv('cleaned_IST_FDENNIS_enc.csv', index=False)
 
-discretize()
+def one_zero():
+    m = {1: 0, 0: 1}
+    file_path = '../data/IST_2000_binary/'
+    """for i in range(1, 6):
+        name = 'data_train_enc_' + str(i) + '.csv'
+        df = pd.read_csv(file_path + name)
+        # isolate the y, y0-y5, ml0-ml5
+        y_cols = ['y', 'y0', 'y1', 'y2', 'y3', 'y4', 'y5', 'ml0', 'ml1', 'ml2', 'ml3', 'ml4', 'ml5']
+        for col in y_cols:
+            df[col] = df[col].map(m)
+
+        df.to_csv(file_path + name, index=False)"""
+
+    """for i in range(1, 6):
+        name = 'data_train_' + str(i) + '.csv'
+        df = pd.read_csv(file_path + name)
+        # isolate the y, y0-y5, ml0-ml5
+        y_cols = ['y', 'y0', 'y1', 'y2', 'y3', 'y4', 'y5']
+        for col in y_cols:
+            df[col] = df[col].map(m)
+
+        df.to_csv(file_path + name, index=False)
+
+    for i in range(1, 6):
+        name = 'data_test_' + str(i) + '.csv'
+        df = pd.read_csv(file_path + name)
+        # isolate the y, y0-y5, ml0-ml5
+        y_cols = ['y', 'y0', 'y1', 'y2', 'y3', 'y4', 'y5']
+        for col in y_cols:
+            df[col] = df[col].map(m)
+
+        df.to_csv(file_path + name, index=False)"""
+
+    for i in range(1, 6):
+        name = 'data_test_enc_' + str(i) + '.csv'
+        df = pd.read_csv(file_path + name)
+        # isolate the y, y0-y5, ml0-ml5
+        y_cols = ['y', 'y0', 'y1', 'y2', 'y3', 'y4', 'y5']
+        for col in y_cols:
+            df[col] = df[col].map(m)
+
+        df.to_csv(file_path + name, index=False)
+
+
+def correl():
+    df = pd.read_csv('cleaned_IST_FDENNIS_enc.csv')
+    subset = df[['RDEF1', 'RDEF2', 'RDEF3', 'RDEF4', 'RDEF5', 'RDEF6']]
+    print(subset.corr())
+
+correl()
+
+
+
 
 #prediction += error
 #df['y' + str(i)] = prediction

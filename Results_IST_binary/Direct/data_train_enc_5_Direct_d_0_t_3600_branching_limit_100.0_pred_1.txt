@@ -1,0 +1,198 @@
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (mac64)
+Optimize a model with 16002 rows, 14007 columns and 40008 nonzeros
+Model fingerprint: 0xd21dcda9
+Variable types: 14006 continuous, 1 integer (1 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 15567 rows and 13629 columns
+Presolve time: 0.06s
+Presolved: 435 rows, 378 columns, 1122 nonzeros
+Variable types: 378 continuous, 0 integer (0 binary)
+
+Root relaxation: objective 1.514000e+03, 338 iterations, 0.01 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    1514.0000000 1514.00000  0.00%     -    0s
+
+Explored 0 nodes (338 simplex iterations) in 0.08 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 1514 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.514000000000e+03, best bound 1.514000000000e+03, gap 0.0000%
+
+
+
+#########node  1
+leaf 4
+
+
+Total Solving Time 1.0825810432434082
+obj value 1514.0
+Policy Regret train (Sum) 607
+Best Treatment Found train (%) 69.65
+treatment classification acc train (%) 11.05
+Policy Regret test (Sum) 5224
+Best Treatment Found test (%) 69.86443611191233
+treatment classification acc test (%) 11.485434092875686
+['-f', 'data_train_enc_5.csv', '-e', 'data_test_enc_5.csv', '-d', 1, '-b', 100, '-t', 3600, '-p', 1, '-r', False]
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (mac64)
+Optimize a model with 48006 rows, 42037 columns and 156042 nonzeros
+Model fingerprint: 0xe69b5aaf
+Variable types: 42018 continuous, 19 integer (19 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 1406.0000000
+Presolve removed 28890 rows and 25384 columns
+Presolve time: 0.32s
+Presolved: 19116 rows, 16653 columns, 62360 nonzeros
+Variable types: 16637 continuous, 16 integer (16 binary)
+
+Root relaxation: objective 1.935167e+03, 12005 iterations, 0.92 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1935.16667    0    2 1406.00000 1935.16667  37.6%     -    1s
+H    0     0                    1514.0000000 1935.16667  27.8%     -    1s
+     0     0 1934.33333    0    2 1514.00000 1934.33333  27.8%     -    2s
+     0     0 1934.33333    0    2 1514.00000 1934.33333  27.8%     -    2s
+     0     0 1932.94074    0    4 1514.00000 1932.94074  27.7%     -    2s
+     0     0 1928.62500    0    4 1514.00000 1928.62500  27.4%     -    3s
+     0     0 1928.62500    0    4 1514.00000 1928.62500  27.4%     -    3s
+H    0     0                    1566.0000000 1928.62500  23.2%     -    3s
+     0     0 1928.58333    0    4 1566.00000 1928.58333  23.2%     -    3s
+     0     0 1928.58333    0    4 1566.00000 1928.58333  23.2%     -    3s
+     0     0 1928.00000    0    4 1566.00000 1928.00000  23.1%     -    4s
+     0     0 1928.00000    0    4 1566.00000 1928.00000  23.1%     -    4s
+     0     0 1928.00000    0    4 1566.00000 1928.00000  23.1%     -    4s
+     0     0 1927.96667    0    4 1566.00000 1927.96667  23.1%     -    5s
+     0     0 1927.96667    0    4 1566.00000 1927.96667  23.1%     -    5s
+     0     2 1927.96667    0    4 1566.00000 1927.96667  23.1%     -    5s
+    11     2 1752.96825    6    6 1566.00000 1793.50000  14.5%  3857   10s
+*   12     2               6    1592.0000000 1752.87500  10.1%  3723   10s
+
+Cutting planes:
+  MIR: 18
+  RLT: 15
+  Relax-and-lift: 7
+
+Explored 25 nodes (85772 simplex iterations) in 12.47 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 4: 1592 1566 1514 1406 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.592000000000e+03, best bound 1.592000000000e+03, gap 0.0000%
+
+
+
+#########node  1
+RSBP3
+#########node  2
+leaf 4
+#########node  3
+leaf 1
+
+
+Total Solving Time 15.711846113204956
+obj value 1592.0
+Policy Regret train (Sum) 607
+Best Treatment Found train (%) 69.65
+treatment classification acc train (%) 11.05
+Policy Regret test (Sum) 5290
+Best Treatment Found test (%) 69.48370349004904
+treatment classification acc test (%) 11.32967983847707
+['-f', 'data_train_enc_5.csv', '-e', 'data_test_enc_5.csv', '-d', 2, '-b', 100, '-t', 3600, '-p', 1, '-r', False]
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (mac64)
+Optimize a model with 112014 rows, 98097 columns and 388114 nonzeros
+Model fingerprint: 0xa42caa04
+Variable types: 98042 continuous, 55 integer (55 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 1431.0000000
+Presolve removed 66300 rows and 58120 columns
+Presolve time: 1.50s
+Presolved: 45714 rows, 39977 columns, 157160 nonzeros
+Variable types: 39929 continuous, 48 integer (48 binary)
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   12546    1.9112984e+03   9.982620e-01   6.848671e+07      5s
+   20326    1.7697752e+03   4.993696e-01   1.508827e+08     10s
+   25296    1.7697980e+03   4.985408e-01   8.452213e+07     15s
+   31206    1.5153041e+03   5.423284e-05   3.034354e+06     20s
+   35836    1.5179895e+03   0.000000e+00   3.222653e+05     25s
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Root relaxation: objective 1.997000e+03, 28196 iterations, 27.25 seconds
+Total elapsed time = 40.39s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1997.00000    0    9 1431.00000 1997.00000  39.6%     -   44s
+H    0     0                    1531.0000000 1997.00000  30.4%     -   44s
+     0     0 1996.50000    0   22 1531.00000 1996.50000  30.4%     -   56s
+     0     0 1996.50000    0   22 1531.00000 1996.50000  30.4%     -   58s
+H    0     0                    1568.0000000 1996.50000  27.3%     -  126s
+H    0     0                    1596.0000000 1996.50000  25.1%     -  126s
+     0     0 1972.50000    0    6 1596.00000 1972.50000  23.6%     -  126s
+     0     0 1964.50000    0    6 1596.00000 1964.50000  23.1%     -  128s
+     0     0 1964.50000    0    6 1596.00000 1964.50000  23.1%     -  131s
+H    0     0                    1607.0000000 1964.50000  22.2%     -  132s
+     0     0 1963.00000    0    7 1607.00000 1963.00000  22.2%     -  135s
+     0     0 1948.33333    0    8 1607.00000 1948.33333  21.2%     -  164s
+     0     0 1948.33333    0    8 1607.00000 1948.33333  21.2%     -  164s
+     0     2 1948.33333    0    8 1607.00000 1948.33333  21.2%     -  187s
+     1     4 1948.33333    1    8 1607.00000 1948.33333  21.2%  3628  191s
+     3     6 1948.33333    2   26 1607.00000 1948.33333  21.2%  6281  197s
+     7     8 1948.33333    3   20 1607.00000 1948.33333  21.2%  5741  202s
+    11    12 1948.33333    4   14 1607.00000 1948.33333  21.2%  5627  206s
+    15    16 1948.33333    5   12 1607.00000 1948.33333  21.2%  5392  213s
+    19    20 1948.33333    6   12 1607.00000 1948.33333  21.2%  4761  215s
+    23    24 1948.33333    7   20 1607.00000 1948.33333  21.2%  4833  221s
+    27    29 1948.33333    8   11 1607.00000 1948.33333  21.2%  4860  229s
+
+Cutting planes:
+  Gomory: 1
+  RLT: 7
+
+Explored 32 nodes (240305 simplex iterations) in 229.46 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 5: 1607 1596 1568 ... 1431
+
+Solve interrupted
+Best objective 1.607000000000e+03, best bound 1.948333333333e+03, gap 21.2404%
+
+
+
+#########node  1
+RDEF3
+#########node  2
