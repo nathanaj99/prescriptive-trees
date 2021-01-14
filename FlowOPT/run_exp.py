@@ -17,7 +17,7 @@ samples = [1, 2, 3, 4, 5]
 # primal.main(["-f", 'data_train_0.5_1.csv', "-e", 'data_test_0.5_1.csv', "-d", 1, "-b", 100, "-t", 600, "-p", 0])
 
 
-for s in [3,4,5]:
+for s in [4,5]:
     for d in [0,1,2]:
         training_file = 'data_train_enc_'  + str(s) + '.csv'
         test_file = 'data_test_enc_' +  str(s) + '.csv'
