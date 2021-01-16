@@ -141,7 +141,7 @@ def main(argv):
     out_put_name = training_file.split('.csv')[0] + '_' + approach_name + '_d_' + str(depth) + '_t_' + str(
         time_limit) + '_branching_limit_' + str(
         branching_limit) + '_pred_' + str(prob_type_pred)
-    out_put_path = os.getcwd() + '/../Results_IST_binary/Direct1/'
+    out_put_path = os.getcwd() + '/../Results_IST_binary/Robust/'
     sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
 
     ##########################################################
