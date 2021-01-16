@@ -126,7 +126,8 @@ def main(argv):
 
     # data_path = os.getcwd() + '/../data/Athey_v1_N_500/'
     # data_path = os.getcwd() + '/../data/Athey_v2_4000/'
-    data_path = os.getcwd() + '/../data/IST_5000/'
+    # data_path = os.getcwd() + '/../data/IST_5000/'
+    data_path = os.getcwd() + '/../data/IST_2000_binary/'
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -149,9 +150,10 @@ def main(argv):
 
     # features = ['V1', 'V2', 'V3']
 
-    features = ['SEX', 'RVISINF', 'RDEF1', 'RDEF2', 'RDEF3', 'RDEF4', 'RDEF5', 'RDEF6', 'RDEF7', 'RDEF8', 'RCONSC1',
-                'RCONSC2', 'RCONSC3', 'STYPE1', 'STYPE2', 'STYPE3', 'STYPE4', 'STYPE5', 'AGE1', 'AGE2', 'AGE3', 'RSBP1',
-                'RSBP2', 'RSBP3', 'RSBP4']
+    # features = ['SEX', 'RVISINF', 'RDEF1', 'RDEF2', 'RDEF3', 'RDEF4', 'RDEF5', 'RDEF6', 'RDEF7', 'RDEF8', 'RCONSC1',
+    #             'RCONSC2', 'RCONSC3', 'STYPE1', 'STYPE2', 'STYPE3', 'STYPE4', 'STYPE5', 'AGE1', 'AGE2', 'AGE3', 'RSBP1',
+    #             'RSBP2', 'RSBP3', 'RSBP4']
+    features = ['AGE2', 'AGE3', 'RVISINF', 'RSBP2', 'RSBP3', 'RSBP4', 'RDEF3', 'RDEF4', 'RDEF5', 'RCONSC1', 'RCONSC2']
 
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
     true_outcome_cols = ['y0', 'y1', 'y2', 'y3', 'y4', 'y5']
