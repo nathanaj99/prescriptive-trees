@@ -2,6 +2,7 @@ import pandas as pd
 import math
 from sklearn.preprocessing import LabelBinarizer
 import numpy as np
+import collections
 
 df = pd.read_csv('../../Warfarin/raw.csv')
 
@@ -175,8 +176,7 @@ df['y0'] = df['t_ideal'].apply(lambda x: 1 if x == 0 else 0)
 df['y1'] = df['t_ideal'].apply(lambda x: 1 if x == 1 else 0)
 df['y2'] = df['t_ideal'].apply(lambda x: 1 if x == 2 else 0)
 
-# --- RANDOMLY GENERATE TRUE DATA (0.5)
-
+# --- RANDOMLY GENERATE TRUE DATA (0.33)
 df['t'] = np.random.randint(3, size=len(df))
 l = []
 # take the outcome of y given the assigned treatment
@@ -186,17 +186,65 @@ for index, row in df.iterrows():
     l.append(row['y' + str(int(t))])
 df['y'] = l
 
-rest = df[['VKORC1 A/G', 'VKORC1 A/A','VKORC1 Missing', 'y', 't', 'y0', 'y1', 'y2']]
+"""rest = df[['VKORC1 A/G', 'VKORC1 A/A','VKORC1 Missing', 'y', 't', 'y0', 'y1', 'y2']]
 rest = rest.reset_index().drop(columns=['index'])
 # COMPILE EVERYTHING (bucketized)
 dataframe = pd.concat([age, height, weight, race, cyp2c9, rest], axis=1)
-dataframe.to_csv('warfarin_enc.csv', index=False)
+dataframe.to_csv('warfarin_enc_0.33.csv', index=False)
 
 # csv not bucketized
 rest2 = df[['Age', 'Height (cm)', 'Weight (kg)']]
 rest2 = rest2.rename(columns={'Height (cm)': 'Height', 'Weight (kg)': 'Weight'}).reset_index().drop(columns=['index'])
 df_enc = pd.concat([rest2, race, cyp2c9, rest], axis=1)
-df_enc.to_csv('warfarin.csv', index=False)
+df_enc.to_csv('warfarin_0.33.csv', index=False)"""
+
+
+# --- NONRANDOMIZED DATA
+def nonrandomized(p):
+    df['t'] = np.random.randint(3, size=len(df))
+    df['t'] = df['t_ideal']
+    a = np.random.binomial(size=len(df), n=1, p=1-p)
+
+    treatments_set = {0, 1, 2}
+    for i in range(len(a)):
+        if a[i] == 1: # then switch
+            real_t = {df['t'].iloc[i]}
+            #print(real_t)
+            minus = treatments_set - real_t
+            #print(minus)
+            choice = np.random.choice(list(minus), size=1)
+            #print(choice)
+            df['t'].iloc[i] = choice
+
+    # with 1-p probability, switch the treatment
+    l = []
+    # take the outcome of y given the assigned treatment
+    for index, row in df.iterrows():
+        # take the assigned treatment
+        t = row['t']
+        l.append(row['y' + str(int(t))])
+    df['y'] = l
+
+    rest = df[['VKORC1 A/G', 'VKORC1 A/A','VKORC1 Missing', 'y', 't', 'y0', 'y1', 'y2']]
+    rest = rest.reset_index().drop(columns=['index'])
+    # COMPILE EVERYTHING (bucketized)
+    dataframe = pd.concat([age, height, weight, race, cyp2c9, rest], axis=1)
+    dataframe.to_csv('warfarin_enc_' + str(p) + '.csv', index=False)
+
+    # csv not bucketized
+    rest2 = df[['Age', 'Height (cm)', 'Weight (kg)']]
+    rest2 = rest2.rename(columns={'Height (cm)': 'Height', 'Weight (kg)': 'Weight'}).reset_index().drop(columns=['index'])
+    df_enc = pd.concat([rest2, race, cyp2c9, rest], axis=1)
+    df_enc.to_csv('warfarin_' + str(p) + '.csv', index=False)
+
+
+nonrandomized(0.6)
+nonrandomized(0.85)
+nonrandomized(0.1)
+
+
+
+# --- NONRANDOMIZED DATA (0.1)
 
 """print(df['Height (cm)'].describe())
 print(df['Height (cm)'].isna().sum()) # 1146 missing

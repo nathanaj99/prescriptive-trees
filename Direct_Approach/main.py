@@ -129,7 +129,7 @@ def main(argv):
             robust = arg
 
     # ---- CHANGE FILE PATH ----
-    data_path = '../data/IST_2000_binary/'
+    data_path = '../data/Warfarin_2000/'
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -141,7 +141,7 @@ def main(argv):
     out_put_name = training_file.split('.csv')[0] + '_' + approach_name + '_d_' + str(depth) + '_t_' + str(
         time_limit) + '_branching_limit_' + str(
         branching_limit) + '_pred_' + str(prob_type_pred)
-    out_put_path = os.getcwd() + '/../Results_IST_binary/Robust/'
+    out_put_path = os.getcwd() + '/../Results_Warfarin/Robust/'
     sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
 
     ##########################################################
@@ -149,12 +149,15 @@ def main(argv):
     ##########################################################
     #features = ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10',
      #           'V2.1', 'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10']
-    features = ['AGE2', 'AGE3', 'RVISINF', 'RSBP2', 'RSBP3', 'RSBP4', 'RDEF3', 'RDEF4', 'RDEF5', 'RCONSC1', 'RCONSC2']
+    #features = ['AGE2', 'AGE3', 'RVISINF', 'RSBP2', 'RSBP3', 'RSBP4', 'RDEF3', 'RDEF4', 'RDEF5', 'RCONSC1', 'RCONSC2']
     #features = ['V1', 'V2', 'V3']
+    features = ['Age1.2', 'Age3.4', 'Age5.6', 'Age7', 'Age8.9', 'Height1', 'Height2', 'Height3', 'Height4', 'Height5',
+                'Weight1', 'Weight2', 'Weight3', 'Weight4', 'Weight5', 'Asian', 'Black.or.African.American', 'Unknown.Race',
+                'X.1..1', 'X.1..3', 'X.2..2', 'X.2..3', 'X.3..3', 'Unknown.Cyp2C9', 'VKORC1.A.G', 'VKORC1.A.A', 'VKORC1.Missing']
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
-    true_outcome_cols = ['y0', 'y1', 'y2', 'y3', 'y4', 'y5']
+    true_outcome_cols = ['y0', 'y1', 'y2']
     outcome = 'y'
-    regression = ['ml0', 'ml1', 'ml2', 'ml3', 'ml4', 'ml5']
+    regression = ['ml0', 'ml1', 'ml2']
     if prob_type_pred:
         prob_t = 'prob_t_pred_tree'
         data_train = data_train[data_train.columns[data_train.columns != 'prob_t']]
