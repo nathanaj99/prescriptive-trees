@@ -129,7 +129,7 @@ def main(argv):
             robust = arg
 
     # ---- CHANGE FILE PATH ----
-    data_path = '../data/Warfarin_2000/'
+    data_path = '../data/Warfarin/Warfarin_0.85_2000/'
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -141,7 +141,7 @@ def main(argv):
     out_put_name = training_file.split('.csv')[0] + '_' + approach_name + '_d_' + str(depth) + '_t_' + str(
         time_limit) + '_branching_limit_' + str(
         branching_limit) + '_pred_' + str(prob_type_pred)
-    out_put_path = os.getcwd() + '/../Results_Warfarin/Robust/'
+    out_put_path = os.getcwd() + '/../Results_Warfarin/Robust/0.85/'
     sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
 
     ##########################################################

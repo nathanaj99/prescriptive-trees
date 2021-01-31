@@ -161,6 +161,15 @@ weight = lb.fit_transform(df['weight_bins'])
 weight = stratify(weight, ['Weight1', 'Weight2', 'Weight3', 'Weight4', 'Weight5'])
 
 
+# combining everything together
+rest = df[['Enzyme Inducer', 'Amiodarone (Cordarone)', 'VKORC1 A/G', 'VKORC1 A/A', 'VKORC1 Missing']]
+rest = rest.reset_index().drop(columns=['index'])
+# COMPILE EVERYTHING (bucketized)
+
+# csv not bucketized
+rest2 = df[['Age', 'Height (cm)', 'Weight (kg)']]
+rest2 = rest2.rename(columns={'Height (cm)': 'Height', 'Weight (kg)': 'Weight'}).reset_index().drop(columns=['index'])
+df = pd.concat([rest2, race, cyp2c9, rest], axis=1)
 
 
 # --- DISCRETIZING OUTCOME AND TREATMENT ---
@@ -168,8 +177,18 @@ weight = stratify(weight, ['Weight1', 'Weight2', 'Weight3', 'Weight4', 'Weight5'
 
 bins = [0, 21, 48, 350]
 labels = [0, 1, 2]
-df['t_ideal'] = pd.cut(df['Therapeutic Dose of Warfarin'], bins=bins, labels=labels)
 
+# transform t_ideal from the formula
+# df['t_ideal'] = pd.cut(df['Therapeutic Dose of Warfarin'], bins=bins, labels=labels)
+
+df['t_ideal'] = 5.6044 - 0.2614*df['Age'] + 0.0087*df['Height'] + 0.0128*df['Weight'] - 0.8677*df[
+    'VKORC1 A/G'] - 1.6974*df['VKORC1 A/A'] - 0.4854*df['VKORC1 Missing'] - 0.5211*df['*1/*1'] - 0.9357*df[
+    '*1/*3'] - 1.0616*df['*2/*2'] - 1.9206*df['*2/*3'] - 2.3312*df['*3/*3'] - 0.2188*df['Unknown Cyp2C9'] - 0.1092*df[
+    'Asian'] - 0.2760*df['Black or African American'] - 0.1032*df['Unknown Race'] + 1.1816*df[
+    'Enzyme Inducer'] - 0.5503*df['Amiodarone (Cordarone)']
+df['t_ideal'] = df['t_ideal'] * df['t_ideal']
+df['t_ideal'] = pd.cut(df['t_ideal'], bins=bins, labels=labels)
+print(df['t_ideal'])
 # construct "true outcomes"
 # 1 if coincides with treatment tier
 df['y0'] = df['t_ideal'].apply(lambda x: 1 if x == 0 else 0)
@@ -185,6 +204,17 @@ for index, row in df.iterrows():
     t = row['t']
     l.append(row['y' + str(int(t))])
 df['y'] = l
+
+#df.loc[:, df.columns != 't_ideal'].to_csv('warfarin_0.33.csv', index=False)
+
+
+rest3 = df[['Enzyme Inducer', 'Amiodarone (Cordarone)', 'VKORC1 A/G', 'VKORC1 A/A', 'VKORC1 Missing', 'y', 't', 'y0', 'y1', 'y2']]
+rest3 = rest3.reset_index().drop(columns=['index'])
+# COMPILE EVERYTHING (bucketized)
+df_enc = pd.concat([age, height, weight, race, cyp2c9, rest3], axis=1)
+#df_enc.to_csv('warfarin_enc_0.33.csv', index=False)
+
+# drop t_ideal column
 
 """rest = df[['VKORC1 A/G', 'VKORC1 A/A','VKORC1 Missing', 'y', 't', 'y0', 'y1', 'y2']]
 rest = rest.reset_index().drop(columns=['index'])
@@ -225,7 +255,7 @@ def nonrandomized(p):
         l.append(row['y' + str(int(t))])
     df['y'] = l
 
-    rest = df[['VKORC1 A/G', 'VKORC1 A/A','VKORC1 Missing', 'y', 't', 'y0', 'y1', 'y2']]
+    """rest = df[['Enzyme Inducer', 'Amiodarone (Cordarone)', 'VKORC1 A/G', 'VKORC1 A/A', 'VKORC1 Missing', 'y', 't', 'y0', 'y1', 'y2']]
     rest = rest.reset_index().drop(columns=['index'])
     # COMPILE EVERYTHING (bucketized)
     dataframe = pd.concat([age, height, weight, race, cyp2c9, rest], axis=1)
@@ -235,13 +265,94 @@ def nonrandomized(p):
     rest2 = df[['Age', 'Height (cm)', 'Weight (kg)']]
     rest2 = rest2.rename(columns={'Height (cm)': 'Height', 'Weight (kg)': 'Weight'}).reset_index().drop(columns=['index'])
     df_enc = pd.concat([rest2, race, cyp2c9, rest], axis=1)
-    df_enc.to_csv('warfarin_' + str(p) + '.csv', index=False)
+    df_enc.to_csv('warfarin_' + str(p) + '.csv', index=False)"""
+
+    df.loc[:, df.columns != 't_ideal'].to_csv('warfarin_' + str(p) + '.csv', index=False)
+
+    rest3 = df[
+        ['Enzyme Inducer', 'Amiodarone (Cordarone)', 'VKORC1 A/G', 'VKORC1 A/A', 'VKORC1 Missing', 'y', 't', 'y0', 'y1',
+         'y2']]
+    rest3 = rest3.reset_index().drop(columns=['index'])
+    # COMPILE EVERYTHING (bucketized)
+    df_enc = pd.concat([age, height, weight, race, cyp2c9, rest3], axis=1)
+    df_enc.to_csv('warfarin_enc_' + str(p) + '.csv', index=False)
 
 
-nonrandomized(0.6)
-nonrandomized(0.85)
+
+def nonrandomized_v2():
+    # nonrandomization by tweaking formula
+    bins = [0, 21, 48, 350]
+    labels = [0, 1, 2]
+    ## rougly 88%
+    """nonrandom_85 = 5.5 - 0.2614 * df['Age'] + 0.0047 * df['Height'] + 0.02 * df['Weight'] - 0.9 * df[
+        'VKORC1 A/G'] - 2 * df['VKORC1 A/A'] - 0.6854 * df['VKORC1 Missing'] - 0.5211 * df['*1/*1'] - 2 * df[
+                       '*1/*3'] - 1.0616 * df['*2/*2'] - 1.5206 * df['*2/*3'] - 1.3312 * df['*3/*3'] - 0.5 * df[
+                       'Unknown Cyp2C9'] - 0.1092 * df['Asian'] - 0.2760 * df['Black or African American'] - 0.1032 * \
+                   df['Unknown Race'] + 1.1 * df['Enzyme Inducer'] - 0.403 * df['Amiodarone (Cordarone)']"""
+
+    nonrandom_85 = 2.1 + 0.4 * df['Age'] + 0.0061 * df['Height'] + 0.01 * df['Weight'] + 1.4 * df[
+        'VKORC1 A/G'] - 2 * df['VKORC1 A/A'] - 0.8854 * df['VKORC1 Missing'] - 0.6 * df['*1/*1'] - 2.9 * df[
+                       '*1/*3'] - 1.0616 * df['*2/*2'] - 1.5206 * df['*2/*3'] - 1.5312 * df['*3/*3'] + 0.5 * df[
+                       'Unknown Cyp2C9'] - 0.1092 * df['Asian'] - 0.44 * df['Black or African American'] + 0.3 * \
+                   df['Unknown Race'] + 2.5 * df['Enzyme Inducer'] + 0.803 * df['Amiodarone (Cordarone)']
+
+    nonrandom_85 = nonrandom_85 * nonrandom_85
+    nonrandom_85 = pd.cut(nonrandom_85, bins=bins, labels=labels)
+    print(nonrandom_85.value_counts())
+    print(df['t_ideal'].value_counts())
+
+    diff = df['t_ideal'].astype(int) - nonrandom_85.astype(int)
+    print(diff.value_counts())
+
+    df['t'] = nonrandom_85
+
+    l = []
+    # take the outcome of y given the assigned treatment
+    for index, row in df.iterrows():
+        # take the assigned treatment
+        t = row['t']
+        l.append(row['y' + str(int(t))])
+    df['y'] = l
+
+    #f.loc[:, df.columns != 't_ideal'].to_csv('warfarin_0.6.csv', index=False)
+
+    rest3 = df[
+        ['Enzyme Inducer', 'Amiodarone (Cordarone)', 'VKORC1 A/G', 'VKORC1 A/A', 'VKORC1 Missing', 'y', 't', 'y0', 'y1',
+         'y2']]
+    rest3 = rest3.reset_index().drop(columns=['index'])
+    # COMPILE EVERYTHING (bucketized)
+    df_enc = pd.concat([age, height, weight, race, cyp2c9, rest3], axis=1)
+    #df_enc.to_csv('warfarin_enc_0.6.csv', index=False)
+
+
+    ## 79%
+    """nonrandom_85 = 5.7 - 0.2614 * df['Age'] + 0.0047 * df['Height'] + 0.02 * df['Weight'] - 1.4 * df[
+        'VKORC1 A/G'] - 2 * df['VKORC1 A/A'] - 0.8854 * df['VKORC1 Missing'] - 0.5211 * df['*1/*1'] - 2.3 * df[
+                       '*1/*3'] - 1.0616 * df['*2/*2'] - 1.5206 * df['*2/*3'] - 1.5312 * df['*3/*3'] - 0.5 * df[
+                       'Unknown Cyp2C9'] - 0.1092 * df['Asian'] - 0.2760 * df['Black or African American'] - 0.1032 * \
+                   df['Unknown Race'] + 1.1 * df['Enzyme Inducer'] - 0.803 * df['Amiodarone (Cordarone)']"""
+
+    ## 60%
+    """nonrandom_85 = 2.1 + 0.4 * df['Age'] + 0.0061 * df['Height'] + 0.01 * df['Weight'] + 1.4 * df[
+        'VKORC1 A/G'] - 2 * df['VKORC1 A/A'] - 0.8854 * df['VKORC1 Missing'] - 0.6 * df['*1/*1'] - 2.9 * df[
+                       '*1/*3'] - 1.0616 * df['*2/*2'] - 1.5206 * df['*2/*3'] - 1.5312 * df['*3/*3'] + 0.5 * df[
+                       'Unknown Cyp2C9'] - 0.1092 * df['Asian'] - 0.44 * df['Black or African American'] + 0.3 * \
+                   df['Unknown Race'] + 2.5 * df['Enzyme Inducer'] + 0.803 * df['Amiodarone (Cordarone)']"""
+
+    """nonrandom_85 = nonrandom_85 * nonrandom_85
+    nonrandom_85 = pd.cut(nonrandom_85, bins=bins, labels=labels)
+    print(nonrandom_85.value_counts())
+    print(df['t_ideal'].value_counts())
+
+    diff = df['t_ideal'].astype(int) - nonrandom_85.astype(int)
+    print(diff.value_counts())"""
+
 nonrandomized(0.1)
 
+
+
+
+#nonrandomized_v2()
 
 
 # --- NONRANDOMIZED DATA (0.1)
