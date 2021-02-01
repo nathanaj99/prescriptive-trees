@@ -6,7 +6,7 @@
 
 rm(list=ls())
 graphics.off()
-setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/Warfarin/Warfarin_0.85_2000/")
+setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/Warfarin2/Warfarin_0.85_2000/")
 
 
 ##########################################################################################################
@@ -76,9 +76,9 @@ for(Run in c(1,2,3,4,5)){
 
   rm(t_train_data,t_test_data)
 
-  # par(xpd = TRUE)
-  # plot(model, compress = TRUE)
-  # text(model, use.n = TRUE)
+  par(xpd = TRUE)
+  plot(model, compress = TRUE)
+  text(model, use.n = TRUE)
 
   rm(model,model.cv,train_control)
 
@@ -87,15 +87,26 @@ for(Run in c(1,2,3,4,5)){
   ##########################################################################################################
 
   # Save files
-  write.csv(data_train_enc,paste("data_train_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
-  write.csv(data_test_enc,paste("data_test_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
-  write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
-  write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
+  # write.csv(data_train_enc,paste("data_train_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
+  # write.csv(data_test_enc,paste("data_test_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
+  # write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
+  # write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
 }
 
 # data_train <- read.csv("data_train_enc_1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
-st = ""
-for(s in names(data)){
-  s = paste('\'',s,'\'',sep = "")
-  st = paste(st,",",s,sep = "")
-}
+# st = ""
+# for(s in names(data)){
+#   s = paste('\'',s,'\'',sep = "")
+#   st = paste(st,",",s,sep = "")
+# }
+# 
+# 
+# data8 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/data/Warfarin/Warfarin_0.85_2000/data_train_enc_1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
+# data3 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/data/Warfarin/Warfarin_0.33_2000/data_train_enc_1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
+# data1 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/data/Warfarin/Warfarin_0.10_2000/data_train_enc_1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
+# data3old <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/data/Warfarin/Warfarin_random_2000/data_train_enc_1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
+
+
+# data8 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approach/warfarin_enc_0.85.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
+# data3 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approach/warfarin_enc_0.33.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
+# data1 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approach/warfarin_enc_0.1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
