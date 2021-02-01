@@ -76,9 +76,9 @@ for(Run in c(1,2,3,4,5)){
 
   rm(t_train_data,t_test_data)
 
-  par(xpd = TRUE)
-  plot(model, compress = TRUE)
-  text(model, use.n = TRUE)
+  # par(xpd = TRUE)
+  # plot(model, compress = TRUE)
+  # text(model, use.n = TRUE)
 
   rm(model,model.cv,train_control)
 
@@ -87,13 +87,13 @@ for(Run in c(1,2,3,4,5)){
   ##########################################################################################################
 
   # Save files
-  # write.csv(data_train_enc,paste("data_train_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
-  # write.csv(data_test_enc,paste("data_test_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
-  # write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
-  # write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_train_enc,paste("data_train_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_test_enc,paste("data_test_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
 }
 
-# data_train <- read.csv("data_train_enc_1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
+# data <- read.csv("data_train_enc_1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
 # st = ""
 # for(s in names(data)){
 #   s = paste('\'',s,'\'',sep = "")
