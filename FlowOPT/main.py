@@ -128,7 +128,7 @@ def main(argv):
     # data_path = os.getcwd() + '/../data/Athey_v2_4000/'
     # data_path = os.getcwd() + '/../data/IST_5000/'
     # data_path = os.getcwd() + '/../data/IST_2000_binary/'
-    data_path = os.getcwd() + '/../data/Warfarin/Warfarin_0.85_2000/'
+    data_path = os.getcwd() + '/../data/Warfarin2/Warfarin_0.85_2000/'
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
