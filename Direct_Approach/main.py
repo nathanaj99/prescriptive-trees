@@ -129,7 +129,7 @@ def main(argv):
             robust = arg
 
     # ---- CHANGE FILE PATH ----
-    data_path = '../data/Warfarin/Warfarin_0.85_2000/'
+    data_path = '../data/Warfarin2/Warfarin_0.85_2000/'
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -141,7 +141,7 @@ def main(argv):
     out_put_name = training_file.split('.csv')[0] + '_' + approach_name + '_d_' + str(depth) + '_t_' + str(
         time_limit) + '_branching_limit_' + str(
         branching_limit) + '_pred_' + str(prob_type_pred)
-    out_put_path = os.getcwd() + '/../Results_Warfarin/Robust/0.85/'
+    out_put_path = os.getcwd() + '/../Results_Warfarin2/Robust/v3_0.85/'
     sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
 
     ##########################################################
@@ -153,7 +153,7 @@ def main(argv):
     #features = ['V1', 'V2', 'V3']
     features = ['Age1.2', 'Age3.4', 'Age5.6', 'Age7', 'Age8.9', 'Height1', 'Height2', 'Height3', 'Height4', 'Height5',
                 'Weight1', 'Weight2', 'Weight3', 'Weight4', 'Weight5', 'Asian', 'Black.or.African.American', 'Unknown.Race',
-                'X.1..1', 'X.1..3', 'X.2..2', 'X.2..3', 'X.3..3', 'Unknown.Cyp2C9', 'VKORC1.A.G', 'VKORC1.A.A', 'VKORC1.Missing']
+                'X.1..1', 'X.1..3', 'X.2..2', 'X.2..3', 'X.3..3', 'Unknown.Cyp2C9', 'VKORC1.A.G', 'VKORC1.A.A', 'VKORC1.Missing', 'Enzyme.Inducer', 'Amiodarone..Cordarone.']
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
     true_outcome_cols = ['y0', 'y1', 'y2']
     outcome = 'y'

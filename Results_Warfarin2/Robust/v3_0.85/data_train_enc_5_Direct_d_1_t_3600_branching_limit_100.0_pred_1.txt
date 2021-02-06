@@ -1,0 +1,182 @@
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (mac64)
+Optimize a model with 30006 rows, 24041 columns and 128046 nonzeros
+Model fingerprint: 0x934f3cc6
+Variable types: 24009 continuous, 32 integer (32 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 1970.0000000
+Presolve removed 18686 rows and 15517 columns
+Presolve time: 0.50s
+Presolved: 11320 rows, 8524 columns, 56620 nonzeros
+Variable types: 8496 continuous, 28 integer (28 binary)
+
+Root relaxation: objective 2.000000e+03, 4948 iterations, 0.62 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 2000.00000    0    2 1970.00000 2000.00000  1.52%     -    1s
+     0     0 2000.00000    0    2 1970.00000 2000.00000  1.52%     -    1s
+     0     0 2000.00000    0    2 1970.00000 2000.00000  1.52%     -    1s
+     0     0 2000.00000    0    2 1970.00000 2000.00000  1.52%     -    2s
+     0     0 2000.00000    0    2 1970.00000 2000.00000  1.52%     -    2s
+     0     0 2000.00000    0    2 1970.00000 2000.00000  1.52%     -    2s
+     0     0 2000.00000    0    2 1970.00000 2000.00000  1.52%     -    2s
+     0     0 1999.50000    0    2 1970.00000 1999.50000  1.50%     -    2s
+     0     0 1999.50000    0    2 1970.00000 1999.50000  1.50%     -    2s
+H    0     0                    1971.0000000 1999.50000  1.45%     -    2s
+     0     0 1999.25000    0    2 1971.00000 1999.25000  1.43%     -    3s
+     0     0 1999.25000    0    2 1971.00000 1999.25000  1.43%     -    3s
+     0     2 1999.25000    0    2 1971.00000 1999.25000  1.43%     -    3s
+*    8     2               4    1977.0000000 1987.50000  0.53%  1089    4s
+*   10     2               5    1985.0000000 1987.00000  0.10%   961    4s
+*   12     2               6    1986.0000000 1986.00000  0.00%   887    4s
+
+Cutting planes:
+  Gomory: 3
+  MIR: 17
+  RLT: 10
+
+Explored 13 nodes (16792 simplex iterations) in 4.49 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 5: 1986 1985 1977 ... 1970
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.986000000000e+03, best bound 1.986000000000e+03, gap 0.0000%
+
+
+
+#########node  1
+Age3.4
+#########node  2
+leaf 1
+#########node  3
+leaf 2
+
+
+Total Solving Time 8.21763801574707
+obj value 1986.0
+Policy Regret train (Sum) 926
+Best Treatment Found train (%) 53.7
+treatment classification acc train (%) 45.050000000000004
+Policy Regret test (Sum) 1127
+Best Treatment Found test (%) 52.76613579212071
+treatment classification acc test (%) 42.749371332774516
+['-f', 'data_train_enc_5.csv', '-e', 'data_test_enc_5.csv', '-d', 2, '-b', 100, '-t', 3600, '-p', 1, '-r', True]
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (mac64)
+Optimize a model with 70014 rows, 56115 columns and 340132 nonzeros
+Model fingerprint: 0x4046b6d4
+Variable types: 56021 continuous, 94 integer (94 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 1964.0000000
+Presolve removed 41714 rows and 34321 columns
+Presolve time: 1.45s
+Presolved: 28300 rows, 21794 columns, 152884 nonzeros
+Variable types: 21710 continuous, 84 integer (84 binary)
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    6976    1.9701541e+03   0.000000e+00   1.412209e+04      5s
+    8742    2.0000000e+03   0.000000e+00   0.000000e+00      7s
+Concurrent spin time: 1.03s
+
+Solved with primal simplex
+
+Root relaxation: objective 2.000000e+03, 8742 iterations, 6.96 seconds
+Total elapsed time = 23.55s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 2000.00000    0    2 1964.00000 2000.00000  1.83%     -   25s
+H    0     0                    1971.0000000 2000.00000  1.47%     -   25s
+     0     0 2000.00000    0   12 1971.00000 2000.00000  1.47%     -   27s
+     0     0 2000.00000    0   11 1971.00000 2000.00000  1.47%     -   29s
+     0     0 2000.00000    0    2 1971.00000 2000.00000  1.47%     -   49s
+     0     0 2000.00000    0    8 1971.00000 2000.00000  1.47%     -   50s
+H    0     0                    1972.0000000 2000.00000  1.42%     -   50s
+H    0     0                    1979.0000000 2000.00000  1.06%     -   65s
+     0     0 2000.00000    0    2 1979.00000 2000.00000  1.06%     -   65s
+     0     0 2000.00000    0   11 1979.00000 2000.00000  1.06%     -   71s
+H    0     0                    1986.0000000 2000.00000  0.70%     -  111s
+H    0     0                    1987.0000000 2000.00000  0.65%     -  111s
+H    0     0                    1988.0000000 2000.00000  0.60%     -  111s
+H    0     0                    1989.0000000 2000.00000  0.55%     -  111s
+     0     0 2000.00000    0    4 1989.00000 2000.00000  0.55%     -  112s
+     0     0 2000.00000    0    4 1989.00000 2000.00000  0.55%     -  112s
+     0     0 2000.00000    0    4 1989.00000 2000.00000  0.55%     -  113s
+     0     0 2000.00000    0    4 1989.00000 2000.00000  0.55%     -  113s
+     0     2 2000.00000    0    4 1989.00000 2000.00000  0.55%     -  118s
+     3     8 2000.00000    2   27 1989.00000 2000.00000  0.55%  2685  140s
+     7     8 2000.00000    3   43 1989.00000 2000.00000  0.55%  2121  146s
+    11    12 2000.00000    4   31 1989.00000 2000.00000  0.55%  1880  150s
+    15    12 2000.00000    5   44 1989.00000 2000.00000  0.55%  1772  157s
+    19    16 2000.00000    6   14 1989.00000 2000.00000  0.55%  1676  161s
+*   24    17               5    1991.0000000 2000.00000  0.45%  1532  163s
+    37    17 2000.00000    9   13 1991.00000 2000.00000  0.45%  1326  166s
+    59    20 2000.00000   12   12 1991.00000 2000.00000  0.45%  1060  170s
+*   62    20              13    1994.0000000 2000.00000  0.30%  1018  170s
+    81    25 2000.00000   14   10 1994.00000 2000.00000  0.30%   947  176s
+   144    19     cutoff   18      1994.00000 2000.00000  0.30%   859  182s
+   194    20 2000.00000    7    2 1994.00000 2000.00000  0.30%   770  188s
+   239    19 2000.00000   18    4 1994.00000 2000.00000  0.30%   768  190s
+   283    15 2000.00000   22    4 1994.00000 2000.00000  0.30%   741  196s
+   370     1     cutoff    8      1994.00000 2000.00000  0.30%   714  201s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 39
+  Flow cover: 9
+  RLT: 1
+
+Explored 392 nodes (352509 simplex iterations) in 201.31 seconds
+Thread count was 8 (of 8 available processors)
+
+Solution count 10: 1994 1991 1989 ... 1964
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.994000000000e+03, best bound 1.994000000000e+03, gap 0.0000%
+
+
+
+#########node  1
+X.1..1
+#########node  2
+X.1..3
+#########node  3
+Age3.4
+#########node  4
+leaf 2
+#########node  5
+leaf 1
+#########node  6
+leaf 1
+#########node  7
+leaf 2
+
+
+Total Solving Time 208.24933505058289
+obj value 1994.0
+Policy Regret train (Sum) 1160
+Best Treatment Found train (%) 42.0
+treatment classification acc train (%) 33.7
+Policy Regret test (Sum) 1350
+Best Treatment Found test (%) 43.41994970662196
+treatment classification acc test (%) 33.40318524727577
