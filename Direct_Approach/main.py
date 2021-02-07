@@ -105,11 +105,13 @@ def main(argv):
     time_limit = None
     prob_type_pred = None
     robust = None
+    data_group = None
+    ml = None
 
     try:
-        opts, args = getopt.getopt(argv, "f:e:d:b:t:p:r:",
+        opts, args = getopt.getopt(argv, "f:e:d:b:t:p:r:g:m:",
                                    ["training_file=", "test_file=", "depth=", "branching_limit=", "time_limit=",
-                                    "pred=", "robust="])
+                                    "pred=", "robust=", "data_group=", "ml="])
     except getopt.GetoptError:
         sys.exit(2)
     for opt, arg in opts:
@@ -124,12 +126,65 @@ def main(argv):
         elif opt in ("-t", "--time_limit"):
             time_limit = int(arg)
         elif opt in ("-p", "--pred"):
-            prob_type_pred = int(arg)
+            prob_type_pred = arg
         elif opt in ("-r", "--robust"):
             robust = arg
+        elif opt in ("-g", "--data_group"):
+            data_group = arg
+        elif opt in ("-m", "--ml"):
+            ml = arg
 
     # ---- CHANGE FILE PATH ----
-    data_path = '../data/Warfarin2/Warfarin_0.85_2000/'
+    if robust == 'robust':
+        robust = True
+    elif robust == 'direct':
+        robust = False
+
+    data_path_dict = {}
+    if robust:
+        data_path_dict = {'Warfarin_3000': ('/../data/Warfarin/3000/', '/../Results_Robust/Warfarin/3000/'),
+                          'Athey_v1_500': ('/../data/Athey_v1/500/', '/../Results_Robust/Athey_v1/500/'),
+                          'Athey_v2_4000': ('/../data/Athey_v2/4000/', '/../Results_Robust/Athey_v2/4000/')}
+    else:
+        data_path_dict = {'Warfarin_3000': ('/../data/Warfarin/3000/', '/../Results_Direct/Warfarin/3000/'),
+                          'Athey_v1_500': ('/../data/Athey_v1/500/', '/../Results_Direct/Athey_v1/500/'),
+                          'Athey_v2_4000': ('/../data/Athey_v2/4000/', '/../Results_Direct/Athey_v2/4000/')}
+
+    data_group_features_dict = {
+        'Warfarin_3000': ['Age1.2', 'Age3.4', 'Age5.6', 'Age7', 'Age8.9', 'Height1', 'Height2', 'Height3', 'Height4',
+                          'Height5',
+                          'Weight1', 'Weight2', 'Weight3', 'Weight4', 'Weight5', 'Asian', 'Black.or.African.American',
+                          'Unknown.Race', 'X.1..1', 'X.1..3', 'X.2..2', 'X.2..3', 'X.3..3', 'Unknown.Cyp2C9',
+                          'VKORC1.A.G',
+                          'VKORC1.A.A', 'VKORC1.Missing', 'Enzyme.Inducer', 'Amiodarone..Cordarone.'],
+        'Athey_v1_500': ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10', 'V2.1',
+                         'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10'],
+        'Athey_v2_4000': ['V1', 'V2', 'V3']}
+
+    data_group_true_outcome_cols_dict = {
+        'Warfarin_3000': ['y0', 'y1', 'y2'],
+        'Athey_v1_500': ['y0', 'y1'],
+        'Athey_v2_4000': ['y0', 'y1']
+    }
+
+    data_group_ml_outcome_cols_dict = {}
+
+    if ml == 'ml':
+        data_group_ml_outcome_cols_dict = {
+            'Warfarin_3000': ['ml0', 'ml1', 'ml2']
+        }
+    elif ml == 'linear':
+        data_group_ml_outcome_cols_dict = {
+            'Athey_v1_500': ['linear0', 'linear1'],
+            'Athey_v2_4000': ['linear0', 'linear1']
+        }
+    elif ml == 'lasso':
+        data_group_ml_outcome_cols_dict = {
+            'Athey_v1_500': ['lasso0', 'lasso1'],
+            'Athey_v2_4000': ['lasso0', 'lasso1']
+        }
+
+    data_path = os.getcwd() + data_path_dict[data_group][0]
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -137,48 +192,42 @@ def main(argv):
     ##########################################################
     # output setting
     ##########################################################
-    approach_name = 'Direct'
+    approach_name = ''
+    if robust:
+        approach_name = 'Robust'
+    else:
+        approach_name = 'Direct'
     out_put_name = training_file.split('.csv')[0] + '_' + approach_name + '_d_' + str(depth) + '_t_' + str(
         time_limit) + '_branching_limit_' + str(
         branching_limit) + '_pred_' + str(prob_type_pred)
-    out_put_path = os.getcwd() + '/../Results_Warfarin2/Robust/v3_0.85/'
+    out_put_path = os.getcwd() + data_path_dict[data_group][1]
     sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
 
     ##########################################################
     # DataSet specific settings
     ##########################################################
-    #features = ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10',
-     #           'V2.1', 'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10']
-    #features = ['AGE2', 'AGE3', 'RVISINF', 'RSBP2', 'RSBP3', 'RSBP4', 'RDEF3', 'RDEF4', 'RDEF5', 'RCONSC1', 'RCONSC2']
-    #features = ['V1', 'V2', 'V3']
-    features = ['Age1.2', 'Age3.4', 'Age5.6', 'Age7', 'Age8.9', 'Height1', 'Height2', 'Height3', 'Height4', 'Height5',
-                'Weight1', 'Weight2', 'Weight3', 'Weight4', 'Weight5', 'Asian', 'Black.or.African.American', 'Unknown.Race',
-                'X.1..1', 'X.1..3', 'X.2..2', 'X.2..3', 'X.3..3', 'Unknown.Cyp2C9', 'VKORC1.A.G', 'VKORC1.A.A', 'VKORC1.Missing', 'Enzyme.Inducer', 'Amiodarone..Cordarone.']
+    features = data_group_features_dict[data_group]
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
-    true_outcome_cols = ['y0', 'y1', 'y2']
+    true_outcome_cols = data_group_true_outcome_cols_dict[data_group]
     outcome = 'y'
-    regression = ['ml0', 'ml1', 'ml2']
-    if prob_type_pred:
+    regression = data_group_ml_outcome_cols_dict[data_group]
+
+    prob_t = ''
+    if prob_type_pred == 'tree':
         prob_t = 'prob_t_pred_tree'
-        data_train = data_train[data_train.columns[data_train.columns != 'prob_t']]
-    else:
+    elif prob_type_pred == 'true':
         prob_t = 'prob_t'
-        data_train = data_train[data_train.columns[data_train.columns != 'prob_t_pred_tree']]
+    elif prob_type_pred == 'log':
+        prob_t = 'prob_t_pred_log'
+
+
     ##########################################################
     # Creating and Solving the problem
     ##########################################################
     tree = Tree.Tree(depth)  # Tree structure: We create a complete binary tree of depth d
-    primal = Primal.Primal(data_train, features, treatment_col, true_outcome_cols, outcome, regression, prob_t, robust, tree,
-                           branching_limit,
+    primal = Primal.Primal(data_train, features, treatment_col, true_outcome_cols, outcome, regression, prob_t, robust,
+                           tree, branching_limit,
                            time_limit)
-    """primal.create_primal_problem()
-    primal.model.update()
-    primal.model.optimize()
-    print(primal.model.getAttr("X", primal.b))
-    print(primal.model.getAttr("X", primal.zeta))
-    print(primal.model.getAttr('X', primal.p))
-    print(primal.model.getAttr('X', primal.w))"""
-
 
     start_time = time.time()
     primal.create_primal_problem()
@@ -243,7 +292,7 @@ def main(argv):
              regret_test,
              best_found_test,
              treatment_classification_acc_test,
-             prob_type_pred
+             prob_type_pred, ml
              ])
 
 
