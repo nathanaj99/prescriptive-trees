@@ -103,11 +103,12 @@ def main(argv):
     branching_limit = None
     time_limit = None
     prob_type_pred = None
+    data_group = None
 
     try:
-        opts, args = getopt.getopt(argv, "f:e:d:b:t:p:",
+        opts, args = getopt.getopt(argv, "f:e:d:b:t:p:g:",
                                    ["training_file=", "test_file=", "depth=", "branching_limit=", "time_limit=",
-                                    "pred="])
+                                    "pred=", "data_group="])
     except getopt.GetoptError:
         sys.exit(2)
     for opt, arg in opts:
@@ -122,13 +123,33 @@ def main(argv):
         elif opt in ("-t", "--time_limit"):
             time_limit = int(arg)
         elif opt in ("-p", "--pred"):
-            prob_type_pred = int(arg)
+            prob_type_pred = arg
+        elif opt in ("-g", "--data_group"):
+            data_group = arg
 
+    data_path_dict = {'Warfarin_3000': ('/../data/Warfarin/3000/', '/../Results/Warfarin/3000/'),
+                      'Athey_v1_500': ('/../data/Athey_v1/500/', '/../Results/Athey_v1/500/'),
+                      'Athey_v2_500': ('/../data/Athey_v2/500/', '/../Results/Athey_v2/500/'),
+                      'Athey_v2_4000': ('/../data/Athey_v2/4000/', '/../Results/Athey_v2/4000/')}
+
+    data_group_features_dict = {
+        'Warfarin_3000': ['Age1.2', 'Age3.4', 'Age5.6', 'Age7', 'Age8.9', 'Height1', 'Height2', 'Height3', 'Height4',
+                          'Height5',
+                          'Weight1', 'Weight2', 'Weight3', 'Weight4', 'Weight5', 'Asian', 'Black.or.African.American',
+                          'Unknown.Race', 'X.1..1', 'X.1..3', 'X.2..2', 'X.2..3', 'X.3..3', 'Unknown.Cyp2C9',
+                          'VKORC1.A.G',
+                          'VKORC1.A.A', 'VKORC1.Missing', 'Enzyme.Inducer', 'Amiodarone..Cordarone.'],
+        'Athey_v1_500': ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10', 'V2.1',
+                         'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10'],
+        'Athey_v2_4000': ['V1', 'V2', 'V3']}
+
+    data_group_true_outcome_cols_dict = {
+        'Warfarin_3000': ['y0', 'y1', 'y2'],
+        'Athey_v1_500': ['y0', 'y1'],
+        'Athey_v2_4000': ['y0', 'y1']
+    }
     # data_path = os.getcwd() + '/../data/Athey_v1_N_500/'
-    # data_path = os.getcwd() + '/../data/Athey_v2_4000/'
-    # data_path = os.getcwd() + '/../data/IST_5000/'
-    # data_path = os.getcwd() + '/../data/IST_2000_binary/'
-    data_path = os.getcwd() + '/../data/Warfarin2/Warfarin_0.85_2000/'
+    data_path = os.getcwd() + data_path_dict[data_group][0]
 
     data_train = pd.read_csv(data_path + training_file)
     data_test = pd.read_csv(data_path + test_file)
@@ -136,40 +157,29 @@ def main(argv):
     ##########################################################
     # output setting
     ##########################################################
-    approach_name = 'FlowOPT'
-    out_put_name = training_file.split('.csv')[0] + '_' + approach_name + '_d_' + str(depth) + '_t_' + str(
+    approach_name = 'IPW'
+    out_put_name = data_group + '_' + training_file.split('.csv')[0] + '_' + approach_name + '_d_' + str(
+        depth) + '_t_' + str(
         time_limit) + '_branching_limit_' + str(
-        branching_limit) + '_pred_' + str(prob_type_pred)
-    out_put_path = os.getcwd() + '/../Results/'
+        branching_limit) + '_pred_' + prob_type_pred
+    out_put_path = os.getcwd() + data_path_dict[data_group][1]
     sys.stdout = logger.logger(out_put_path + out_put_name + '.txt')
 
     ##########################################################
     # DataSet specific settings
     ##########################################################
-    # features = ['V1.1', 'V1.2', 'V1.3', 'V1.4', 'V1.5', 'V1.6', 'V1.7', 'V1.8', 'V1.9', 'V1.10',
-    #             'V2.1', 'V2.2', 'V2.3', 'V2.4', 'V2.5', 'V2.6', 'V2.7', 'V2.8', 'V2.9', 'V2.10']
-
-    # features = ['V1', 'V2', 'V3']
-
-    # features = ['SEX', 'RVISINF', 'RDEF1', 'RDEF2', 'RDEF3', 'RDEF4', 'RDEF5', 'RDEF6', 'RDEF7', 'RDEF8', 'RCONSC1',
-    #             'RCONSC2', 'RCONSC3', 'STYPE1', 'STYPE2', 'STYPE3', 'STYPE4', 'STYPE5', 'AGE1', 'AGE2', 'AGE3', 'RSBP1',
-    #             'RSBP2', 'RSBP3', 'RSBP4']
-    # features = ['AGE2', 'AGE3', 'RVISINF', 'RSBP2', 'RSBP3', 'RSBP4', 'RDEF3', 'RDEF4', 'RDEF5', 'RCONSC1', 'RCONSC2']
-    features = ['Age1.2', 'Age3.4', 'Age5.6', 'Age7', 'Age8.9', 'Height1', 'Height2', 'Height3', 'Height4', 'Height5',
-                'Weight1', 'Weight2', 'Weight3', 'Weight4', 'Weight5', 'Asian', 'Black.or.African.American',
-                'Unknown.Race', 'X.1..1', 'X.1..3', 'X.2..2', 'X.2..3', 'X.3..3', 'Unknown.Cyp2C9', 'VKORC1.A.G',
-                'VKORC1.A.A', 'VKORC1.Missing','Enzyme.Inducer','Amiodarone..Cordarone.']
+    features = data_group_features_dict[data_group]
 
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
-    # true_outcome_cols = ['y0', 'y1', 'y2', 'y3', 'y4', 'y5']
-    true_outcome_cols = ['y0', 'y1', 'y2']
+    true_outcome_cols = data_group_true_outcome_cols_dict[data_group]
     outcome = 'y'
-    if prob_type_pred:
-        prob_t = 'prob_t_pred_tree'
-        # data_train = data_train[data_train.columns[data_train.columns != 'prob_t']]
-    else:
+    prob_t = 'prob_t_pred_tree'
+    if prob_type_pred == 'true':
         prob_t = 'prob_t'
-        # data_train = data_train[data_train.columns[data_train.columns != 'prob_t_pred']]
+    elif prob_type_pred == 'tree':
+        prob_t = 'prob_t_pred_tree'
+    elif prob_type_pred == 'log':
+        prob_t = 'prob_t_pred_log'
     ##########################################################
     # Creating and Solving the problem
     ##########################################################

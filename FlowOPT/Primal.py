@@ -30,7 +30,7 @@ class Primal:
         self.zeta = 0
 
         # Gurobi model
-        self.model = Model('FlowOPT')
+        self.model = Model('IPW')
         # self.model.params.Threads = 1
         self.model.params.TimeLimit = time_limit
 
@@ -99,20 +99,6 @@ class Primal:
 
         for n in self.tree.Terminals:
             self.model.addConstrs(self.zeta[i, n] == self.z[i, n] for i in self.datapoints)
-
-        # self.model.addConstrs(self.z[i, 1] <=1 for i in self.datapoints)
-        # self.model.addConstr(self.b[1, 'V1.1'] == 1)
-        # self.model.addConstr(self.b[2, 'V1.4'] == 1)
-        # self.model.addConstr(self.b[3, 'V2.6'] == 1)
-        # self.model.addConstr(self.w[4, 1] == 1)
-        # self.model.addConstr(self.w[5, 1] == 1)
-        # self.model.addConstr(self.w[6, 0] == 1)
-        # self.model.addConstr(self.w[7, 1] == 1)
-
-        # self.model.addConstr(self.b[1, 'V1.3'] == 1)
-        # self.model.addConstr(self.w[2, 1] == 1)
-        # self.model.addConstr(self.w[3, 0] == 1)
-
 
 
         # define objective function

@@ -4,6 +4,39 @@ import os
 depths = [0, 1, 2]
 samples = [1, 2, 3, 4, 5]
 
+#Warfarin_3000 :: 
+for s in [1,2,3,4,5]:
+    for d in [0,1,2]:
+        training_file = 'data_train_enc_'  + str(s) + '.csv'
+        test_file = 'data_test_enc_' +  str(s) + '.csv'
+        primal.main(["-f", training_file, "-e", test_file, "-d", d, "-b", 100, "-t", 3600, "-p", 1, "-g", "Warfarin_3000"])
+
+
+
+
+
+#Athey_v1_500
+
+
+
+
+
+
+
+
+
+
+#Athey_v2_4000
+
+
+
+
+
+
+
+
+
+
 
 # for s in samples:
 #     for d in depths:
@@ -17,8 +50,3 @@ samples = [1, 2, 3, 4, 5]
 # primal.main(["-f", 'data_train_0.5_1.csv', "-e", 'data_test_0.5_1.csv', "-d", 1, "-b", 100, "-t", 600, "-p", 0])
 
 
-for s in [1,2,3,4,5]:
-    for d in [0,1,2]:
-        training_file = 'data_train_enc_'  + str(s) + '.csv'
-        test_file = 'data_test_enc_' +  str(s) + '.csv'
-        primal.main(["-f", training_file, "-e", test_file, "-d", d, "-b", 100, "-t", 3600, "-p", 1])
