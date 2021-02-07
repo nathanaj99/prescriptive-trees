@@ -234,7 +234,7 @@ def main(argv):
     ##########################################################
     # writing info to the file
     ##########################################################
-    primal.model.write(out_put_path + out_put_name + '.lp')
+    # primal.model.write(out_put_path + out_put_name + '.lp')
     result_file = out_put_name + '.csv'
     with open(out_put_path + result_file, mode='a') as results:
         results_writer = csv.writer(results, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
