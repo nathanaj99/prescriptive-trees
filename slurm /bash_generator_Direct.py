@@ -30,8 +30,8 @@ def generate(data_group, depths, thresholds, preds, mls, array):
                 for threshold in thresholds:
                     for pred in preds:
                         for ml in mls:
-                            training_file = 'data_train_' + str(threshold) + '_' + str(s) + '.csv'
-                            test_file = 'data_test_' + str(threshold) + '_' + str(s) + '.csv'
+                            training_file = 'data_train_enc_' + str(threshold) + '_' + str(s) + '.csv'
+                            test_file = 'data_test_enc_' + str(threshold) + '_' + str(s) + '.csv'
                             train_data_list.append(training_file)
                             test_data_list.append(test_file)
                             depth_list.append(d)

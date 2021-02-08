@@ -26,8 +26,8 @@ def generate(data_group, depths, thresholds, array):
         for s in samples:
             for d in depths:
                 for threshold in thresholds:
-                    training_file = 'data_train_' + str(threshold) + '_' + str(s) + '.csv'
-                    test_file = 'data_test_' + str(threshold) + '_' + str(s) + '.csv'
+                    training_file = 'data_train_enc_' + str(threshold) + '_' + str(s) + '.csv'
+                    test_file = 'data_test_enc_' + str(threshold) + '_' + str(s) + '.csv'
                     train_data_list.append(training_file)
                     test_data_list.append(test_file)
                     depth_list.append(d)
