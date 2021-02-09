@@ -26,7 +26,7 @@ type_list="kallus kallus kallus kallus bertsimas bertsimas bertsimas bertsimas
 train_data_list=($train_data_list)
 test_data_list=($test_data_list)
 depth_list=($depth_list)
-type_list = ($type_list)
+type_list=($type_list)
 
 
 python main.py -f ${train_data_list[$SLURM_ARRAY_TASK_ID]} -e ${test_data_list[$SLURM_ARRAY_TASK_ID]} -d ${depth_list[$SLURM_ARRAY_TASK_ID]} -t 3600 -b 100 -r ${type_list[$SLURM_ARRAY_TASK_ID]} -n 0 -g Athey_v1_500
