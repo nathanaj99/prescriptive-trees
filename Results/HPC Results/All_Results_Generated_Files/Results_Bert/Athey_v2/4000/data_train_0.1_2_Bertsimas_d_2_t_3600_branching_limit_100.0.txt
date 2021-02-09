@@ -1,0 +1,104 @@
+Using license file /spack/apps/linux-centos7-x86_64/gcc-8.3.0/gurobi-9.0.1/license/gurobi.lic
+Set parameter TokenServer to value hpc-licenses.hpcc.usc.edu
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 140031 rows, 48029 columns and 429866 nonzeros
+Model fingerprint: 0xb2e6f1ef
+Model has 4000 quadratic objective terms
+Variable types: 36012 continuous, 12017 integer (12017 binary)
+Coefficient statistics:
+  Matrix range     [8e-04, 3e+03]
+  Objective range  [8e-04, 1e+00]
+  QObjective range [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+03]
+Presolve removed 35228 rows and 18029 columns (presolve time = 5s) ...
+Presolve removed 35228 rows and 18029 columns
+Presolve time: 5.04s
+Presolved: 104803 rows, 30000 columns, 307316 nonzeros
+Presolved model has 4000 quadratic objective terms
+Variable types: 27920 continuous, 2080 integer (2080 binary)
+Found heuristic solution: objective 753.5882856
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0   -0.0000000e+00   0.000000e+00   6.002109e+03      7s
+   30501    7.7370204e+02   0.000000e+00   5.420712e+02     10s
+   38865    1.5158823e+03   0.000000e+00   1.418645e+03     15s
+   50237    1.6345600e+03   0.000000e+00   5.499582e+02     20s
+   57173    1.8047547e+03   0.000000e+00   8.311745e+01     25s
+   64505    1.9032580e+03   0.000000e+00   4.506073e+01     30s
+   73073    2.1306980e+03   0.000000e+00   3.007117e+01     35s
+   78377    2.3914879e+03   0.000000e+00   2.146330e+01     40s
+   82405    2.4969929e+03   0.000000e+00   1.549013e+01     45s
+   86077    2.6293763e+03   0.000000e+00   9.159957e+00     50s
+   90157    2.8427470e+03   0.000000e+00   1.431505e+00     55s
+   93121    3.0232108e+03   0.000000e+00   0.000000e+00     58s
+
+Root relaxation: objective 3.023211e+03, 93121 iterations, 50.25 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 3023.21077    0 2080  753.58829 3023.21077   301%     -   89s
+H    0     0                     991.5045705 3023.21077   205%     -   91s
+     0     0 2879.79771    0 2080  991.50457 2879.79771   190%     -  219s
+     0     0 2879.79771    0 2080  991.50457 2879.79771   190%     -  445s
+     0     0 1995.12910    0 2080  991.50457 1995.12910   101%     - 1439s
+     0     0 1995.12910    0 2080  991.50457 1995.12910   101%     - 1471s
+     0     0 1993.93130    0 2080  991.50457 1993.93130   101%     - 2173s
+H    0     0                    1017.0469915 1993.93130  96.1%     - 2226s
+     0     2 1993.93130    0 2080 1017.04699 1993.93130  96.1%     - 2300s
+     1     4 1993.93130    1 1830 1017.04699 1993.93130  96.1%  9579 2311s
+     3     8 1993.93130    2 1543 1017.04699 1993.93130  96.1%  6647 2321s
+     7    16 1971.64496    3 1542 1017.04699 1989.72524  95.6%  4523 2353s
+    15    32 1599.22635    4 1541 1017.04699 1970.34523  93.7%  3802 2401s
+    31    52 1217.72667    5 1004 1017.04699 1879.77209  84.8%  3008 3507s
+H   36    52                    1043.2215566 1879.77209  80.2%  2873 3507s
+H   39    52                    1112.6580948 1879.77209  68.9%  3076 3508s
+H   41    52                    1116.4818594 1688.73422  51.3%  3071 3508s
+    51    63 1179.95848    6  755 1116.48186 1688.73422  51.3%  3172 3600s
+
+Cutting planes:
+  Gomory: 2
+  Implied bound: 1
+  MIR: 1322
+  Flow cover: 191
+  RLT: 4459
+
+Explored 70 nodes (787435 simplex iterations) in 3600.66 seconds
+Thread count was 20 (of 20 available processors)
+
+Solution count 6: 1116.48 1112.66 1043.22 ... 753.588
+
+Time limit reached
+Best objective 1.116481859439e+03, best bound 1.688734218416e+03, gap 51.2550%
+
+
+
+#########node 1
+V3
+#########node 2
+V2
+#########node 3
+V1
+#########node 4
+leaf 0
+#########node 5
+leaf 1
+#########node 6
+leaf 0
+#########node 7
+leaf 1
+
+
+Total Solving Time 3607.386120080948
+obj value 1116.4818594385947
+Policy Regret train (Sum) 104.01357278467687
+Best Treatment Found train (%) 70.125
+treatment classification acc train (%) 28.7
+Policy Regret test (Sum) 250.0706570000572
+Best Treatment Found test (%) 70.55
+treatment classification acc test (%) 30.17

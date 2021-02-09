@@ -1,0 +1,95 @@
+Using license file /spack/apps/linux-centos7-x86_64/gcc-8.3.0/gurobi-9.0.1/license/gurobi.lic
+Set parameter TokenServer to value hpc-licenses.hpcc.usc.edu
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 10014 rows, 7081 columns and 50098 nonzeros
+Model fingerprint: 0xe2a829ff
+Variable types: 7014 continuous, 67 integer (67 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-02, 3e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective -0.0000000
+Presolve removed 4053 rows and 4033 columns
+Presolve time: 0.09s
+Presolved: 5961 rows, 3048 columns, 39380 nonzeros
+Variable types: 2988 continuous, 60 integer (60 binary)
+
+Root relaxation: objective 4.491037e+02, 4152 iterations, 0.36 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  449.10370    0    6   -0.00000  449.10370      -     -    0s
+H    0     0                     237.4911473  449.10370  89.1%     -    0s
+H    0     0                     238.3496405  449.10370  88.4%     -    0s
+     0     0  449.04305    0   14  238.34964  449.04305  88.4%     -    0s
+     0     0  448.93185    0   13  238.34964  448.93185  88.4%     -    0s
+H    0     0                     241.1533601  448.93185  86.2%     -    0s
+     0     0  448.65129    0   17  241.15336  448.65129  86.0%     -    0s
+     0     0  448.64532    0   13  241.15336  448.64532  86.0%     -    0s
+     0     0  447.17968    0   18  241.15336  447.17968  85.4%     -    1s
+     0     0  447.14065    0   20  241.15336  447.14065  85.4%     -    1s
+H    0     0                     241.8662171  445.62480  84.2%     -    1s
+     0     0  445.62480    0   22  241.86622  445.62480  84.2%     -    1s
+     0     0  445.10822    0   20  241.86622  445.10822  84.0%     -    1s
+     0     0  445.08595    0   20  241.86622  445.08595  84.0%     -    1s
+     0     0  444.23365    0   20  241.86622  444.23365  83.7%     -    1s
+H    0     0                     250.7290651  444.23365  77.2%     -    1s
+     0     0  443.93445    0   22  250.72907  443.93445  77.1%     -    1s
+     0     0  443.90569    0   23  250.72907  443.90569  77.0%     -    1s
+     0     0  443.90569    0   23  250.72907  443.90569  77.0%     -    1s
+     0     0  443.61588    0   21  250.72907  443.61588  76.9%     -    2s
+     0     0  443.61588    0   21  250.72907  443.61588  76.9%     -    2s
+     0     2  443.61588    0   21  250.72907  443.61588  76.9%     -    2s
+    85    40  442.24722    9   17  250.72907  442.78628  76.6%   310    7s
+* 1169    94              15     251.5875583  439.60856  74.7%  90.1    9s
+  1268   107     cutoff   13       251.58756  439.60856  74.7%  88.6   10s
+* 1315   107              28     253.3820818  439.60856  73.5%  87.2   10s
+  4631   256  322.73257   21    2  253.38208  421.33138  66.3%  81.7   15s
+  6810     6  322.73257   24    2  253.38208  392.71936  55.0%  76.5   20s
+  7439    17  328.55080   29    2  253.38208  330.86212  30.6%  76.9   25s
+
+Cutting planes:
+  Gomory: 3
+  MIR: 83
+  Flow cover: 4
+  RLT: 54
+  Relax-and-lift: 12
+
+Explored 7506 nodes (589142 simplex iterations) in 25.49 seconds
+Thread count was 20 (of 20 available processors)
+
+Solution count 8: 253.382 251.588 250.729 ... -0
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.533820818033e+02, best bound 2.533820818033e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.2
+#########node  2
+V1.4
+#########node  3
+V2.7
+#########node  4
+leaf 1
+#########node  5
+leaf 0
+#########node  6
+leaf 1
+#########node  7
+leaf 0
+
+
+Total Solving Time 26.10453224182129
+obj value 253.38208180332637
+Policy Regret train (Sum) 2.589746866565452
+Best Treatment Found train (%) 83.6
+treatment classification acc train (%) 70.0
+Policy Regret test (Sum) 61.31920514526248
+Best Treatment Found test (%) 82.25
+treatment classification acc test (%) 67.01

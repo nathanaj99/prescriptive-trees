@@ -1,0 +1,81 @@
+Using license file /spack/apps/linux-centos7-x86_64/gcc-8.3.0/gurobi-9.0.1/license/gurobi.lic
+Set parameter TokenServer to value hpc-licenses.hpcc.usc.edu
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 45021 rows, 18043 columns and 188211 nonzeros
+Model fingerprint: 0x673647d9
+Model has 3000 quadratic objective terms
+Variable types: 15008 continuous, 3035 integer (3035 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+03]
+  Objective range  [5e-01, 1e+00]
+  QObjective range [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+03]
+Presolve removed 12303 rows and 6299 columns
+Presolve time: 1.08s
+Presolved: 32718 rows, 11744 columns, 131367 nonzeros
+Presolved model has 3000 quadratic objective terms
+Variable types: 9008 continuous, 2736 integer (2734 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   20215   -1.3950000e+03   0.000000e+00   2.459861e+01      5s
+Warning: Markowitz tolerance tightened to 0.125
+   25203   -1.4999661e+03   0.000000e+00   6.836527e+00     10s
+Warning: Markowitz tolerance tightened to 0.25
+   27639   -1.4999661e+03   0.000000e+00   2.834390e+00     15s
+   29301   -1.5000000e+03   0.000000e+00   0.000000e+00     18s
+
+Root relaxation: objective -1.500000e+03, 29301 iterations, 16.58 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1500.00000    0 2723          - 1500.00000      -     -   26s
+H    0     0                    1198.0563474 1500.00000  25.2%     -   35s
+     0     0 1500.00000    0 2722 1198.05635 1500.00000  25.2%     -   71s
+H    0     0                    1339.4138319 1500.00000  12.0%     -   79s
+     0     0 1500.00000    0 2720 1339.41383 1500.00000  12.0%     -   89s
+     0     2 1500.00000    0 2720 1339.41383 1500.00000  12.0%     -   97s
+     3     7 1476.85645    2 2280 1339.41383 1500.00000  12.0%   318  119s
+     7    11 1468.19999    3 2214 1339.41383 1496.76563  11.7%   983  139s
+    14     9 1423.77502    4 1061 1339.41383 1487.21133  11.0%  1090  180s
+*   15     9               4    1367.0060087 1487.21133  8.79%  1246  180s
+    25     5 1382.33860    5  537 1367.00601 1487.02763  8.78%  1310  204s
+    34     8 1382.33860    6  537 1367.00601 1485.69512  8.68%  1033  218s
+    39     4     cutoff    7      1367.00601 1485.69512  8.68%   945  262s
+    47     4     cutoff    8      1367.00601 1483.86424  8.55%  1086  326s
+    51     4     cutoff    9      1367.00601 1483.86424  8.55%  1064  345s
+    55     4     cutoff   10      1367.00601 1483.86424  8.55%  1053  370s
+    59     4     cutoff   11      1367.00601 1479.65119  8.24%  1023  395s
+    63     4     cutoff   12      1367.00601 1477.00627  8.05%  1040  441s
+    67     4     cutoff   13      1367.00601 1472.94620  7.75%  1028  463s
+    71     4     cutoff   14      1367.00601 1470.10719  7.54%  1045  515s
+    75     4     cutoff   15      1367.00601 1467.40857  7.34%  1056  560s
+    79     4     cutoff   16      1367.00601 1465.54860  7.21%  1039  593s
+    83     5 1370.04887   17    2 1367.00601 1442.42409  5.52%  1025  612s
+    87     2     cutoff   18      1367.00601 1397.47026  2.23%   990  615s
+    92     0     cutoff   19      1367.00601 1395.04261  2.05%   971  646s
+
+Cutting planes:
+  Flow cover: 3
+
+Explored 94 nodes (125714 simplex iterations) in 646.99 seconds
+Thread count was 20 (of 20 available processors)
+
+Solution count 3: 1367.01 1339.41 1198.06 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.367006008717e+03, best bound 1.367006008717e+03, gap 0.0000%
+
+
+
+#########node 2
+leaf 1
+
+
+Total Solving Time 651.6876058578491
+obj value 1367.0060087167535

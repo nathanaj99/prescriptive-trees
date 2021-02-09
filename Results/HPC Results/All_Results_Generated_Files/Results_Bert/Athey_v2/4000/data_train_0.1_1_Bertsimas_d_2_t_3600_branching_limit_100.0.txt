@@ -1,0 +1,101 @@
+Using license file /spack/apps/linux-centos7-x86_64/gcc-8.3.0/gurobi-9.0.1/license/gurobi.lic
+Set parameter TokenServer to value hpc-licenses.hpcc.usc.edu
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 140031 rows, 48029 columns and 430223 nonzeros
+Model fingerprint: 0x3f7b29d2
+Model has 4000 quadratic objective terms
+Variable types: 36012 continuous, 12017 integer (12017 binary)
+Coefficient statistics:
+  Matrix range     [2e-03, 3e+03]
+  Objective range  [2e-03, 1e+00]
+  QObjective range [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 3e+03]
+Presolve removed 33828 rows and 17632 columns
+Presolve time: 3.88s
+Presolved: 106203 rows, 30397 columns, 311929 nonzeros
+Presolved model has 4000 quadratic objective terms
+Variable types: 28392 continuous, 2005 integer (2005 binary)
+Found heuristic solution: objective 750.9739006
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0   -0.0000000e+00   0.000000e+00   6.117969e+03      6s
+   36609    1.0915740e+03   0.000000e+00   9.622033e+02     10s
+   48294    9.1848755e+02   0.000000e+00   6.474099e+02     15s
+   55879    1.3581593e+03   0.000000e+00   5.982903e+02     20s
+   63454    1.4327842e+03   0.000000e+00   9.935626e+01     25s
+   69624    1.5243131e+03   0.000000e+00   5.226380e+01     30s
+   78849    1.9561040e+03   0.000000e+00   3.303559e+01     35s
+   84999    2.3028650e+03   0.000000e+00   2.062500e+01     40s
+   90329    2.5880348e+03   0.000000e+00   1.006250e+01     45s
+   95044    2.8721295e+03   0.000000e+00   3.828125e-01     50s
+   98733    3.0282366e+03   0.000000e+00   0.000000e+00     51s
+
+Root relaxation: objective 3.028237e+03, 98733 iterations, 45.70 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 3028.23661    0 2005  750.97390 3028.23661   303%     -   69s
+H    0     0                     964.8006612 3028.23661   214%     -   71s
+     0     0 2840.62517    0 2005  964.80066 2840.62517   194%     -  209s
+     0     0 2840.62517    0 2005  964.80066 2840.62517   194%     -  384s
+     0     0 2648.56175    0 2005  964.80066 2648.56175   175%     -  697s
+H    0     0                    1051.9333534 2648.56175   152%     -  728s
+     0     0 2631.85066    0 2005 1051.93335 2631.85066   150%     -  731s
+     0     0 1999.74372    0 2005 1051.93335 1999.74372  90.1%     - 1575s
+     0     0 1999.74372    0 2005 1051.93335 1999.74372  90.1%     - 1584s
+     0     0 1999.57335    0 2005 1051.93335 1999.57335  90.1%     - 1827s
+H    0     0                    1123.8662372 1999.57335  77.9%     - 2059s
+     0     2 1999.57335    0 2005 1123.86624 1999.57335  77.9%     - 2061s
+     3     8 1997.50827    2 1482 1123.86624 1999.57335  77.9%  4610 2068s
+     7    16 1977.47701    3 1481 1123.86624 1997.24532  77.7%  5397 2090s
+    15    32 1604.87818    4 1480 1123.86624 1977.46394  76.0%  4451 2121s
+    31    50 1197.48430    5  957 1123.86624 1875.15674  66.8%  3335 3106s
+    51    62 1161.26795    6  754 1123.86624 1874.12771  66.8%  3029 3600s
+
+Cutting planes:
+  Gomory: 2
+  Implied bound: 1
+  MIR: 1164
+  Flow cover: 460
+  RLT: 5871
+
+Explored 65 nodes (852058 simplex iterations) in 3600.91 seconds
+Thread count was 20 (of 20 available processors)
+
+Solution count 4: 1123.87 1051.93 964.801 750.974 
+
+Time limit reached
+Best objective 1.123866237173e+03, best bound 1.874127712510e+03, gap 66.7572%
+
+
+
+#########node 1
+V3
+#########node 2
+V2
+#########node 3
+V3
+#########node 4
+leaf 0
+#########node 5
+leaf 1
+#########node 6
+leaf 1
+#########node 7
+leaf 0
+
+
+Total Solving Time 3608.0551977157593
+obj value 1123.866237172649
+Policy Regret train (Sum) 68.21660534867378
+Best Treatment Found train (%) 75.775
+treatment classification acc train (%) 49.7
+Policy Regret test (Sum) 165.84974477503138
+Best Treatment Found test (%) 75.12
+treatment classification acc test (%) 49.19

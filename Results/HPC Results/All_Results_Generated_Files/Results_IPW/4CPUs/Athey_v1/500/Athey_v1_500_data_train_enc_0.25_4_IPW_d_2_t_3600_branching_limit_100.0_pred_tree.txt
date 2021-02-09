@@ -1,0 +1,94 @@
+Using license file /spack/apps/linux-centos7-x86_64/gcc-8.3.0/gurobi-9.0.1/license/gurobi.lic
+Set parameter TokenServer to value hpc-licenses.hpcc.usc.edu
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 10014 rows, 7081 columns and 50098 nonzeros
+Model fingerprint: 0xa02f1833
+Variable types: 7014 continuous, 67 integer (67 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e-01, 4e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective -0.0000000
+Presolve removed 4049 rows and 4031 columns
+Presolve time: 0.10s
+Presolved: 5965 rows, 3050 columns, 39369 nonzeros
+Variable types: 2990 continuous, 60 integer (60 binary)
+
+Root relaxation: objective 5.695129e+02, 4347 iterations, 0.41 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  569.51293    0    6   -0.00000  569.51293      -     -    0s
+H    0     0                     299.8935344  569.51293  89.9%     -    0s
+     0     0  568.82100    0   13  299.89353  568.82100  89.7%     -    0s
+H    0     0                     300.5854674  568.82100  89.2%     -    0s
+     0     0  568.21155    0   12  300.58547  568.21155  89.0%     -    0s
+     0     0  567.80966    0   15  300.58547  567.80966  88.9%     -    0s
+     0     0  567.67247    0   15  300.58547  567.67247  88.9%     -    0s
+     0     0  566.75020    0   18  300.58547  566.75020  88.5%     -    1s
+     0     0  566.71985    0   16  300.58547  566.71985  88.5%     -    1s
+     0     0  566.53232    0   16  300.58547  566.53232  88.5%     -    1s
+     0     0  566.53232    0   13  300.58547  566.53232  88.5%     -    1s
+     0     0  566.53232    0   13  300.58547  566.53232  88.5%     -    1s
+H    0     0                     300.8904411  564.44286  87.6%     -    1s
+     0     0  563.59092    0   15  300.89044  563.59092  87.3%     -    1s
+     0     0  563.59092    0   15  300.89044  563.59092  87.3%     -    1s
+     0     2  563.59092    0   15  300.89044  563.59092  87.3%     -    1s
+H   45    32                     302.1924751  561.29458  85.7%   308    3s
+H   53    32                     304.0437770  560.57574  84.4%   288    3s
+*  105    46               8     304.1147227  560.26838  84.2%   225    4s
+   119    60  559.03688   10   13  304.11472  560.26838  84.2%   218    7s
+H  126    60                     304.4392291  560.26838  84.0%   213    7s
+H  128    60                     321.6821489  560.26838  74.2%   211    7s
+H  136    60                     326.6077256  560.26838  71.5%   199    7s
+  1038   138  336.51712   30    2  326.60773  554.10486  69.7%   113   10s
+* 1131   138              25     329.3240155  554.10486  68.3%   112   10s
+* 3909    73              28     330.4958725  538.53059  62.9%  84.6   13s
+  4541    40  523.47336   22    4  330.49587  534.86286  61.8%  82.0   15s
+  5819     4  394.49997   43    2  330.49587  477.65285  44.5%  79.2   20s
+
+Cutting planes:
+  Gomory: 4
+  MIR: 93
+  Flow cover: 7
+  RLT: 49
+  Relax-and-lift: 4
+
+Explored 6074 nodes (493967 simplex iterations) in 22.80 seconds
+Thread count was 20 (of 20 available processors)
+
+Solution count 10: 330.496 329.324 326.608 ... 300.585
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.304958725121e+02, best bound 3.304958725121e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.7
+#########node  2
+V2.7
+#########node  3
+V1.4
+#########node  4
+leaf 1
+#########node  5
+leaf 0
+#########node  6
+leaf 1
+#########node  7
+leaf 0
+
+
+Total Solving Time 23.435788869857788
+obj value 330.4958725120952
+Policy Regret train (Sum) 9.074149285660045
+Best Treatment Found train (%) 53.6
+treatment classification acc train (%) 47.0
+Policy Regret test (Sum) 175.41949337401866
+Best Treatment Found test (%) 64.21
+treatment classification acc test (%) 40.77

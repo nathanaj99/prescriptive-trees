@@ -1,0 +1,85 @@
+Using license file /spack/apps/linux-centos7-x86_64/gcc-8.3.0/gurobi-9.0.1/license/gurobi.lic
+Set parameter TokenServer to value hpc-licenses.hpcc.usc.edu
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 33021 rows, 15037 columns and 152176 nonzeros
+Model fingerprint: 0x562b1733
+Variable types: 12002 continuous, 3035 integer (3035 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+03]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+03]
+Presolve removed 15626 rows and 7567 columns
+Presolve time: 1.17s
+Presolved: 17395 rows, 7470 columns, 84909 nonzeros
+Variable types: 4974 continuous, 2496 integer (2494 binary)
+
+Root relaxation: objective 3.000000e+03, 8394 iterations, 1.11 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 3000.00000    0    3          - 3000.00000      -     -    2s
+H    0     0                    2247.5350554 3000.00000  33.5%     -    3s
+H    0     0                    2605.7142857 3000.00000  15.1%     -    3s
+H    0     0                    2943.8406736 3000.00000  1.91%     -    4s
+     0     0 3000.00000    0  465 2943.84067 3000.00000  1.91%     -    5s
+     0     0 3000.00000    0  465 2943.84067 3000.00000  1.91%     -    5s
+     0     0 3000.00000    0    3 2943.84067 3000.00000  1.91%     -    6s
+     0     0 3000.00000    0 2025 2943.84067 3000.00000  1.91%     -    7s
+     0     0 3000.00000    0    3 2943.84067 3000.00000  1.91%     -    8s
+     0     0 3000.00000    0  389 2943.84067 3000.00000  1.91%     -    9s
+     0     0 3000.00000    0  389 2943.84067 3000.00000  1.91%     -    9s
+     0     0 3000.00000    0  389 2943.84067 3000.00000  1.91%     -    9s
+     0     0 3000.00000    0  389 2943.84067 3000.00000  1.91%     -   10s
+     0     2 3000.00000    0  389 2943.84067 3000.00000  1.91%     -   11s
+     7    10 2983.58138    3    3 2943.84067 3000.00000  1.91%   362   20s
+    14    12     cutoff    4      2943.84067 3000.00000  1.91%   365   26s
+    24    19 2945.50115    5 1567 2943.84067 3000.00000  1.91%   682   32s
+*   33    19               5    2953.6146310 2999.79553  1.56%   846   32s
+    36    10     cutoff    6      2953.61463 2999.79553  1.56%   891   39s
+H   37    10                    2967.6395817 2999.79553  1.08%   867   39s
+*   48    10               6    2986.9130435 2999.75308  0.43%   776   39s
+    54     4     cutoff    7      2986.91304 2999.33333  0.42%   793   48s
+    66     4     cutoff    9      2986.91304 2998.30267  0.38%   660   56s
+    71     2     cutoff   10      2986.91304 2997.84554  0.37%   657   61s
+    75     2     cutoff   11      2986.91304 2997.39229  0.35%   676   75s
+    77     2     cutoff   12      2986.91304 2997.29781  0.35%   667   80s
+    83     3 2995.47368   15    2 2986.91304 2996.98079  0.34%   656   85s
+    93     2 2986.92671   19    2 2986.91304 2993.64350  0.23%   645   97s
+    95     2     cutoff   20      2986.91304 2992.94523  0.20%   642  100s
+   101     0     cutoff   23      2986.91304 2988.98960  0.07%   621  106s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 1
+  Flow cover: 1
+
+Explored 103 nodes (71525 simplex iterations) in 106.58 seconds
+Thread count was 20 (of 20 available processors)
+
+Solution count 6: 2986.91 2967.64 2953.61 ... 2247.54
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.986913043478e+03, best bound 2.986913043478e+03, gap 0.0000%
+
+
+
+#########node 1
+Weight4
+#########node 2
+leaf 1
+#########node 3
+leaf 2
+
+
+Total Solving Time 110.21246480941772
+obj value 2986.913043478261
+Policy Regret train (Sum) 2473
+Best Treatment Found train (%) 17.566666666666666
+treatment classification acc train (%) 15.8
+Policy Regret test (Sum) 1139
+Best Treatment Found test (%) 17.82106782106782
+treatment classification acc test (%) 16.594516594516595

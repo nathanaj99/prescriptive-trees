@@ -1,0 +1,86 @@
+Using license file /spack/apps/linux-centos7-x86_64/gcc-8.3.0/gurobi-9.0.1/license/gurobi.lic
+Set parameter TokenServer to value hpc-licenses.hpcc.usc.edu
+Changed value of parameter TimeLimit to 3600.0
+   Prev: inf  Min: 0.0  Max: inf  Default: inf
+Gurobi Optimizer version 9.0.1 build v9.0.1rc0 (linux64)
+Optimize a model with 45021 rows, 18043 columns and 184818 nonzeros
+Model fingerprint: 0xab58b294
+Model has 3000 quadratic objective terms
+Variable types: 15008 continuous, 3035 integer (3035 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+03]
+  Objective range  [5e-01, 1e+00]
+  QObjective range [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+03]
+Presolve removed 17285 rows and 8274 columns
+Presolve time: 1.14s
+Presolved: 27736 rows, 9769 columns, 114024 nonzeros
+Presolved model has 3000 quadratic objective terms
+Variable types: 7504 continuous, 2265 integer (2263 binary)
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+   26531    1.5000000e+03   2.206207e+01   0.000000e+00      5s
+   39438    1.5000000e+03   1.644681e+02   0.000000e+00     10s
+   47074    1.5000000e+03   0.000000e+00   0.000000e+00     15s
+
+Root relaxation: objective 1.500000e+03, 47074 iterations, 13.30 seconds
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 1500.00000    0 2240          - 1500.00000      -     -   17s
+H    0     0                    -166.4912244 1500.00000  1001%     -   21s
+H    0     0                     876.6374306 1500.00000  71.1%     -   24s
+H    0     0                    1143.1291220 1500.00000  31.2%     -   30s
+     0     0 1500.00000    0 2251 1143.12912 1500.00000  31.2%     -   36s
+     0     0 1500.00000    0 2246 1143.12912 1500.00000  31.2%     -   37s
+     0     0 1500.00000    0 2250 1143.12912 1500.00000  31.2%     -   38s
+     0     0 1500.00000    0 2246 1143.12912 1500.00000  31.2%     -   45s
+     0     0 1495.09167    0 2244 1143.12912 1495.09167  30.8%     -   84s
+     0     2 1495.09167    0 2244 1143.12912 1495.09167  30.8%     -   95s
+     3     8 1420.44085    2 1242 1143.12912 1494.41092  30.7%   982  117s
+     7    14 1409.87446    3  803 1143.12912 1492.05211  30.5%  3044  161s
+    15    14 1275.76442    4  298 1143.12912 1485.05848  29.9%  2855  235s
+    29    16     cutoff    5      1143.12912 1480.43098  29.5%  2706  254s
+    43    18 1285.36981    6 2020 1143.12912 1476.95059  29.2%  2389  274s
+    59    14 1285.36981    7 2020 1143.12912 1436.09670  25.6%  2189  299s
+    77    14 1284.94410    8 2009 1143.12912 1435.27557  25.6%  2047  341s
+    91    13 1229.06868    9 2007 1143.12912 1394.06651  22.0%  2025  362s
+   105    13 1205.42320   10 1958 1143.12912 1365.13540  19.4%  2021  384s
+*  111    13              10    1162.5597591 1337.58665  15.1%  2012  384s
+   119    10 1174.12339   11 1824 1162.55976 1337.58665  15.1%  1926  396s
+   133    10 1168.43369   12 1737 1162.55976 1329.74887  14.4%  1838  415s
+   147     7     cutoff   13      1162.55976 1328.49163  14.3%  1772  436s
+   158     8     cutoff   16      1162.55976 1302.99992  12.1%  1766  449s
+   167     8 1267.65188   16 1404 1162.55976 1289.94353  11.0%  1732  465s
+   177     4     cutoff   17      1162.55976 1255.50548  7.99%  1710  475s
+   187     2     cutoff   21      1162.55976 1241.14485  6.76%  1684  487s
+   193     0     cutoff   20      1162.55976 1221.58936  5.08%  1668  492s
+
+Cutting planes:
+  Implied bound: 4
+  MIR: 1
+  Flow cover: 2
+  RLT: 2
+
+Explored 195 nodes (432025 simplex iterations) in 492.23 seconds
+Thread count was 20 (of 20 available processors)
+
+Solution count 4: 1162.56 1143.13 876.637 -166.491 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.162559759128e+03, best bound 1.162559759128e+03, gap 0.0000%
+
+
+
+#########node 2
+leaf 1
+#########node 3
+leaf 0
+
+
+Total Solving Time 496.4883623123169
+obj value 1162.5597591275477
