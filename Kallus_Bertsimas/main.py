@@ -9,6 +9,7 @@ import Primal
 import logger
 import getopt
 import csv
+import math
 import numpy as np
 
 
@@ -184,14 +185,15 @@ def main(argv):
     # get branching and treatments
     g = primal.model.getAttr("X", primal.gamma).items()
     l = primal.model.getAttr("X", primal.lamb).items()
-
-    branching = {i[0][0]: i[0][1] for i in g if i[1] == 1.0}
-    treatments = {i[0][0]: i[0][1] for i in l if i[1] == 1.0}
+    branching = {i[0][0]: i[0][1] for i in g if math.isclose(i[1], 1.0, abs_tol=0.001)}
+    treatments = {i[0][0]: i[0][1] for i in l if math.isclose(i[1], 1.0, abs_tol=0.001)}
+    print(branching)
 
     print("\n\n")
     print_tree(branching, treatments, features)
     print('\n\nTotal Solving Time', solving_time)
     print("obj value", primal.model.getAttr("ObjVal"))
+    print(g)
 
     ##########################################################
     # Evaluation
