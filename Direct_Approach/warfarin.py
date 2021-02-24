@@ -3,6 +3,7 @@ import math
 from sklearn.preprocessing import LabelBinarizer
 import numpy as np
 import collections
+import sklearn.metrics as skm
 
 df = pd.read_csv('../../Warfarin/raw.csv')
 
@@ -162,7 +163,7 @@ weight = stratify(weight, ['Weight1', 'Weight2', 'Weight3', 'Weight4', 'Weight5'
 
 
 # combining everything together
-rest = df[['Enzyme Inducer', 'Amiodarone (Cordarone)', 'VKORC1 A/G', 'VKORC1 A/A', 'VKORC1 Missing']]
+rest = df[['Enzyme Inducer', 'Amiodarone (Cordarone)', 'VKORC1 A/G', 'VKORC1 A/A', 'VKORC1 Missing', 'Therapeutic Dose of Warfarin']]
 rest = rest.reset_index().drop(columns=['index'])
 # COMPILE EVERYTHING (bucketized)
 
@@ -186,14 +187,25 @@ df['t_ideal'] = 5.6044 - 0.2614*df['Age'] + 0.0087*df['Height'] + 0.0128*df['Wei
     '*1/*3'] - 1.0616*df['*2/*2'] - 1.9206*df['*2/*3'] - 2.3312*df['*3/*3'] - 0.2188*df['Unknown Cyp2C9'] - 0.1092*df[
     'Asian'] - 0.2760*df['Black or African American'] - 0.1032*df['Unknown Race'] + 1.1816*df[
     'Enzyme Inducer'] - 0.5503*df['Amiodarone (Cordarone)']
+
+np.random.seed(0)
+noise = np.random.normal(0, 0.2, size=len(df))
+
+df['t_ideal_noise'] = df['t_ideal'] + noise
+
 df['t_ideal'] = df['t_ideal'] * df['t_ideal']
+df['t_ideal_noise'] = df['t_ideal_noise'] * df['t_ideal_noise']
+#print(skm.r2_score(df['Therapeutic Dose of Warfarin'], df['t_ideal']))
 df['t_ideal'] = pd.cut(df['t_ideal'], bins=bins, labels=labels)
-print(df['t_ideal'])
+df['t_ideal_noise'] = pd.cut(df['t_ideal_noise'], bins=bins, labels=labels)
+
+print(df['t_ideal'].compare(df['t_ideal_noise'])) # ~248 changed their ideal treatment assignment
+
 # construct "true outcomes"
 # 1 if coincides with treatment tier
-df['y0'] = df['t_ideal'].apply(lambda x: 1 if x == 0 else 0)
-df['y1'] = df['t_ideal'].apply(lambda x: 1 if x == 1 else 0)
-df['y2'] = df['t_ideal'].apply(lambda x: 1 if x == 2 else 0)
+df['y0'] = df['t_ideal_noise'].apply(lambda x: 1 if x == 0 else 0)
+df['y1'] = df['t_ideal_noise'].apply(lambda x: 1 if x == 1 else 0)
+df['y2'] = df['t_ideal_noise'].apply(lambda x: 1 if x == 2 else 0)
 
 # --- RANDOMLY GENERATE TRUE DATA (0.33)
 df['t'] = np.random.randint(3, size=len(df))
@@ -205,7 +217,7 @@ for index, row in df.iterrows():
     l.append(row['y' + str(int(t))])
 df['y'] = l
 
-#df.loc[:, df.columns != 't_ideal'].to_csv('warfarin_0.33.csv', index=False)
+#df.loc[:, df.columns != 't_ideal'].loc[:, df.columns != 't_ideal'].to_csv('warfarin_0.33.csv', index=False)
 
 
 rest3 = df[['Enzyme Inducer', 'Amiodarone (Cordarone)', 'VKORC1 A/G', 'VKORC1 A/A', 'VKORC1 Missing', 'y', 't', 'y0', 'y1', 'y2']]
@@ -267,7 +279,10 @@ def nonrandomized(p):
     df_enc = pd.concat([rest2, race, cyp2c9, rest], axis=1)
     df_enc.to_csv('warfarin_' + str(p) + '.csv', index=False)"""
 
-    df.loc[:, df.columns != 't_ideal'].to_csv('warfarin_' + str(p) + '.csv', index=False)
+    df_dropped = df.drop(columns=['t_ideal', 't_ideal_noise', 'Therapeutic Dose of Warfarin'])
+    df_dropped.to_csv('warfarin_' + str(p) + '.csv', index=False)
+    #print(df.loc[[10, 29]])
+    print(df['y'].sum()/float(len(df)))
 
     rest3 = df[
         ['Enzyme Inducer', 'Amiodarone (Cordarone)', 'VKORC1 A/G', 'VKORC1 A/A', 'VKORC1 Missing', 'y', 't', 'y0', 'y1',
@@ -277,6 +292,10 @@ def nonrandomized(p):
     df_enc = pd.concat([age, height, weight, race, cyp2c9, rest3], axis=1)
     df_enc.to_csv('warfarin_enc_' + str(p) + '.csv', index=False)
 
+nonrandomized(0.33)
+nonrandomized(0.1)
+nonrandomized(0.6)
+nonrandomized(0.85)
 
 
 def nonrandomized_v2():
@@ -347,7 +366,7 @@ def nonrandomized_v2():
     diff = df['t_ideal'].astype(int) - nonrandom_85.astype(int)
     print(diff.value_counts())"""
 
-nonrandomized(0.1)
+#nonrandomized(0.1)
 
 
 
