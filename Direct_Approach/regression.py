@@ -32,14 +32,15 @@ def warfarin():
             df_enc = pd.read_csv(file_path + file_name_enc)
             t_unique = df['t'].unique()
             test = {}
-
+            print(df['y'].value_counts())
             # for 0.1, y=1 will be minority class and for 0.85, y=0 will be minority class.
             # perform smote to increase the accuracy?
 
             for i in t_unique:
+                print(i)
                 buffer = df[df['t'] == i]
                 X = buffer.iloc[:, :17]
-                y = buffer.iloc[:, 17]
+                y = buffer['y']
                 print(y.value_counts())
                 y_values = y.value_counts()
 
@@ -50,8 +51,8 @@ def warfarin():
                 elif y_values[1] <= 5:
                     smote = SMOTE(sampling_strategy=1.0, k_neighbors=y_values[1]-1)
                 X, y = smote.fit_resample(X, y)
-                if prob == 0.85:
-                    print(y.value_counts())
+                print(y.value_counts())
+
                 lr = RandomForestClassifier().fit(X, y)
                 test[i] = lr
 
@@ -81,6 +82,7 @@ def warfarin():
 
             df_enc.to_csv(file_path + file_name_enc, index=False)
 
+warfarin()
 
 def v1():
     probs = [0.1, 0.25, 0.5, 0.75, 0.9]
@@ -182,5 +184,3 @@ def v2():
             print(df)
 
             df.to_csv(file_path + file_name, index=False)
-
-v2()
