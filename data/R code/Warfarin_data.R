@@ -6,7 +6,7 @@
 
 rm(list=ls())
 graphics.off()
-setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/Warfarin2/Warfarin_0.85_2000/")
+setwd("/Users/sina/Documents/GitHub/prescriptive-trees/data/Warfarin/3000/")
 
 
 ##########################################################################################################
@@ -27,6 +27,7 @@ data <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approac
 data_enc <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approach/warfarin_enc_0.85.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
 data$t <- as.factor(data$t)
 data_enc$t <- as.factor(data_enc$t)
+threshold = 0.85
 
 for(Run in c(1,2,3,4,5)){
   set.seed(seeds[Run])
@@ -35,7 +36,7 @@ for(Run in c(1,2,3,4,5)){
   ##########################################################################################################
   ## 75% of the sample size
   # smp_size <- floor(training_portion * nrow(data))
-  smp_size = 2000
+  smp_size = 3000
 
   ## set the seed to make your partition reproducible
   train_ind <- sample(seq_len(nrow(data)), size = smp_size)
@@ -87,10 +88,10 @@ for(Run in c(1,2,3,4,5)){
   ##########################################################################################################
 
   # Save files
-  write.csv(data_train_enc,paste("data_train_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
-  write.csv(data_test_enc,paste("data_test_enc_",toString(Run),".csv",sep=''),row.names = FALSE)
-  write.csv(data_train,paste("data_train_",toString(Run),".csv",sep=''),row.names = FALSE)
-  write.csv(data_test,paste("data_test_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_train_enc,paste("data_train_enc_",toString(threshold),"_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_test_enc,paste("data_test_enc_",toString(threshold),"_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_train,paste("data_train_",toString(threshold),"_",toString(Run),".csv",sep=''),row.names = FALSE)
+  write.csv(data_test,paste("data_test_",toString(threshold),"_",toString(Run),".csv",sep=''),row.names = FALSE)
 }
 
 # data <- read.csv("data_train_enc_1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
@@ -99,13 +100,3 @@ for(Run in c(1,2,3,4,5)){
 #   s = paste('\'',s,'\'',sep = "")
 #   st = paste(st,",",s,sep = "")
 # }
-# 
-# 
-# data8 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/data/Warfarin2/Warfarin_0.85_2000/data_train_enc_1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
-# data3 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/data/Warfarin2/Warfarin_0.33_2000/data_train_enc_1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
-# data1 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/data/Warfarin2/Warfarin_0.10_2000/data_train_enc_1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
-
-
-# data8 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approach/warfarin_enc_0.85.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
-# data3 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approach/warfarin_enc_0.33.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
-# data1 <- read.csv("/Users/sina/Documents/GitHub/prescriptive-trees/Direct_Approach/warfarin_enc_0.1.csv", header = TRUE, sep = ",",na.strings = "",stringsAsFactors = TRUE)
