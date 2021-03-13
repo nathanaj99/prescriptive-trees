@@ -7,7 +7,7 @@
 #SBATCH --constraint="xeon-2640v4"
 #SBATCH --array=0-79
 
-cd /scratch2/saghaei/prescriptive-trees/IPW/
+cd /scratch/nathanaj/prescriptive-trees/IPW/
 
 
 module load gcc

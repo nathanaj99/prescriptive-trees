@@ -108,7 +108,7 @@ def main(argv):
                           'Athey_v1_500': ('/../data/Athey_v1/500/', '/../Results_Bert/Athey_v1/500/'),
                           'Athey_v2_4000': ('/../data/Athey_v2/4000/', '/../Results_Bert/Athey_v2/4000/')}
     else:
-        data_path_dict = {'Warfarin_3000': ('/../data/Warfarin/3000/', '/../Results_Kallus/Warfarin/3000/'),
+        data_path_dict = {'Warfarin_3000': ('/../data/Warfarin_no_noise/3000/', '/../Results_Kallus/Warfarin/3000/'),
                           'Athey_v1_500': ('/../data/Athey_v1/500/', '/../Results_Kallus/Athey_v1/500/'),
                           'Athey_v2_4000': ('/../data/Athey_v2/4000/', '/../Results_Kallus/Athey_v2/4000/')}
 
@@ -222,23 +222,23 @@ def main(argv):
     # writing info to the file
     ##########################################################
     #primal.model.write(out_put_path + out_put_name + '.lp')
-    result_file = out_put_name + '.csv'
-    with open(out_put_path + result_file, mode='a') as results:
-        results_writer = csv.writer(results, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
-        results_writer.writerow(
-            [approach_name, training_file.split('.csv')[0], len(data_train),
-             depth, branching_limit, time_limit,
-             primal.model.getAttr("Status"),
-             primal.model.getAttr("ObjVal"),
-             primal.model.getAttr("MIPGap") * 100,
-             solving_time,
-             regret_train,
-             best_found_train,
-             treatment_classification_acc_train,
-             regret_test,
-             best_found_test,
-             treatment_classification_acc_test,
-             ])
+    # result_file = out_put_name + '.csv'
+    # with open(out_put_path + result_file, mode='a') as results:
+    #     results_writer = csv.writer(results, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
+    #     results_writer.writerow(
+    #         [approach_name, training_file.split('.csv')[0], len(data_train),
+    #          depth, branching_limit, time_limit,
+    #          primal.model.getAttr("Status"),
+    #          primal.model.getAttr("ObjVal"),
+    #          primal.model.getAttr("MIPGap") * 100,
+    #          solving_time,
+    #          regret_train,
+    #          best_found_train,
+    #          treatment_classification_acc_train,
+    #          regret_test,
+    #          best_found_test,
+    #          treatment_classification_acc_test,
+    #          ])
 
 
 if __name__ == "__main__":

@@ -1,13 +1,19 @@
 import pandas as pd
+import numpy as np
 
-df = pd.read_csv('../data/Warfarin/Warfarin_0.85_2000/data_train_enc_1.csv')
-print(df['t'].value_counts())
 
-df_test = pd.read_csv('../data/Warfarin/Warfarin_0.85_2000/data_test_enc_1.csv')
-print(df_test['t'].value_counts())
+p = 0.5
+cols = ['Age', 'Height', 'Weight', 'VKORC1 A/G', 'VKORC1 A/A', 'VKORC1 Missing', '*1/*1', '*1/*3', '*2/*2',
+        '*2/*3', '*3/*3', 'Unknown Cyp2C9', 'Asian', 'Black or African American', 'Unknown Race',
+        'Enzyme Inducer', 'Amiodarone (Cordarone)']
 
-df2 = pd.read_csv('../data/Warfarin2/Warfarin_0.85_2000/data_train_enc_1.csv')
-print(df2['t'].value_counts())
+coeffs = [-0.2614, 0.0087, 0.0128, -0.8677, -1.6974, -0.4854, -0.5211, -0.9357, -1.0616, -1.9206, -2.3312, -0.2188,
+          -0.1092, -0.2760, -0.1032, 1.1816, -0.5503]
 
-df_test2 = pd.read_csv('../data/Warfarin2/Warfarin_0.85_2000/data_test_enc_1.csv')
-print(df_test2['t'].value_counts())
+const = 5.6044
+
+for i in coeffs:
+    lb = i - i*p
+    ub = i + i*p
+    print(lb, ub)
+    print(np.random.uniform(lb, ub))
