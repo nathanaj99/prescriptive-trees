@@ -17,7 +17,7 @@ seeds = c(123,156,67,1,43)
 
 
 
-for(data_seed in c(2,3,4,5)){
+for(data_seed in c(1,2,3,4,5)){
   for(r in c(1,2,3)){
     ##########################################################################################################
     # read data
@@ -44,9 +44,16 @@ for(data_seed in c(2,3,4,5)){
       # Splitting data into training and test
       ##########################################################################################################
       smp_size = 3000
-
       
-      train_ind <- sample(seq_len(nrow(data)), size = smp_size)
+      if((data_seed==1 | data_seed == 3) & r==3){
+        rare_index <- (data$t == 2 & data$y ==0)
+        prob = rep(1/nrow(data), nrow(data))
+        prob[rare_index]=1
+        train_ind <- sample(seq_len(nrow(data)), size = smp_size, prob = prob)
+      }else{
+        train_ind <- sample(seq_len(nrow(data)), size = smp_size)
+      }
+      
 
       data_train <- data[train_ind, ]
       data_test <- data[-train_ind, ]
@@ -54,7 +61,9 @@ for(data_seed in c(2,3,4,5)){
 
       data_train_enc <- data_enc[train_ind, ]
       data_test_enc <- data_enc[-train_ind, ]
-
+      
+    
+      
       ##########################################################################################################
       # Learning propensity score P(t|x) for each entry using decision tree
       ##########################################################################################################
