@@ -127,7 +127,11 @@ def main(argv):
         elif opt in ("-g", "--data_group"):
             data_group = arg
 
-    data_path_dict = {'Warfarin_3000': ('/../data/Warfarin/3000/', '/../Results/Warfarin/3000/'),
+    data_path_dict = {'Warfarin_seed1': ('/../data/Warfarin_v2/seed1/', '/../Results/Warfarin_v2/seed1/'),
+                      'Warfarin_seed2': ('/../data/Warfarin_v2/seed2/', '/../Results/Warfarin_v2/seed2/'),
+                      'Warfarin_seed3': ('/../data/Warfarin_v2/seed3/', '/../Results/Warfarin_v2/seed3/'),
+                      'Warfarin_seed4': ('/../data/Warfarin_v2/seed4/', '/../Results/Warfarin_v2/seed4/'),
+                      'Warfarin_seed5': ('/../data/Warfarin_v2/seed5/', '/../Results/Warfarin_v2/seed5/'),
                       'Athey_v1_500': ('/../data/Athey_v1/500/', '/../Results/Athey_v1/500/'),
                       'Athey_v2_500': ('/../data/Athey_v2/500/', '/../Results/Athey_v2/500/'),
                       'Athey_v2_4000': ('/../data/Athey_v2/4000/', '/../Results/Athey_v2/4000/')}
