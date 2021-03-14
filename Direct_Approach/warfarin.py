@@ -6,8 +6,8 @@ import collections
 import sklearn.metrics as skm
 
 df = pd.read_csv('../../Warfarin/raw.csv')
-# 100, 1, 5, 104, 8
-seed = 8
+seed = 109
+# 13, 1, 5, 19, 109
 path = 'seed5/'
 
 # VCORC1 imputation rules
@@ -300,7 +300,7 @@ def nonrandomized(p):
     df_enc.to_csv('warfarin_' + str(p) + '.csv', index=False)"""
 
     df_dropped = df.drop(columns=['t_ideal', 't_ideal_noise', 'Therapeutic Dose of Warfarin'])
-    df_dropped.to_csv('warfarin_' + str(p) + '_nonoise.csv', index=False)
+    #df_dropped.to_csv('warfarin_' + str(p) + '_nonoise.csv', index=False)
     #print(df.loc[[10, 29]])
     print(df['y'].sum()/float(len(df)))
 
@@ -310,7 +310,7 @@ def nonrandomized(p):
     rest3 = rest3.reset_index().drop(columns=['index'])
     # COMPILE EVERYTHING (bucketized)
     df_enc = pd.concat([age, height, weight, race, cyp2c9, rest3], axis=1)
-    df_enc.to_csv('warfarin_enc_' + str(p) + '_nonoise.csv', index=False)
+    #df_enc.to_csv('warfarin_enc_' + str(p) + '_nonoise.csv', index=False)
 
 # nonrandomized(0.33)
 # nonrandomized(0.1)
@@ -415,14 +415,30 @@ def nonrandomized_v3(p, seed):
 
     nonrandom = nonrandom * nonrandom
     nonrandom = pd.cut(nonrandom, bins=bins, labels=labels)
-    print(nonrandom.value_counts())
-    print(df['t_ideal'].value_counts())
+    # print(nonrandom.value_counts())
+    # print(df['t_ideal'].value_counts())
     diff = df['t_ideal'].astype(int) - nonrandom.astype(int)
-
-    print(diff.value_counts())
+    diff_value = diff.value_counts()
+    diff_value = diff_value[[i == 0 for i in diff_value.index]]
+    num_correct = diff_value.sum()
+    accuracy = float(num_correct)/4386
+    #
+    # ok1 = False
+    # ok2 = False
+    # # SEED NEEDS TO HAVE AT MOST 80% accuracy
+    # if p == 0.06:
+    #     # SEEDS NEEDS TO HAVE AT MOST 88% accuracy
+    #     if accuracy < 0.88:
+    #         ok1 = True
+    # elif p == 0.11:
+    #     # SEEDS NEEDS TO HAVE AT MOST 65% accuracy
+    #     if accuracy < 0.7:
+    #         ok2 = True
+    #
+    # if ok1 or ok2:
+    print("SEED: " + str(seed))
 
     df['t'] = nonrandom
-
     l = []
     # take the outcome of y given the assigned treatment
     for index, row in df.iterrows():
@@ -431,7 +447,12 @@ def nonrandomized_v3(p, seed):
         l.append(row['y' + str(int(t))])
     df['y'] = l
 
-    """rest = df[
+    for t in [0, 1, 2]:
+        print(t)
+        df_buffer = df[df['t'] == int(t)]
+        print(df_buffer['y'].value_counts())
+
+    rest = df[
         ['Enzyme Inducer', 'Amiodarone (Cordarone)', 'VKORC1 A/G', 'VKORC1 A/A', 'VKORC1 Missing', 'y', 't', 'y0', 'y1',
          'y2']]
     rest = rest.reset_index().drop(columns=['index'])
@@ -443,11 +464,10 @@ def nonrandomized_v3(p, seed):
     rest2 = df[['Age', 'Height', 'Weight']]
     rest2 = rest2.reset_index().drop(columns=['index'])
     df_normal = pd.concat([rest2, race, cyp2c9, rest], axis=1)
-    df_normal.to_csv(path + 'warfarin_r' + str(p) + '.csv', index=False)"""
+    df_normal.to_csv(path + 'warfarin_r' + str(p) + '.csv', index=False)
 
 
 #nonrandomized_v3(0.3, 5)
 nonrandomized_v3(0.06, seed)
-nonrandomized_v3(0.3, seed)
-# 100, 1, 5, 104, 8
+nonrandomized_v3(0.11, seed)
 # seed 100 gives strongly imbalanced classes (t=2 is reduced)

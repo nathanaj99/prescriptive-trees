@@ -136,6 +136,7 @@ def main(argv):
                       'Athey_v2_500': ('/../data/Athey_v2/500/', '/../Results/Athey_v2/500/'),
                       'Athey_v2_4000': ('/../data/Athey_v2/4000/', '/../Results/Athey_v2/4000/')}
 
+
     data_group_features_dict = {
         'Warfarin_3000': ['Age1.2', 'Age3.4', 'Age5.6', 'Age7', 'Age8.9', 'Height1', 'Height2', 'Height3', 'Height4',
                           'Height5',
@@ -172,10 +173,14 @@ def main(argv):
     ##########################################################
     # DataSet specific settings
     ##########################################################
-    features = data_group_features_dict[data_group]
+    if 'Warfarin' in data_group:
+        features = data_group_features_dict['Warfarin_3000']
+        true_outcome_cols = data_group_true_outcome_cols_dict['Warfarin_3000']
+    else:
+        features = data_group_features_dict[data_group]
+        true_outcome_cols = data_group_true_outcome_cols_dict[data_group]
 
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
-    true_outcome_cols = data_group_true_outcome_cols_dict[data_group]
     outcome = 'y'
     prob_t = 'prob_t_pred_tree'
     if prob_type_pred == 'true':

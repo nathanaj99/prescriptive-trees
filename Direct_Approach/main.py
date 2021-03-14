@@ -142,11 +142,19 @@ def main(argv):
 
     data_path_dict = {}
     if robust:
-        data_path_dict = {'Warfarin_3000': ('/../data/Warfarin/3000/', '/../Results_Robust/Warfarin/3000/'),
+        data_path_dict = {'Warfarin_seed1': ('/../data/Warfarin_v2/seed1/', '/../Results_Robust/Warfarin_v2/seed1/'),
+                      'Warfarin_seed2': ('/../data/Warfarin_v2/seed2/', '/../Results_Robust/Warfarin_v2/seed2/'),
+                      'Warfarin_seed3': ('/../data/Warfarin_v2/seed3/', '/../Results_Robust/Warfarin_v2/seed3/'),
+                      'Warfarin_seed4': ('/../data/Warfarin_v2/seed4/', '/../Results_Robust/Warfarin_v2/seed4/'),
+                      'Warfarin_seed5': ('/../data/Warfarin_v2/seed5/', '/../Results_Robust/Warfarin_v2/seed5/'),
                           'Athey_v1_500': ('/../data/Athey_v1/500/', '/../Results_Robust/Athey_v1/500/'),
                           'Athey_v2_4000': ('/../data/Athey_v2/4000/', '/../Results_Robust/Athey_v2/4000/')}
     else:
-        data_path_dict = {'Warfarin_3000': ('/../data/Warfarin/3000/', '/../Results_Direct/Warfarin/3000/'),
+        data_path_dict = {'Warfarin_seed1': ('/../data/Warfarin_v2/seed1/', '/../Results_Direct/Warfarin_v2/seed1/'),
+                      'Warfarin_seed2': ('/../data/Warfarin_v2/seed2/', '/../Results_DirectWarfarin_v2/seed2/'),
+                      'Warfarin_seed3': ('/../data/Warfarin_v2/seed3/', '/../Results_Direct/Warfarin_v2/seed3/'),
+                      'Warfarin_seed4': ('/../data/Warfarin_v2/seed4/', '/../Results_Direct/Warfarin_v2/seed4/'),
+                      'Warfarin_seed5': ('/../data/Warfarin_v2/seed5/', '/../Results_Direct/Warfarin_v2/seed5/'),
                           'Athey_v1_500': ('/../data/Athey_v1/500/', '/../Results_Direct/Athey_v1/500/'),
                           'Athey_v2_4000': ('/../data/Athey_v2/4000/', '/../Results_Direct/Athey_v2/4000/')}
 
@@ -206,11 +214,18 @@ def main(argv):
     ##########################################################
     # DataSet specific settings
     ##########################################################
-    features = data_group_features_dict[data_group]
+
+    if 'Warfarin' in data_group:
+        features = data_group_features_dict['Warfarin_3000']
+        true_outcome_cols = data_group_true_outcome_cols_dict['Warfarin_3000']
+        regression = data_group_ml_outcome_cols_dict['Warfarin_3000']
+    else:
+        features = data_group_features_dict[data_group]
+        true_outcome_cols = data_group_true_outcome_cols_dict[data_group]
+        regression = data_group_ml_outcome_cols_dict[data_group]
     treatment_col = 't'  # Name of the column in the dataset representing the treatment assigned to each data point
-    true_outcome_cols = data_group_true_outcome_cols_dict[data_group]
     outcome = 'y'
-    regression = data_group_ml_outcome_cols_dict[data_group]
+
 
     prob_t = ''
     if prob_type_pred == 'tree':
