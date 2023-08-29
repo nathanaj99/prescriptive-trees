@@ -1,0 +1,85 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x53c093b5
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [3e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+02]
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.06s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+Found heuristic solution: objective 225.0294928
+
+Root relaxation: objective 2.514348e+02, 3490 iterations, 0.16 seconds (0.21 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  251.43481    0    2  225.02949  251.43481  11.7%     -    0s
+     0     0  250.79406    0    2  225.02949  250.79406  11.4%     -    0s
+     0     0  249.90934    0    2  225.02949  249.90934  11.1%     -    0s
+     0     0  249.65613    0    3  225.02949  249.65613  10.9%     -    0s
+     0     0  248.78639    0    2  225.02949  248.78639  10.6%     -    0s
+     0     0  248.01928    0    3  225.02949  248.01928  10.2%     -    0s
+     0     0  244.52314    0    4  225.02949  244.52314  8.66%     -    1s
+     0     0  244.52314    0    4  225.02949  244.52314  8.66%     -    1s
+     0     0  244.52165    0    4  225.02949  244.52165  8.66%     -    1s
+     0     0  244.52165    0    4  225.02949  244.52165  8.66%     -    1s
+     0     0  244.52165    0    4  225.02949  244.52165  8.66%     -    1s
+     0     0  244.52165    0    4  225.02949  244.52165  8.66%     -    1s
+     0     0  244.52165    0    4  225.02949  244.52165  8.66%     -    1s
+     0     0  244.52165    0    4  225.02949  244.52165  8.66%     -    1s
+     0     0  244.52165    0    4  225.02949  244.52165  8.66%     -    1s
+     0     0  244.52165    0    4  225.02949  244.52165  8.66%     -    1s
+     0     0  244.52165    0    4  225.02949  244.52165  8.66%     -    1s
+     0     0  244.51483    0    4  225.02949  244.51483  8.66%     -    1s
+     0     0  243.95268    0    3  225.02949  243.95268  8.41%     -    1s
+H    0     0                     229.2139850  243.89796  6.41%     -    1s
+     0     0  243.89796    0    4  229.21399  243.89796  6.41%     -    1s
+     0     0  243.89796    0    4  229.21399  243.89796  6.41%     -    1s
+     0     0  242.80624    0    4  229.21399  242.80624  5.93%     -    1s
+     0     0  242.80624    0    4  229.21399  242.80624  5.93%     -    1s
+     0     2  242.80624    0    4  229.21399  242.80624  5.93%     -    1s
+*   22     2              11     230.0958993  237.74308  3.32%   283    2s
+*   24     2              12     232.2828139  237.05113  2.05%   278    2s
+*   26     2              13     233.4704159  236.44372  1.27%   271    2s
+*   28     2              14     235.3643810  235.65492  0.12%   262    2s
+
+Cutting planes:
+  MIR: 177
+  Flow cover: 4
+  RLT: 18
+  Relax-and-lift: 4
+
+Explored 31 nodes (12316 simplex iterations) in 2.46 seconds (2.03 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 6: 235.364 233.47 232.283 ... 225.029
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.353643810366e+02, best bound 2.353643810366e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.7
+#########node  2
+0.0789473684210526,0.9210526315789475
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 2.88824725151062
+obj value 235.364381036626
+Policy Regret train (Sum) 4.147362670960024
+Best Treatment Found train (%) 70.19999999999999
+treatment classification acc train (%) 50.6
+Policy Regret test (Sum) 63.74597884426457
+Best Treatment Found test (%) 73.06
+treatment classification acc test (%) 50.339999999999996

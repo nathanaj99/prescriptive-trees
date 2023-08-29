@@ -1,0 +1,67 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x76ceb944
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e-03, 3e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+01]
+Found heuristic solution: objective 214.6970742
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.06s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+
+Root relaxation: objective 2.264049e+02, 3128 iterations, 0.11 seconds (0.13 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  226.40491    0    2  214.69707  226.40491  5.45%     -    0s
+H    0     0                     215.8652081  226.40491  4.88%     -    0s
+     0     0  225.72563    0    2  215.86521  225.72563  4.57%     -    0s
+     0     0  225.43895    0    4  215.86521  225.43895  4.44%     -    0s
+     0     0  225.42802    0    4  215.86521  225.42802  4.43%     -    0s
+H    0     0                     216.8797130  225.42802  3.94%     -    0s
+H    0     0                     224.2495483  225.42802  0.53%     -    0s
+     0     0  225.40703    0    4  224.24955  225.40703  0.52%     -    0s
+     0     0  225.33128    0    3  224.24955  225.33128  0.48%     -    0s
+
+Cutting planes:
+  Gomory: 5
+  Implied bound: 161
+  MIR: 3
+  Flow cover: 87
+  RLT: 1
+  Relax-and-lift: 11
+
+Explored 1 nodes (4585 simplex iterations) in 1.24 seconds (0.58 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 4: 224.25 216.88 215.865 214.697 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.242495483067e+02, best bound 2.242495483067e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.9
+#########node  2
+0.2499999999999999,0.7500000000000001
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 1.6858816146850586
+obj value 224.24954830671442
+Policy Regret train (Sum) 10.475852471410601
+Best Treatment Found train (%) 51.800000000000004
+treatment classification acc train (%) 58.8
+Policy Regret test (Sum) 171.07608036179815
+Best Treatment Found test (%) 53.010000000000005
+treatment classification acc test (%) 57.65

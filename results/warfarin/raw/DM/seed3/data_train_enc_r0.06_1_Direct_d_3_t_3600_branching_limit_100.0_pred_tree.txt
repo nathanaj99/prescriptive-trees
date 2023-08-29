@@ -1,0 +1,129 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 225030 rows, 180263 columns and 1146312 nonzeros
+Model fingerprint: 0x465f18b2
+Variable types: 180045 continuous, 218 integer (218 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 27008 rows and 27022 columns (presolve time = 6s) ...
+Presolve removed 44500 rows and 40539 columns (presolve time = 10s) ...
+Presolve removed 44500 rows and 40539 columns
+Presolve time: 12.05s
+Presolved: 180530 rows, 139724 columns, 1001288 nonzeros
+Variable types: 139528 continuous, 196 integer (196 binary)
+Found heuristic solution: objective 2784.3000000
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    2.9499500e+03   1.000000e+01   3.600958e+07     15s
+   15194    2.9224105e+03   9.997083e-01   1.999972e+06     20s
+   17844    2.9224048e+03   9.993132e-01   8.999896e+06     25s
+   20544    2.9224013e+03   9.990873e-01   2.299874e+07     30s
+   23204    2.9340576e+03   9.987612e-01   3.766261e+07     35s
+   25244    2.9339630e+03   9.981864e-01   4.045455e+07     40s
+   27034    2.8921498e+03   7.987318e-01   4.580000e+07     45s
+   29144    2.7839191e+03   4.211904e-04   7.150000e+07     50s
+   30504    2.7838931e+03   2.380616e-04   7.388889e+06     55s
+   33356    2.7838504e+03   4.123968e-05   5.000000e+06     60s
+   38009    2.7838999e+03   0.000000e+00   4.836181e+04     65s
+   41169    2.7840092e+03   0.000000e+00   4.180077e+04     70s
+   44089    2.7841392e+03   0.000000e+00   4.686224e+04     75s
+Concurrent spin time: 5.69s
+
+Solved with dual simplex
+
+Root relaxation: objective 2.949950e+03, 30428 iterations, 63.80 seconds (144.51 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 2949.95000    0    9 2784.30000 2949.95000  5.95%     -   78s
+H    0     0                    2829.4700000 2949.95000  4.26%     -   79s
+     0     0 2949.95000    0   30 2829.47000 2949.95000  4.26%     -  153s
+     0     0 2949.95000    0   25 2829.47000 2949.95000  4.26%     -  157s
+     0     0 2949.95000    0   41 2829.47000 2949.95000  4.26%     -  438s
+     0     0 2949.95000    0   40 2829.47000 2949.95000  4.26%     -  451s
+     0     0 2949.95000    0   44 2829.47000 2949.95000  4.26%     -  786s
+     0     0 2949.95000    0   44 2829.47000 2949.95000  4.26%     -  792s
+     0     0 2949.95000    0   13 2829.47000 2949.95000  4.26%     - 1275s
+H    0     0                    2829.5700000 2949.95000  4.25%     - 1276s
+     0     0 2949.95000    0   13 2829.57000 2949.95000  4.25%     - 1277s
+     0     0 2949.95000    0   10 2829.57000 2949.95000  4.25%     - 1552s
+     0     0 2949.95000    0   12 2829.57000 2949.95000  4.25%     - 1555s
+     0     0 2949.95000    0   11 2829.57000 2949.95000  4.25%     - 1916s
+     0     0 2949.95000    0   11 2829.57000 2949.95000  4.25%     - 2115s
+H    0     0                    2850.0700000 2949.95000  3.50%     - 2166s
+     0     2 2949.95000    0    6 2850.07000 2949.95000  3.50%     - 2545s
+     1     4 2949.95000    1   48 2850.07000 2949.95000  3.50% 74747 2664s
+     3     8 2949.95000    2   49 2850.07000 2949.95000  3.50% 35442 2916s
+     7    14 2949.95000    3   41 2850.07000 2949.95000  3.50% 24672 3006s
+    15    24 2949.95000    4   37 2850.07000 2949.95000  3.50% 16188 3223s
+    29    39 2945.79577    5   37 2850.07000 2949.95000  3.50% 14247 3600s
+H   30    39                    2852.7200000 2949.95000  3.41% 13772 3600s
+
+Cutting planes:
+  MIR: 8
+  Flow cover: 3
+  RLT: 6
+  Relax-and-lift: 2
+
+Explored 48 nodes (1218594 simplex iterations) in 3600.40 seconds (10862.23 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 5: 2852.72 2850.07 2829.57 ... 2784.3
+
+Time limit reached
+Best objective 2.852720000000e+03, best bound 2.949950000000e+03, gap 3.4083%
+
+
+
+#########node  1
+Weight4
+#########node  2
+Black.or.African.American
+#########node  3
+Asian
+#########node  4
+Age1.2
+#########node  5
+Age1.2
+#########node  6
+X.3..3
+#########node  7
+VKORC1.A.G
+#########node  8
+leaf 1
+#########node  9
+leaf 1
+#########node  10
+leaf 1
+#########node  11
+leaf 2
+#########node  12
+leaf 1
+#########node  13
+leaf 1
+#########node  14
+leaf 0
+#########node  15
+leaf 1
+
+
+Total Solving Time 3616.383163690567
+obj value 2852.7200000000016
+Policy Regret train (Sum) 594
+Best Treatment Found train (%) 80.2
+treatment classification acc train (%) 80.10000000000001
+Policy Regret test (Sum) 251
+Best Treatment Found test (%) 81.8903318903319
+treatment classification acc test (%) 81.38528138528139

@@ -1,0 +1,60 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0xffb25fcf
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [4e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+01]
+Presolve removed 1514 rows and 1511 columns
+Presolve time: 0.09s
+Presolved: 4493 rows, 3018 columns, 21993 nonzeros
+Variable types: 2998 continuous, 20 integer (20 binary)
+Found heuristic solution: objective 296.6969931
+
+Root relaxation: objective 2.993248e+02, 1959 iterations, 0.09 seconds (0.09 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  299.32483    0    3  296.69699  299.32483  0.89%     -    0s
+     0     0  299.23494    0    4  296.69699  299.23494  0.86%     -    0s
+     0     0  298.97219    0    4  296.69699  298.97219  0.77%     -    0s
+H    0     0                     298.7913030  298.97219  0.06%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  MIR: 81
+  Flow cover: 7
+  RLT: 16
+
+Explored 1 nodes (2329 simplex iterations) in 0.59 seconds (0.36 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 2: 298.791 296.697 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.987913029788e+02, best bound 2.987913029788e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.9
+#########node  2
+0.27272727272727276,0.7272727272727272
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 1.0399491786956787
+obj value 298.79130297879067
+Policy Regret train (Sum) 1.2671902492705043
+Best Treatment Found train (%) 86.2
+treatment classification acc train (%) 39.2
+Policy Regret test (Sum) 171.4960881571544
+Best Treatment Found test (%) 52.800000000000004
+treatment classification acc test (%) 45.26

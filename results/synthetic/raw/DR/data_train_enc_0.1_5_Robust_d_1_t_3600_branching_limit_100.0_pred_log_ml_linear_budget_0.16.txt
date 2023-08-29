@@ -1,0 +1,86 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0xa441f847
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-03, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 8e+01]
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.06s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+Found heuristic solution: objective 277.3327318
+
+Root relaxation: objective 2.873680e+02, 2538 iterations, 0.08 seconds (0.09 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  287.36802    0    2  277.33273  287.36802  3.62%     -    0s
+     0     0  287.27571    0    2  277.33273  287.27571  3.59%     -    0s
+     0     0  286.99837    0    2  277.33273  286.99837  3.49%     -    0s
+     0     0  286.93991    0    2  277.33273  286.93991  3.46%     -    0s
+H    0     0                     277.9335813  286.93991  3.24%     -    0s
+     0     0  286.59334    0    4  277.93358  286.59334  3.12%     -    0s
+     0     0  286.59082    0    5  277.93358  286.59082  3.11%     -    0s
+     0     0  286.59068    0    5  277.93358  286.59068  3.11%     -    0s
+     0     0  286.01247    0    2  277.93358  286.01247  2.91%     -    0s
+     0     0  286.00593    0    4  277.93358  286.00593  2.90%     -    0s
+     0     0  285.97336    0    3  277.93358  285.97336  2.89%     -    0s
+     0     0  285.94002    0    3  277.93358  285.94002  2.88%     -    0s
+     0     0  285.91690    0    3  277.93358  285.91690  2.87%     -    0s
+     0     0  285.61530    0    5  277.93358  285.61530  2.76%     -    0s
+     0     0  285.61530    0    5  277.93358  285.61530  2.76%     -    0s
+     0     0  285.61530    0    5  277.93358  285.61530  2.76%     -    0s
+     0     0  285.61530    0    5  277.93358  285.61530  2.76%     -    0s
+     0     0  285.49872    0    4  277.93358  285.49872  2.72%     -    0s
+H    0     0                     284.0485317  285.49872  0.51%     -    1s
+     0     0  285.49585    0    5  284.04853  285.49585  0.51%     -    1s
+     0     0  285.49585    0    5  284.04853  285.49585  0.51%     -    1s
+     0     0  285.49585    0    5  284.04853  285.49585  0.51%     -    1s
+     0     0  285.49585    0    4  284.04853  285.49585  0.51%     -    1s
+H    0     0                     284.6875482  285.49585  0.28%     -    1s
+     0     0  285.49585    0    4  284.68755  285.49585  0.28%     -    1s
+     0     0  285.49585    0    2  284.68755  285.49585  0.28%     -    1s
+     0     0  285.19480    0    4  284.68755  285.19480  0.18%     -    1s
+     0     0  285.18980    0    4  284.68755  285.18980  0.18%     -    2s
+     0     0  284.68755    0    5  284.68755  284.68755  0.00%     -    2s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 360
+  MIR: 69
+  RLT: 4
+  Relax-and-lift: 36
+
+Explored 1 nodes (6983 simplex iterations) in 2.11 seconds (1.33 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 4: 284.688 284.049 277.934 277.333 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.846875481990e+02, best bound 2.846875481990e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.8
+#########node  2
+0.1919191919191919,0.8080808080808081
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 2.566593647003174
+obj value 284.6875481990022
+Policy Regret train (Sum) 3.4466623243982886
+Best Treatment Found train (%) 75.4
+treatment classification acc train (%) 31.4
+Policy Regret test (Sum) 33.68478658989411
+Best Treatment Found test (%) 82.75
+treatment classification acc test (%) 34.0

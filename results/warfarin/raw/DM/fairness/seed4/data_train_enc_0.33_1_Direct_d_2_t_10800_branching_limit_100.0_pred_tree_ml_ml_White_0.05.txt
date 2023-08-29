@@ -1,0 +1,103 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 10800
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 105016 rows, 84115 columns and 593376 nonzeros
+Model fingerprint: 0xc8217554
+Variable types: 84021 continuous, 94 integer (94 binary)
+Coefficient statistics:
+  Matrix range     [6e-06, 1e+00]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [5e-02, 1e+00]
+Presolve removed 52052 rows and 47914 columns
+Presolve time: 3.58s
+Presolved: 52964 rows, 36201 columns, 389478 nonzeros
+Variable types: 36117 continuous, 84 integer (84 binary)
+Found heuristic solution: objective 1550.1985862
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    4302    2.6514757e+03   4.998286e+00   4.399999e+07      5s
+   13082    2.6512066e+03   9.992328e-01   3.368414e+07     10s
+   17842    2.6504927e+03   4.995446e-01   2.050121e+07     15s
+   21502    2.6505940e+03   4.991481e-01   2.199956e+07     20s
+   25712    2.6415486e+03   3.998217e-01   2.969775e+07     25s
+   29902    2.6002549e+03   2.498690e-01   6.250000e+07     30s
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Root relaxation: objective 2.651476e+03, 26145 iterations, 27.11 seconds (60.41 work units)
+Total elapsed time = 52.87s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 2651.47573    0    4 1550.19859 2651.47573  71.0%     -   54s
+H    0     0                    1623.3297841 2651.47573  63.3%     -   55s
+H    0     0                    1653.3584529 2651.47573  60.4%     -   60s
+     0     0 2651.47573    0   17 1653.35845 2651.47573  60.4%     -   61s
+H    0     0                    1960.6751595 2651.47573  35.2%     -  207s
+H    0     0                    2495.1305953 2651.47573  6.27%     -  207s
+H    0     0                    2495.4505953 2651.47573  6.25%     -  207s
+H    0     0                    2503.2305953 2651.47573  5.92%     -  207s
+H    0     0                    2506.3505953 2651.47573  5.79%     -  207s
+H    0     0                    2515.3005953 2651.47573  5.41%     -  207s
+H    0     0                    2529.4305953 2651.47573  4.83%     -  207s
+H    0     0                    2532.1905953 2651.47573  4.71%     -  207s
+     0     0 2651.33573    0   11 2532.19060 2651.33573  4.71%     -  207s
+     0     0 2651.33573    0   11 2532.19060 2651.33573  4.71%     -  207s
+     0     0 2635.13659    0    6 2532.19060 2635.13659  4.07%     -  285s
+     0     0 2623.56573    0   12 2532.19060 2623.56573  3.61%     -  288s
+H    0     0                    2540.6505953 2623.56573  3.26%     -  515s
+     0     0 2542.73560    0   11 2540.65060 2542.73560  0.08%     -  515s
+     0     0 2541.91810    0   12 2540.65060 2541.91810  0.05%     -  519s
+     0     0 2540.65060    0   11 2540.65060 2540.65060  0.00%     -  552s
+
+Cutting planes:
+  Gomory: 2
+  MIR: 275
+  Flow cover: 1
+  RLT: 14
+  Relax-and-lift: 5
+
+Explored 1 nodes (217724 simplex iterations) in 552.30 seconds (723.62 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 10: 2540.65 2532.19 2529.43 ... 1653.36
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.540650595322e+03, best bound 2.540650595322e+03, gap 0.0000%
+
+
+
+#########node  1
+VKORC1.A.A
+#########node  2
+X.2..3
+#########node  3
+Weight4
+#########node  4
+0.0,1.0,0.0
+#########node  5
+1.0,0.0,0.0
+#########node  6
+0.0,1.0,0.0
+#########node  7
+1.0,0.0,0.0
+
+
+Total Solving Time 560.1611785888672
+obj value 2540.6505953224687
+Policy Regret train (Sum) 446
+Best Treatment Found train (%) 85.13333333333334
+treatment classification acc train (%) 33.733333333333334
+Policy Regret test (Sum) 224
+Best Treatment Found test (%) 83.83838383838383
+treatment classification acc test (%) 33.910533910533914

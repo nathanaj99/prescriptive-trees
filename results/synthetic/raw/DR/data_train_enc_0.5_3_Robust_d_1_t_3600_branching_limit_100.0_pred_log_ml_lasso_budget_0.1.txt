@@ -1,0 +1,67 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x9a9dca41
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+01]
+Found heuristic solution: objective 256.3666070
+Presolve removed 1514 rows and 1511 columns
+Presolve time: 0.06s
+Presolved: 4493 rows, 3018 columns, 21993 nonzeros
+Variable types: 2998 continuous, 20 integer (20 binary)
+
+Root relaxation: objective 2.696673e+02, 2819 iterations, 0.11 seconds (0.18 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  269.66726    0    3  256.36661  269.66726  5.19%     -    0s
+     0     0  269.26341    0    3  256.36661  269.26341  5.03%     -    0s
+     0     0  268.57112    0    3  256.36661  268.57112  4.76%     -    0s
+     0     0  268.50731    0    3  256.36661  268.50731  4.74%     -    0s
+     0     0  268.09504    0    3  256.36661  268.09504  4.57%     -    0s
+     0     0  266.09681    0    3  256.36661  266.09681  3.80%     -    0s
+     0     0  265.46329    0    3  256.36661  265.46329  3.55%     -    0s
+H    0     0                     257.6271447  265.46329  3.04%     -    0s
+     0     0  264.90985    0    3  257.62714  264.90985  2.83%     -    0s
+     0     0  264.90985    0    3  257.62714  264.90985  2.83%     -    0s
+     0     2  264.90985    0    3  257.62714  264.90985  2.83%     -    1s
+
+Cutting planes:
+  Gomory: 5
+  MIR: 109
+  Flow cover: 2
+  RLT: 30
+
+Explored 29 nodes (9327 simplex iterations) in 2.41 seconds (1.29 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 2: 257.627 256.367 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.576271447267e+02, best bound 2.576271447267e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.9
+#########node  2
+0.05660377358490354,0.943396226415096
+#########node  3
+0.9999999999999998,0.0
+
+
+Total Solving Time 2.818122148513794
+obj value 257.6271447266675
+Policy Regret train (Sum) 1.515319924254638
+Best Treatment Found train (%) 88.8
+treatment classification acc train (%) 51.2
+Policy Regret test (Sum) 145.29074060878332
+Best Treatment Found test (%) 59.919999999999995
+treatment classification acc test (%) 49.51

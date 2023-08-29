@@ -1,0 +1,77 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x65f880c0
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [6e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+01]
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.06s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+Found heuristic solution: objective 279.6627756
+
+Root relaxation: objective 2.873066e+02, 1989 iterations, 0.08 seconds (0.10 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  287.30663    0    2  279.66278  287.30663  2.73%     -    0s
+     0     0  286.94938    0    4  279.66278  286.94938  2.61%     -    0s
+     0     0  286.94257    0    4  279.66278  286.94257  2.60%     -    0s
+     0     0  286.82262    0    4  279.66278  286.82262  2.56%     -    0s
+     0     0  286.80072    0    4  279.66278  286.80072  2.55%     -    0s
+     0     0  286.46119    0    4  279.66278  286.46119  2.43%     -    0s
+     0     0  286.45875    0    4  279.66278  286.45875  2.43%     -    0s
+     0     0  286.36060    0    6  279.66278  286.36060  2.39%     -    0s
+     0     0  286.35489    0    4  279.66278  286.35489  2.39%     -    0s
+     0     0  286.35459    0    6  279.66278  286.35459  2.39%     -    0s
+     0     0  286.34328    0    4  279.66278  286.34328  2.39%     -    0s
+     0     0  286.05962    0    4  279.66278  286.05962  2.29%     -    0s
+H    0     0                     279.9261665  286.05962  2.19%     -    0s
+     0     0  286.05962    0    4  279.92617  286.05962  2.19%     -    0s
+H    0     0                     281.2875397  286.05962  1.70%     -    1s
+     0     0  286.05962    0    4  281.28754  286.05962  1.70%     -    1s
+     0     0  285.98853    0    4  281.28754  285.98853  1.67%     -    1s
+     0     0  285.37532    0    4  281.28754  285.37532  1.45%     -    1s
+     0     0  285.37532    0    4  281.28754  285.37532  1.45%     -    1s
+     0     2  285.37532    0    4  281.28754  285.37532  1.45%     -    1s
+
+Cutting planes:
+  Gomory: 2
+  MIR: 109
+  Flow cover: 8
+  RLT: 31
+  Relax-and-lift: 9
+
+Explored 33 nodes (9582 simplex iterations) in 4.37 seconds (1.57 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 3: 281.288 279.926 279.663 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.812875397262e+02, best bound 2.812875397262e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.9
+#########node  2
+0.5192307692307692,0.48076923076923084
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 4.81038236618042
+obj value 281.28753972620484
+Policy Regret train (Sum) 11.699048612925887
+Best Treatment Found train (%) 56.2
+treatment classification acc train (%) 45.4
+Policy Regret test (Sum) 128.73533649513482
+Best Treatment Found test (%) 65.68
+treatment classification acc test (%) 50.760000000000005

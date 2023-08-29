@@ -1,0 +1,128 @@
+['lrrf0', 'lrrf1', 'lrrf2']
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 10800
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 105014 rows, 84115 columns and 510132 nonzeros
+Model fingerprint: 0x82e388cc
+Variable types: 84021 continuous, 94 integer (94 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [5e-06, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 39004 rows and 39017 columns
+Presolve time: 2.15s
+Presolved: 66010 rows, 45098 columns, 411111 nonzeros
+Variable types: 45014 continuous, 84 integer (84 binary)
+Found heuristic solution: objective 1760.0906949
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+    8929    2.2767987e+03   1.999417e+00   1.400000e+07      5s
+   16119    2.2767443e+03   9.995474e-01   1.399995e+07     10s
+   23089    2.2777843e+03   9.986538e-01   1.092308e+08     15s
+   27149    2.2737399e+03   9.931491e-01   1.279889e+09     20s
+   30759    2.1520555e+03   7.584971e-01   4.955429e+09     25s
+   34139    1.8651409e+03   2.029107e-01   3.284000e+09     30s
+Concurrent spin time: 0.02s
+
+Solved with dual simplex
+
+Root relaxation: objective 2.278341e+03, 27095 iterations, 27.67 seconds (72.83 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 2278.34056    0    4 1760.09069 2278.34056  29.4%     -   30s
+     0     0 2278.34056    0   15 1760.09069 2278.34056  29.4%     -   51s
+     0     0 2278.34056    0   16 1760.09069 2278.34056  29.4%     -   52s
+     0     0 2278.34056    0    6 1760.09069 2278.34056  29.4%     -   86s
+     0     0 2278.34056    0    9 1760.09069 2278.34056  29.4%     -   87s
+     0     0 2278.34056    0    4 1760.09069 2278.34056  29.4%     -  124s
+H    0     0                    2091.8644758 2278.34056  8.91%     -  124s
+     0     0 2278.34056    0    8 2091.86448 2278.34056  8.91%     -  204s
+     0     0 2278.34056    0   23 2091.86448 2278.34056  8.91%     -  207s
+     0     0 2278.34056    0    6 2091.86448 2278.34056  8.91%     -  267s
+     0     0 2278.34056    0   12 2091.86448 2278.34056  8.91%     -  269s
+     0     0 2278.34056    0    7 2091.86448 2278.34056  8.91%     -  311s
+     0     0 2278.34056    0    7 2091.86448 2278.34056  8.91%     -  315s
+H    0     0                    2145.0461108 2278.34056  6.21%     -  326s
+H    0     2                    2163.8579764 2278.34056  5.29%     -  327s
+     0     2 2278.34056    0    7 2163.85798 2278.34056  5.29%     -  327s
+     1     4 2278.34056    1   24 2163.85798 2278.34056  5.29%  5210  333s
+     3     6 2278.34056    2   14 2163.85798 2278.34056  5.29%  4578  343s
+     7     8 2278.34056    3    6 2163.85798 2278.34056  5.29%  4752  348s
+    13    12 2277.91183    4   20 2163.85798 2278.34056  5.29%  4862  357s
+    21    16 2277.80817    5   27 2163.85798 2277.91183  5.27%  5034  371s
+    33    20 2277.25343    6   26 2163.85798 2277.79259  5.27%  4737  378s
+    49    22 2275.44407    7   34 2163.85798 2277.24824  5.24%  3782  385s
+    69    24 2274.71903    8   25 2163.85798 2275.24021  5.15%  3230  392s
+    89    26 2272.74912    9   25 2163.85798 2274.70809  5.12%  2952  402s
+   109    28 2271.28202   10   20 2163.85798 2272.74419  5.03%  2826  411s
+   137    36 2268.87366   11   32 2163.85798 2271.25711  4.96%  2629  467s
+   159    33 2262.03357   12   15 2163.85798 2268.86986  4.85%  2592  479s
+   190    37 2257.69186   12    4 2163.85798 2261.96995  4.53%  2513  492s
+   218    33 2258.67763   13    6 2163.85798 2259.30387  4.41%  2450  502s
+   248    42 2255.81118   13    4 2163.85798 2259.30387  4.41%  2375  517s
+   279    45 2255.55016   14    4 2163.85798 2259.30387  4.41%  2297  526s
+   322    43     cutoff   16      2163.85798 2259.30387  4.41%  2170  555s
+   354    31     cutoff   17      2163.85798 2259.30387  4.41%  2047  566s
+   408    39 2245.22319   18    4 2163.85798 2259.30387  4.41%  1938  686s
+   430    40 2241.67950   19    4 2163.85798 2259.30387  4.41%  1926  695s
+   489    32     cutoff   21      2163.85798 2259.30387  4.41%  1795  703s
+   543    41 2209.52374   23    6 2163.85798 2259.30387  4.41%  1707  713s
+   600    56 2168.42219   25    9 2163.85798 2259.30387  4.41%  1649  721s
+   665    42 2168.42219   27    9 2163.85798 2243.40975  3.68%  1565  731s
+   741    31     cutoff   22      2163.85798 2237.78937  3.42%  1496  739s
+   802    36 2185.36973   18    7 2163.85798 2237.78937  3.42%  1459  749s
+   861    24     cutoff   19      2163.85798 2237.78937  3.42%  1430  754s
+   913    14     cutoff   22      2163.85798 2231.66185  3.13%  1376  760s
+   973     6     cutoff   19      2163.85798 2200.84329  1.71%  1343  767s
+  1002     0     cutoff   26      2163.85798 2177.69792  0.64%  1322  770s
+
+Cutting planes:
+  MIR: 287
+  Flow cover: 62
+  RLT: 5
+  Relax-and-lift: 1
+
+Explored 1005 nodes (1540625 simplex iterations) in 770.52 seconds (1537.26 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 4: 2163.86 2145.05 2091.86 1760.09 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.163857976413e+03, best bound 2.163857976413e+03, gap 0.0000%
+
+
+
+#########node  1
+VKORC1.A.A
+#########node  2
+Age7
+#########node  3
+Weight4
+#########node  4
+1.0,0.0,0.0
+#########node  5
+0.0,1.0,0.0
+#########node  6
+0.0,1.0,0.0
+#########node  7
+1.0,0.0,0.0
+
+
+Total Solving Time 777.8179135322571
+obj value 2163.8579764134115
+Policy Regret train (Sum) 577
+Best Treatment Found train (%) 80.76666666666667
+treatment classification acc train (%) 81.43333333333334
+Policy Regret test (Sum) 271
+Best Treatment Found test (%) 80.44733044733044
+treatment classification acc test (%) 81.45743145743147

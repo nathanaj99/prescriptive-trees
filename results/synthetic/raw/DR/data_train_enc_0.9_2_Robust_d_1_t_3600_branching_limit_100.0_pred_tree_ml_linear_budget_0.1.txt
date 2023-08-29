@@ -1,0 +1,58 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0xa53d9cf5
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-04, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+01]
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.09s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+Found heuristic solution: objective 220.6880689
+
+Root relaxation: objective 2.261834e+02, 1711 iterations, 0.10 seconds (0.11 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  226.18339    0    3  220.68807  226.18339  2.49%     -    0s
+H    0     0                     226.0430407  226.14171  0.04%     -    0s
+     0     0  226.06129    0    3  226.04304  226.06129  0.01%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  MIR: 1
+  RLT: 1
+
+Explored 1 nodes (2143 simplex iterations) in 0.53 seconds (0.41 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 2: 226.043 220.688 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.260430406918e+02, best bound 2.260612905833e+02, gap 0.0081%
+
+
+
+#########node  1
+V1.9
+#########node  2
+0.16666666666666666,0.8333333333333334
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 0.938051700592041
+obj value 226.04304069182186
+Policy Regret train (Sum) 10.475852471410601
+Best Treatment Found train (%) 51.800000000000004
+treatment classification acc train (%) 58.8
+Policy Regret test (Sum) 171.07608036179815
+Best Treatment Found test (%) 53.010000000000005
+treatment classification acc test (%) 57.65

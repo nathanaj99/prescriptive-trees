@@ -1,0 +1,86 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x8dfdb414
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [7e-05, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 8e+01]
+Found heuristic solution: objective 256.1205226
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.16s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+
+Root relaxation: objective 2.681246e+02, 2971 iterations, 0.12 seconds (0.17 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  268.12456    0    4  256.12052  268.12456  4.69%     -    0s
+H    0     0                     259.1206303  268.12456  3.47%     -    0s
+     0     0  268.00342    0    2  259.12063  268.00342  3.43%     -    0s
+H    0     0                     262.6855588  268.00342  2.02%     -    0s
+     0     0  267.72565    0    4  262.68556  267.72565  1.92%     -    0s
+     0     0  267.72565    0    4  262.68556  267.72565  1.92%     -    0s
+     0     0  267.26007    0    2  262.68556  267.26007  1.74%     -    0s
+     0     0  267.08709    0    4  262.68556  267.08709  1.68%     -    0s
+     0     0  267.05678    0    7  262.68556  267.05678  1.66%     -    0s
+H    0     0                     264.5853128  267.05678  0.93%     -    0s
+     0     0  266.68801    0    7  264.58531  266.68801  0.79%     -    0s
+     0     0  266.67554    0    5  264.58531  266.67554  0.79%     -    0s
+     0     0  266.67554    0    5  264.58531  266.67554  0.79%     -    1s
+     0     0  266.67554    0    5  264.58531  266.67554  0.79%     -    1s
+H    0     0                     266.0115558  266.67554  0.25%     -    1s
+     0     0  266.48505    0    5  266.01156  266.48505  0.18%     -    1s
+     0     0  266.25594    0    5  266.01156  266.25594  0.09%     -    1s
+     0     0  266.25594    0    4  266.01156  266.25594  0.09%     -    1s
+     0     0  266.25594    0    4  266.01156  266.25594  0.09%     -    1s
+     0     0  266.25594    0    4  266.01156  266.25594  0.09%     -    1s
+     0     0  266.25594    0    4  266.01156  266.25594  0.09%     -    1s
+     0     0  266.25594    0    4  266.01156  266.25594  0.09%     -    1s
+     0     0  266.25594    0    6  266.01156  266.25594  0.09%     -    2s
+     0     0  266.25594    0    6  266.01156  266.25594  0.09%     -    2s
+     0     0  266.25594    0    6  266.01156  266.25594  0.09%     -    2s
+     0     0  266.25594    0    8  266.01156  266.25594  0.09%     -    2s
+     0     0  266.25594    0    8  266.01156  266.25594  0.09%     -    2s
+     0     0  266.25594    0    4  266.01156  266.25594  0.09%     -    2s
+     0     0  266.01156    0    8  266.01156  266.01156  0.00%     -    2s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 703
+  Flow cover: 4
+  RLT: 10
+  Relax-and-lift: 3
+
+Explored 1 nodes (6341 simplex iterations) in 2.52 seconds (1.30 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 5: 266.012 264.585 262.686 ... 256.121
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.660115558008e+02, best bound 2.660115558008e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.8
+#########node  2
+0.2156862745098039,0.7843137254901961
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 2.94362735748291
+obj value 266.01155580076727
+Policy Regret train (Sum) 13.487813242844421
+Best Treatment Found train (%) 49.0
+treatment classification acc train (%) 35.4
+Policy Regret test (Sum) 61.813832268000596
+Best Treatment Found test (%) 75.11
+treatment classification acc test (%) 33.57

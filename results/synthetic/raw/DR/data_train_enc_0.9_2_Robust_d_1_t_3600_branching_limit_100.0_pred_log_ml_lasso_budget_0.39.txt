@@ -1,0 +1,61 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x1d71b03d
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e-02, 1e+02]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+02]
+Found heuristic solution: objective 340.7796804
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.05s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+
+Root relaxation: objective 3.825106e+02, 2974 iterations, 0.10 seconds (0.13 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  382.25478    0    2  340.77968  382.25478  12.2%     -    0s
+H    0     0                     351.0630369  375.61509  6.99%     -    0s
+     0     0  351.06304    0    5  351.06304  351.06304  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 2
+  Implied bound: 360
+  MIR: 13
+  Flow cover: 107
+  RLT: 6
+  Relax-and-lift: 56
+
+Explored 1 nodes (4539 simplex iterations) in 0.41 seconds (0.44 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 2: 351.063 340.78 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.510630369013e+02, best bound 3.510630369013e+02, gap 0.0000%
+
+
+
+#########node  1
+V2.1
+#########node  2
+1.0,0.0
+#########node  3
+0.0,1.0
+
+
+Total Solving Time 0.794703483581543
+obj value 351.0630369013293
+Policy Regret train (Sum) 16.811976247374954
+Best Treatment Found train (%) 44.0
+treatment classification acc train (%) 48.199999999999996
+Policy Regret test (Sum) 241.93303547166212
+Best Treatment Found test (%) 47.089999999999996
+treatment classification acc test (%) 49.370000000000005

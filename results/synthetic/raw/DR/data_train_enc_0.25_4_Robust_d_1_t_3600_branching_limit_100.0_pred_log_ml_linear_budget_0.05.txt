@@ -1,0 +1,59 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x1d0eb0c4
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [4e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+01]
+Presolve removed 1514 rows and 1511 columns
+Presolve time: 0.06s
+Presolved: 4493 rows, 3018 columns, 21993 nonzeros
+Variable types: 2998 continuous, 20 integer (20 binary)
+Found heuristic solution: objective 296.6969931
+
+Root relaxation: objective 2.986580e+02, 1800 iterations, 0.05 seconds (0.06 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  298.65800    0    3  296.69699  298.65800  0.66%     -    0s
+     0     0  298.55358    0    4  296.69699  298.55358  0.63%     -    0s
+H    0     0                     298.0059368  298.54758  0.18%     -    0s
+     0     0  298.23667    0    4  298.00594  298.23667  0.08%     -    0s
+
+Cutting planes:
+  Gomory: 7
+  MIR: 77
+  RLT: 11
+
+Explored 1 nodes (2308 simplex iterations) in 0.47 seconds (0.33 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 2: 298.006 296.697 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.980059367740e+02, best bound 2.980059367740e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.9
+#########node  2
+0.5454545454545453,0.4545454545454546
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 0.898517370223999
+obj value 298.0059367740281
+Policy Regret train (Sum) 4.220354876203336
+Best Treatment Found train (%) 76.6
+treatment classification acc train (%) 47.0
+Policy Regret test (Sum) 264.7485001985924
+Best Treatment Found test (%) 42.43
+treatment classification acc test (%) 50.28

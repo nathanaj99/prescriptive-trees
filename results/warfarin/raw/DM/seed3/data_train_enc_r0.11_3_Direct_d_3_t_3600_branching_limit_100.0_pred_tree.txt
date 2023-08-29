@@ -1,0 +1,129 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 225030 rows, 180263 columns and 1146312 nonzeros
+Model fingerprint: 0x23d4564c
+Variable types: 180045 continuous, 218 integer (218 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Presolve removed 52088 rows and 46403 columns (presolve time = 7s) ...
+Presolve removed 52089 rows and 46403 columns
+Presolve time: 9.36s
+Presolved: 172941 rows, 133860 columns, 959200 nonzeros
+Variable types: 133664 continuous, 196 integer (196 binary)
+Found heuristic solution: objective 2865.0400000
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+
+Root simplex log...
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    2.9580000e+03   5.000000e+00   1.500137e+07     12s
+    3765    2.9310746e+03   9.998189e-01   1.600009e+07     15s
+    5335    2.9310736e+03   9.997571e-01   1.700000e+07     20s
+    7035    2.8651438e+03   4.481181e-04   1.400000e+07     25s
+   15760    2.8651210e+03   0.000000e+00   8.627793e+02     30s
+   20786    2.8651823e+03   0.000000e+00   2.473636e+03     35s
+   23646    2.8652468e+03   0.000000e+00   4.797394e+04     40s
+   26056    2.8653246e+03   0.000000e+00   1.538455e+04     45s
+   27206    2.8654189e+03   0.000000e+00   2.556429e+05     50s
+   28446    2.8655850e+03   0.000000e+00   5.479305e+05     56s
+   29406    2.8657442e+03   0.000000e+00   1.392489e+05     60s
+   30456    2.8659282e+03   0.000000e+00   6.295327e+05     65s
+   31316    2.8661319e+03   0.000000e+00   5.796540e+05     70s
+   32246    2.8663958e+03   0.000000e+00   1.761764e+06     75s
+   33146    2.8667576e+03   0.000000e+00   4.371387e+05     80s
+   34046    2.8671876e+03   0.000000e+00   9.745936e+05     85s
+   34846    2.8676867e+03   0.000000e+00   2.671531e+06     90s
+   35746    2.8683885e+03   0.000000e+00   4.985026e+05     96s
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Root relaxation: objective 2.958000e+03, 33259 iterations, 89.05 seconds (243.52 work units)
+Total elapsed time = 377.19s
+Total elapsed time = 482.89s
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 2958.00000    0   12 2865.04000 2958.00000  3.24%     -  530s
+H    0     0                    2867.2500000 2958.00000  3.17%     -  531s
+     0     0 2958.00000    0   27 2867.25000 2958.00000  3.17%     -  555s
+     0     0 2958.00000    0   30 2867.25000 2958.00000  3.17%     -  560s
+     0     0 2958.00000    0   14 2867.25000 2958.00000  3.17%     - 1046s
+     0     0 2958.00000    0   14 2867.25000 2958.00000  3.17%     - 1048s
+     0     0 2958.00000    0   14 2867.25000 2958.00000  3.17%     - 1438s
+     0     0 2958.00000    0   17 2867.25000 2958.00000  3.17%     - 1440s
+     0     0 2958.00000    0   21 2867.25000 2958.00000  3.17%     - 1699s
+     0     0 2958.00000    0   12 2867.25000 2958.00000  3.17%     - 2144s
+H    0     0                    2872.5500000 2958.00000  2.97%     - 2147s
+     0     0 2958.00000    0   18 2872.55000 2958.00000  2.97%     - 2149s
+     0     0 2958.00000    0   17 2872.55000 2958.00000  2.97%     - 2444s
+     0     0 2958.00000    0   11 2872.55000 2958.00000  2.97%     - 3078s
+H    0     0                    2872.7300000 2958.00000  2.97%     - 3260s
+     0     2 2958.00000    0   11 2872.73000 2958.00000  2.97%     - 3408s
+     1     4 2958.00000    1   23 2872.73000 2958.00000  2.97% 15805 3478s
+     3     8 2958.00000    2   40 2872.73000 2958.00000  2.97% 19724 3600s
+
+Cutting planes:
+  MIR: 79
+  RLT: 15
+  Relax-and-lift: 3
+
+Explored 7 nodes (1100479 simplex iterations) in 3600.45 seconds (11215.47 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 4: 2872.73 2872.55 2867.25 2865.04 
+
+Time limit reached
+Best objective 2.872730000000e+03, best bound 2.958000000000e+03, gap 2.9683%
+
+
+
+#########node  1
+X.2..3
+#########node  2
+Enzyme.Inducer
+#########node  3
+Age1.2
+#########node  4
+Unknown.Cyp2C9
+#########node  5
+Height3
+#########node  6
+Age8.9
+#########node  7
+Amiodarone..Cordarone.
+#########node  8
+leaf 1
+#########node  9
+leaf 1
+#########node  10
+leaf 2
+#########node  11
+leaf 1
+#########node  12
+leaf 1
+#########node  13
+leaf 0
+#########node  14
+leaf 1
+#########node  15
+leaf 1
+
+
+Total Solving Time 3616.15886759758
+obj value 2872.7300000000023
+Policy Regret train (Sum) 1075
+Best Treatment Found train (%) 64.16666666666667
+treatment classification acc train (%) 60.633333333333326
+Policy Regret test (Sum) 524
+Best Treatment Found test (%) 62.19336219336219
+treatment classification acc test (%) 59.45165945165945

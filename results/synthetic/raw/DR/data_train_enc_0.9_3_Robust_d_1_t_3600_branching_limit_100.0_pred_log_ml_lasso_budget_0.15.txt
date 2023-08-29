@@ -1,0 +1,66 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x882a4609
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [6e-03, 2e+01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 8e+01]
+Found heuristic solution: objective 265.1586501
+Presolve removed 1514 rows and 1511 columns
+Presolve time: 0.06s
+Presolved: 4493 rows, 3018 columns, 21993 nonzeros
+Variable types: 2998 continuous, 20 integer (20 binary)
+
+Root relaxation: objective 2.787858e+02, 3266 iterations, 0.12 seconds (0.19 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  278.78577    0    3  265.15865  278.78577  5.14%     -    0s
+     0     0  278.47567    0    3  265.15865  278.47567  5.02%     -    0s
+     0     0  278.45271    0    3  265.15865  278.45271  5.01%     -    0s
+     0     0  276.06030    0    3  265.15865  276.06030  4.11%     -    0s
+     0     0  274.81142    0    3  265.15865  274.81142  3.64%     -    0s
+     0     0  274.63913    0    4  265.15865  274.63913  3.58%     -    0s
+     0     0  273.70609    0    3  265.15865  273.70609  3.22%     -    0s
+     0     0  273.70609    0    3  265.15865  273.70609  3.22%     -    0s
+     0     2  273.70609    0    3  265.15865  273.70609  3.22%     -    1s
+
+Cutting planes:
+  Gomory: 2
+  Implied bound: 20
+  MIR: 51
+  RLT: 20
+  Relax-and-lift: 19
+
+Explored 33 nodes (10317 simplex iterations) in 2.05 seconds (1.49 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 1: 265.159 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.651586501424e+02, best bound 2.651586501424e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.3
+#########node  2
+1.0,0.0
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 2.4882586002349854
+obj value 265.1586501423771
+Policy Regret train (Sum) 4.688848731973859
+Best Treatment Found train (%) 79.4
+treatment classification acc train (%) 48.0
+Policy Regret test (Sum) 222.40112135659427
+Best Treatment Found test (%) 50.370000000000005
+treatment classification acc test (%) 50.22

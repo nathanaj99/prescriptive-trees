@@ -1,0 +1,64 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0xd21cdcdb
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [5e-04, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 8e+01]
+Presolve removed 1514 rows and 1511 columns
+Presolve time: 0.09s
+Presolved: 4493 rows, 3018 columns, 21993 nonzeros
+Variable types: 2998 continuous, 20 integer (20 binary)
+Found heuristic solution: objective 296.3854467
+
+Root relaxation: objective 2.999186e+02, 2242 iterations, 0.12 seconds (0.11 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  299.91864    0    3  296.38545  299.91864  1.19%     -    0s
+     0     0  299.77479    0    3  296.38545  299.77479  1.14%     -    0s
+     0     0  299.61336    0    4  296.38545  299.61336  1.09%     -    0s
+H    0     0                     299.1061481  299.61336  0.17%     -    0s
+     0     0  299.44561    0    5  299.10615  299.44561  0.11%     -    0s
+     0     0  299.44561    0    3  299.10615  299.44561  0.11%     -    1s
+     0     0  299.41632    0    5  299.10615  299.41632  0.10%     -    2s
+     0     0  299.41632    0    5  299.10615  299.41632  0.10%     -    2s
+
+Cutting planes:
+  Gomory: 4
+  MIR: 638
+  RLT: 16
+  Relax-and-lift: 1
+
+Explored 1 nodes (4606 simplex iterations) in 2.39 seconds (0.65 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 2: 299.106 296.385 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.991061480990e+02, best bound 2.991061480990e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.8
+#########node  2
+0.17475728155339806,0.8252427184466019
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 2.7395102977752686
+obj value 299.1061480989578
+Policy Regret train (Sum) 0.5246451196991215
+Best Treatment Found train (%) 90.2
+treatment classification acc train (%) 29.799999999999997
+Policy Regret test (Sum) 110.93848330628616
+Best Treatment Found test (%) 62.73
+treatment classification acc test (%) 33.45

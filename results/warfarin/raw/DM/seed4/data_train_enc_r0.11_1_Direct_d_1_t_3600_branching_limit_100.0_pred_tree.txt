@@ -1,0 +1,91 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 45006 rows, 36041 columns and 192046 nonzeros
+Model fingerprint: 0xe274847b
+Variable types: 36009 continuous, 32 integer (32 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 1350.8900000
+Presolve removed 11714 rows and 11038 columns
+Presolve time: 0.90s
+Presolved: 33292 rows, 25003 columns, 166480 nonzeros
+Variable types: 24975 continuous, 28 integer (28 binary)
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+Concurrent spin time: 0.01s
+
+Solved with dual simplex
+
+Root relaxation: objective 2.969760e+03, 11807 iterations, 2.46 seconds (3.40 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 2969.76000    0    2 1350.89000 2969.76000   120%     -    3s
+H    0     0                    2862.7600000 2969.76000  3.74%     -    3s
+     0     0 2969.72942    0    2 2862.76000 2969.72942  3.74%     -    4s
+     0     0 2969.41794    0    2 2862.76000 2969.41794  3.73%     -    5s
+     0     0 2969.30794    0    2 2862.76000 2969.30794  3.72%     -    5s
+     0     0 2969.01434    0    2 2862.76000 2969.01434  3.71%     -    6s
+     0     0 2968.85434    0    2 2862.76000 2968.85434  3.71%     -    7s
+     0     0 2968.80434    0    2 2862.76000 2968.80434  3.70%     -    7s
+     0     0 2968.38934    0    3 2862.76000 2968.38934  3.69%     -    8s
+     0     0 2968.30934    0    2 2862.76000 2968.30934  3.69%     -    8s
+     0     0 2968.25934    0    2 2862.76000 2968.25934  3.69%     -    9s
+     0     0 2968.16934    0    2 2862.76000 2968.16934  3.68%     -    9s
+     0     0 2968.02934    0    2 2862.76000 2968.02934  3.68%     -   10s
+     0     0 2947.10519    0    2 2862.76000 2947.10519  2.95%     -   10s
+     0     0 2947.10519    0    2 2862.76000 2947.10519  2.95%     -   10s
+     0     0 2947.10519    0    2 2862.76000 2947.10519  2.95%     -   11s
+     0     0 2947.01143    0    2 2862.76000 2947.01143  2.94%     -   11s
+     0     0 2947.01143    0    2 2862.76000 2947.01143  2.94%     -   12s
+     0     0 2947.01143    0    2 2862.76000 2947.01143  2.94%     -   12s
+     0     0 2944.38800    0    2 2862.76000 2944.38800  2.85%     -   12s
+     0     0 2944.38800    0    2 2862.76000 2944.38800  2.85%     -   13s
+     0     2 2944.38800    0    2 2862.76000 2944.38800  2.85%     -   15s
+     3     2 2943.82960    2    8 2862.76000 2944.38800  2.85%  4424   21s
+     9     2 2933.78429    5    6 2862.76000 2937.70333  2.62%  2657   25s
+*   10     2               5    2885.0900000 2933.49000  1.68%  2539   25s
+    25     2 2926.22000   13    3 2885.09000 2930.47000  1.57%  1390   30s
+    35     0     cutoff   18      2885.09000 2913.59000  0.99%  1260   35s
+
+Cutting planes:
+  Gomory: 3
+  MIR: 46
+  Flow cover: 13
+  RLT: 34
+  Relax-and-lift: 10
+
+Explored 37 nodes (59946 simplex iterations) in 35.09 seconds (43.05 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 3: 2885.09 2862.76 1350.89 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.885090000000e+03, best bound 2.885090000000e+03, gap 0.0000%
+
+
+
+#########node  1
+Weight4
+#########node  2
+leaf 1
+#########node  3
+leaf 0
+
+
+Total Solving Time 37.864760875701904
+obj value 2885.090000000002
+Policy Regret train (Sum) 1511
+Best Treatment Found train (%) 49.63333333333333
+treatment classification acc train (%) 43.333333333333336
+Policy Regret test (Sum) 721
+Best Treatment Found test (%) 47.97979797979798
+treatment classification acc test (%) 41.486291486291485

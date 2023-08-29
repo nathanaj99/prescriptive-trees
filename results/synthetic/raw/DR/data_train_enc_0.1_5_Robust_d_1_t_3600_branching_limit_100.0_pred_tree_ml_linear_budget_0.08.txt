@@ -1,0 +1,60 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x00833495
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 4e+01]
+Found heuristic solution: objective 278.8855408
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.06s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+
+Root relaxation: objective 2.836762e+02, 2256 iterations, 0.07 seconds (0.07 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  283.67615    0    3  278.88554  283.67615  1.72%     -    0s
+     0     0  283.52646    0    4  278.88554  283.52646  1.66%     -    0s
+     0     0  283.27317    0    4  278.88554  283.27317  1.57%     -    0s
+H    0     0                     283.0590758  283.27317  0.08%     -    0s
+
+Cutting planes:
+  Gomory: 5
+  MIR: 176
+  Flow cover: 1
+  RLT: 12
+
+Explored 1 nodes (3022 simplex iterations) in 0.56 seconds (0.42 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 2: 283.059 278.886 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.830590758486e+02, best bound 2.830590758486e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.9
+#########node  2
+0.2307692307692309,0.769230769230769
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 1.007927656173706
+obj value 283.0590758486196
+Policy Regret train (Sum) 6.1720858620906105
+Best Treatment Found train (%) 66.60000000000001
+treatment classification acc train (%) 37.6
+Policy Regret test (Sum) 62.03435671197572
+Best Treatment Found test (%) 75.61
+treatment classification acc test (%) 41.839999999999996

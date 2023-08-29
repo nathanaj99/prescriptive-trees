@@ -1,0 +1,58 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x93846254
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [9e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 6e+01]
+Presolve removed 1514 rows and 1511 columns
+Presolve time: 0.09s
+Presolved: 4493 rows, 3018 columns, 21993 nonzeros
+Variable types: 2998 continuous, 20 integer (20 binary)
+Found heuristic solution: objective 256.2523778
+
+Root relaxation: objective 2.592247e+02, 2970 iterations, 0.15 seconds (0.17 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  259.22466    0    3  256.25238  259.22466  1.16%     -    0s
+     0     0  259.17661    0    4  256.25238  259.17661  1.14%     -    0s
+H    0     0                     259.1716154  259.17661  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 33
+  RLT: 5
+
+Explored 1 nodes (3248 simplex iterations) in 0.48 seconds (0.34 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 2: 259.172 256.252 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.591716154388e+02, best bound 2.591766080171e+02, gap 0.0019%
+
+
+
+#########node  1
+V1.9
+#########node  2
+0.0,1.0
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 0.8591823577880859
+obj value 259.17161543882713
+Policy Regret train (Sum) 1.515319924254638
+Best Treatment Found train (%) 88.8
+treatment classification acc train (%) 52.6
+Policy Regret test (Sum) 145.29074060878332
+Best Treatment Found test (%) 59.919999999999995
+treatment classification acc test (%) 54.94

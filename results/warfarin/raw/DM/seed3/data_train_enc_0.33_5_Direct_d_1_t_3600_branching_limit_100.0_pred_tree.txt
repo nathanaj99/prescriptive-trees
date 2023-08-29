@@ -1,0 +1,91 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 45006 rows, 36041 columns and 192046 nonzeros
+Model fingerprint: 0xb038415b
+Variable types: 36009 continuous, 32 integer (32 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e-02, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 1888.6200000
+Presolve removed 14702 rows and 13279 columns
+Presolve time: 0.83s
+Presolved: 30304 rows, 22762 columns, 151540 nonzeros
+Variable types: 22734 continuous, 28 integer (28 binary)
+
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing first log only...
+
+Concurrent spin time: 0.00s
+
+Solved with dual simplex
+
+Root relaxation: objective 2.613830e+03, 7955 iterations, 0.81 seconds (0.93 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 2613.83000    0    2 1888.62000 2613.83000  38.4%     -    1s
+     0     0 2612.24250    0    2 1888.62000 2612.24250  38.3%     -    2s
+     0     0 2608.89041    0    2 1888.62000 2608.89041  38.1%     -    3s
+     0     0 2606.17206    0    2 1888.62000 2606.17206  38.0%     -    4s
+     0     0 2606.12414    0    2 1888.62000 2606.12414  38.0%     -    4s
+     0     0 2604.23552    0    2 1888.62000 2604.23552  37.9%     -    5s
+     0     0 2603.46802    0    2 1888.62000 2603.46802  37.9%     -    5s
+     0     0 2602.49802    0    2 1888.62000 2602.49802  37.8%     -    5s
+     0     0 2601.64456    0    2 1888.62000 2601.64456  37.8%     -    5s
+     0     0 2601.20910    0    3 1888.62000 2601.20910  37.7%     -    6s
+     0     0 2601.02910    0    3 1888.62000 2601.02910  37.7%     -    6s
+     0     0 2600.06206    0    2 1888.62000 2600.06206  37.7%     -    6s
+     0     0 2599.83206    0    2 1888.62000 2599.83206  37.7%     -    6s
+     0     0 2598.39706    0    2 1888.62000 2598.39706  37.6%     -    7s
+     0     0 2597.37039    0    3 1888.62000 2597.37039  37.5%     -    7s
+     0     0 2597.11178    0    3 1888.62000 2597.11178  37.5%     -    7s
+     0     0 2485.47000    0    2 1888.62000 2485.47000  31.6%     -    8s
+     0     0 2485.47000    0    2 1888.62000 2485.47000  31.6%     -    8s
+     0     0 2485.47000    0    2 1888.62000 2485.47000  31.6%     -    8s
+     0     0 2485.46500    0    2 1888.62000 2485.46500  31.6%     -    8s
+     0     0 2485.46500    0    2 1888.62000 2485.46500  31.6%     -    8s
+     0     0 2485.12667    0    2 1888.62000 2485.12667  31.6%     -    9s
+     0     0 2485.12667    0    2 1888.62000 2485.12667  31.6%     -    9s
+     0     2 2485.12667    0    2 1888.62000 2485.12667  31.6%     -   10s
+*    4     2               2    1890.2400000 2485.12667  31.5%  1660   12s
+     5     2 2472.53000    3    2 1890.24000 2485.12667  31.5%  3592   15s
+*    7     0               4    2468.1500000 2468.97000  0.03%  3059   16s
+
+Cutting planes:
+  Gomory: 2
+  MIR: 62
+  Flow cover: 1
+  RLT: 23
+  Relax-and-lift: 20
+
+Explored 9 nodes (35653 simplex iterations) in 16.49 seconds (21.70 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 3: 2468.15 1890.24 1888.62 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.468150000000e+03, best bound 2.468150000000e+03, gap 0.0000%
+
+
+
+#########node  1
+VKORC1.A.A
+#########node  2
+leaf 1
+#########node  3
+leaf 0
+
+
+Total Solving Time 19.05558204650879
+obj value 2468.1500000000015
+Policy Regret train (Sum) 520
+Best Treatment Found train (%) 82.66666666666667
+treatment classification acc train (%) 34.166666666666664
+Policy Regret test (Sum) 221
+Best Treatment Found test (%) 84.05483405483406
+treatment classification acc test (%) 32.39538239538239

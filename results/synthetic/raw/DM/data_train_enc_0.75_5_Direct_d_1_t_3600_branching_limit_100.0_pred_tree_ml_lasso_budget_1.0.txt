@@ -1,0 +1,58 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6006 rows, 4529 columns and 23034 nonzeros
+Model fingerprint: 0x75546648
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-01, 8e-01]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+Found heuristic solution: objective 269.2504870
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.08s
+Presolved: 4486 rows, 3014 columns, 20481 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+
+Root relaxation: objective 2.939065e+02, 2073 iterations, 0.04 seconds (0.05 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  293.90648    0    3  269.25049  293.90648  9.16%     -    0s
+H    0     0                     293.3709007  293.90648  0.18%     -    0s
+H    0     0                     293.8884754  293.90648  0.01%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  MIR: 73
+  RLT: 4
+
+Explored 1 nodes (2073 simplex iterations) in 0.25 seconds (0.14 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 3: 293.888 293.371 269.25 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.938884753636e+02, best bound 2.938884753636e+02, gap 0.0000%
+
+
+
+#########node  1
+V2.9
+#########node  2
+1.0,0.0
+#########node  3
+0.0,1.0
+
+
+Total Solving Time 0.6160593032836914
+obj value 293.8884753636477
+Policy Regret train (Sum) 14.409064287105764
+Best Treatment Found train (%) 50.2
+treatment classification acc train (%) 49.8
+Policy Regret test (Sum) 291.71045480142993
+Best Treatment Found test (%) 41.349999999999994
+treatment classification acc test (%) 50.32

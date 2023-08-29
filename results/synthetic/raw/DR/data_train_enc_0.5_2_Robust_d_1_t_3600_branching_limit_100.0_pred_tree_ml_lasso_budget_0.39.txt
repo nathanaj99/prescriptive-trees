@@ -1,0 +1,86 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x9288215f
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [4e-04, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+02]
+Found heuristic solution: objective 219.9080131
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.09s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+
+Root relaxation: objective 2.563221e+02, 3619 iterations, 0.13 seconds (0.15 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  256.32209    0    2  219.90801  256.32209  16.6%     -    0s
+H    0     0                     222.9781644  256.32209  15.0%     -    0s
+     0     0  255.58364    0    2  222.97816  255.58364  14.6%     -    0s
+H    0     0                     225.0956395  255.58364  13.5%     -    0s
+     0     0  255.06102    0    2  225.09564  255.06102  13.3%     -    0s
+     0     0  254.98465    0    2  225.09564  254.98465  13.3%     -    0s
+     0     0  254.38650    0    2  225.09564  254.38650  13.0%     -    0s
+     0     0  253.28396    0    2  225.09564  253.28396  12.5%     -    0s
+     0     0  253.27205    0    2  225.09564  253.27205  12.5%     -    0s
+     0     0  248.66369    0    3  225.09564  248.66369  10.5%     -    0s
+     0     0  248.66369    0    3  225.09564  248.66369  10.5%     -    0s
+     0     0  248.66369    0    3  225.09564  248.66369  10.5%     -    0s
+     0     0  248.66369    0    4  225.09564  248.66369  10.5%     -    0s
+     0     0  248.66369    0    4  225.09564  248.66369  10.5%     -    0s
+     0     0  248.66369    0    4  225.09564  248.66369  10.5%     -    0s
+H    0     0                     226.7408718  248.66369  9.67%     -    0s
+     0     0  248.66369    0    4  226.74087  248.66369  9.67%     -    0s
+     0     0  248.64095    0    3  226.74087  248.64095  9.66%     -    1s
+     0     0  248.64095    0    4  226.74087  248.64095  9.66%     -    1s
+     0     0  248.64095    0    3  226.74087  248.64095  9.66%     -    1s
+     0     0  246.63965    0    3  226.74087  246.63965  8.78%     -    1s
+     0     0  246.63965    0    3  226.74087  246.63965  8.78%     -    1s
+     0     2  246.63965    0    3  226.74087  246.63965  8.78%     -    1s
+*    8     2               4     228.5255774  245.21853  7.30%   445    1s
+*   10     2               5     229.1199097  244.46190  6.70%   445    1s
+*   14     2               7     232.0237540  243.04221  4.75%   417    2s
+*   20     2              10     235.9821543  240.76391  2.03%   349    2s
+*   24     2              12     236.6132027  239.24594  1.11%   318    2s
+*   26     0              13     238.1517909  238.15179  0.00%   310    2s
+
+Cutting planes:
+  Gomory: 2
+  MIR: 163
+  Flow cover: 1
+  RLT: 16
+  Relax-and-lift: 4
+
+Explored 27 nodes (13367 simplex iterations) in 2.31 seconds (2.15 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 10: 238.152 236.613 235.982 ... 219.908
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.381517908947e+02, best bound 2.381517908947e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.6
+#########node  2
+0.04411764705882353,0.9558823529411765
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 2.6886446475982666
+obj value 238.15179089470155
+Policy Regret train (Sum) 1.948859407221686
+Best Treatment Found train (%) 79.80000000000001
+treatment classification acc train (%) 50.2
+Policy Regret test (Sum) 33.257454375572316
+Best Treatment Found test (%) 81.92
+treatment classification acc test (%) 50.72

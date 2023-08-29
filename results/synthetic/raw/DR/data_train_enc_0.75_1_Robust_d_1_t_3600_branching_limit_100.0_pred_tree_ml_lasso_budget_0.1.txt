@@ -1,0 +1,86 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x451ce278
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e-02, 2e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 5e+01]
+Found heuristic solution: objective 253.5812609
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.06s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+
+Root relaxation: objective 2.711684e+02, 2167 iterations, 0.08 seconds (0.11 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  271.16839    0    3  253.58126  271.16839  6.94%     -    0s
+H    0     0                     255.4040022  271.16839  6.17%     -    0s
+     0     0  270.60200    0    3  255.40400  270.60200  5.95%     -    0s
+     0     0  270.18687    0    4  255.40400  270.18687  5.79%     -    0s
+     0     0  270.14746    0    3  255.40400  270.14746  5.77%     -    0s
+     0     0  270.03435    0    3  255.40400  270.03435  5.73%     -    0s
+     0     0  270.00276    0    3  255.40400  270.00276  5.72%     -    0s
+     0     0  269.96658    0    3  255.40400  269.96658  5.70%     -    0s
+H    0     0                     255.6546724  269.96658  5.60%     -    0s
+     0     0  269.69026    0    3  255.65467  269.69026  5.49%     -    0s
+     0     0  269.55235    0    4  255.65467  269.55235  5.44%     -    0s
+H    0     0                     259.8208091  269.51396  3.73%     -    0s
+     0     0  269.13378    0    3  259.82081  269.13378  3.58%     -    0s
+     0     0  269.13378    0    3  259.82081  269.13378  3.58%     -    0s
+     0     0  269.13304    0    5  259.82081  269.13304  3.58%     -    0s
+     0     0  269.13304    0    5  259.82081  269.13304  3.58%     -    0s
+     0     0  269.13304    0    5  259.82081  269.13304  3.58%     -    0s
+     0     0  269.13304    0    4  259.82081  269.13304  3.58%     -    0s
+     0     0  269.13304    0    5  259.82081  269.13304  3.58%     -    0s
+     0     0  269.13304    0    5  259.82081  269.13304  3.58%     -    0s
+     0     0  269.13304    0    3  259.82081  269.13304  3.58%     -    0s
+     0     0  267.88277    0    4  259.82081  267.88277  3.10%     -    0s
+     0     0  267.87059    0    3  259.82081  267.87059  3.10%     -    0s
+H    0     0                     261.3824933  267.87059  2.48%     -    0s
+     0     0  267.87059    0    3  261.38249  267.87059  2.48%     -    0s
+     0     0  267.43185    0    3  261.38249  267.43185  2.31%     -    0s
+     0     0  267.26128    0    4  261.38249  267.26128  2.25%     -    0s
+     0     0  267.26128    0    4  261.38249  267.26128  2.25%     -    1s
+     0     2  267.26128    0    4  261.38249  267.26128  2.25%     -    1s
+
+Cutting planes:
+  Gomory: 3
+  MIR: 237
+  Flow cover: 5
+  RLT: 21
+  Relax-and-lift: 2
+
+Explored 29 nodes (7192 simplex iterations) in 3.01 seconds (1.23 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 5: 261.382 259.821 255.655 ... 253.581
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.613824932873e+02, best bound 2.613824932873e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.9
+#########node  2
+0.03846153846153788,0.9615384615384619
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 3.4223554134368896
+obj value 261.38249328733036
+Policy Regret train (Sum) 18.330847802036036
+Best Treatment Found train (%) 39.4
+treatment classification acc train (%) 60.0
+Policy Regret test (Sum) 105.47520302296739
+Best Treatment Found test (%) 66.02
+treatment classification acc test (%) 56.02

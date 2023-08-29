@@ -1,0 +1,59 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x5635bf17
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [7e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 6e+01]
+Presolve removed 1514 rows and 1511 columns
+Presolve time: 0.09s
+Presolved: 4493 rows, 3018 columns, 21993 nonzeros
+Variable types: 2998 continuous, 20 integer (20 binary)
+Found heuristic solution: objective 297.1030602
+
+Root relaxation: objective 3.001346e+02, 2250 iterations, 0.12 seconds (0.12 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  300.13464    0    3  297.10306  300.13464  1.02%     -    0s
+H    0     0                     300.0015542  300.03632  0.01%     -    0s
+     0     0  300.00155    0    4  300.00155  300.00155  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  MIR: 3
+  Flow cover: 7
+  RLT: 5
+
+Explored 1 nodes (2373 simplex iterations) in 0.45 seconds (0.27 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 2: 300.002 297.103 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.000015542303e+02, best bound 3.000015542303e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.9
+#########node  2
+0.0,1.0
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 0.8602843284606934
+obj value 300.0015542303089
+Policy Regret train (Sum) 1.2671902492705043
+Best Treatment Found train (%) 86.2
+treatment classification acc train (%) 39.2
+Policy Regret test (Sum) 171.4960881571544
+Best Treatment Found test (%) 52.800000000000004
+treatment classification acc test (%) 45.26

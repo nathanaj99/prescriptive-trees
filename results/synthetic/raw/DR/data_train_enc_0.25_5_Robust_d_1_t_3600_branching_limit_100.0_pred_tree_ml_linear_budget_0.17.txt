@@ -1,0 +1,61 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x5f180640
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 8e+01]
+Found heuristic solution: objective 278.7832413
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.07s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+
+Root relaxation: objective 2.860399e+02, 2128 iterations, 0.11 seconds (0.10 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  286.03986    0    2  278.78324  286.03986  2.60%     -    0s
+H    0     0                     285.7197524  286.03986  0.11%     -    0s
+     0     0  286.03297    0    5  285.71975  286.03297  0.11%     -    0s
+     0     0  286.03297    0    2  285.71975  286.03297  0.11%     -    0s
+     0     0  286.00581    0    5  285.71975  286.00581  0.10%     -    0s
+     0     0  285.74406    0    5  285.71975  285.74406  0.01%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  MIR: 78
+  RLT: 1
+
+Explored 1 nodes (3641 simplex iterations) in 0.96 seconds (0.40 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 2: 285.72 278.783 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.857197523959e+02, best bound 2.857440619417e+02, gap 0.0085%
+
+
+
+#########node  1
+V1.8
+#########node  2
+0.1414141414141414,0.8585858585858586
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 1.372314453125
+obj value 285.71975239594735
+Policy Regret train (Sum) 3.4466623243982886
+Best Treatment Found train (%) 75.4
+treatment classification acc train (%) 37.8
+Policy Regret test (Sum) 33.68478658989411
+Best Treatment Found test (%) 82.75
+treatment classification acc test (%) 40.58

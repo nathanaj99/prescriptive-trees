@@ -1,0 +1,86 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x12c49c38
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e-03, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+02]
+Found heuristic solution: objective 255.1842141
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.08s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+
+Root relaxation: objective 2.709395e+02, 2798 iterations, 0.14 seconds (0.15 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  270.93950    0    2  255.18421  270.93950  6.17%     -    0s
+H    0     0                     260.2406899  270.93950  4.11%     -    0s
+     0     0  270.87094    0    2  260.24069  270.87094  4.08%     -    0s
+     0     0  270.69583    0    2  260.24069  270.69583  4.02%     -    0s
+H    0     0                     263.1279486  270.67727  2.87%     -    0s
+     0     0  270.67727    0    2  263.12795  270.67727  2.87%     -    0s
+     0     0  270.09248    0    3  263.12795  270.09248  2.65%     -    0s
+     0     0  270.04982    0    3  263.12795  270.04982  2.63%     -    0s
+     0     0  269.87172    0    3  263.12795  269.87172  2.56%     -    0s
+     0     0  269.79489    0    3  263.12795  269.79489  2.53%     -    0s
+     0     0  269.79489    0    3  263.12795  269.79489  2.53%     -    0s
+     0     0  269.79489    0    2  263.12795  269.79489  2.53%     -    0s
+     0     0  269.43282    0    5  263.12795  269.43282  2.40%     -    0s
+     0     0  269.42999    0    5  263.12795  269.42999  2.40%     -    0s
+H    0     0                     268.7627998  269.42999  0.25%     -    0s
+     0     0  269.42999    0    2  268.76280  269.42999  0.25%     -    0s
+     0     0  269.42999    0    2  268.76280  269.42999  0.25%     -    0s
+     0     0  269.42999    0    5  268.76280  269.42999  0.25%     -    0s
+     0     0  269.42999    0    2  268.76280  269.42999  0.25%     -    1s
+     0     0  269.42999    0    2  268.76280  269.42999  0.25%     -    1s
+     0     0  269.42999    0    2  268.76280  269.42999  0.25%     -    1s
+     0     0  269.42999    0    2  268.76280  269.42999  0.25%     -    1s
+     0     0  269.42999    0    2  268.76280  269.42999  0.25%     -    1s
+     0     0  269.42999    0    2  268.76280  269.42999  0.25%     -    1s
+     0     0  269.34944    0    2  268.76280  269.34944  0.22%     -    1s
+     0     0  269.34944    0    2  268.76280  269.34944  0.22%     -    2s
+     0     0  269.34366    0    5  268.76280  269.34366  0.22%     -    2s
+     0     0  269.28557    0    5  268.76280  269.28557  0.19%     -    2s
+     0     0  269.28557    0    5  268.76280  269.28557  0.19%     -    2s
+
+Cutting planes:
+  Gomory: 4
+  MIR: 377
+  Flow cover: 53
+  RLT: 11
+  Relax-and-lift: 4
+
+Explored 1 nodes (6970 simplex iterations) in 2.30 seconds (1.06 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 4: 268.763 263.128 260.241 255.184 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.687627998255e+02, best bound 2.687627998255e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.7
+#########node  2
+0.14965986394557823,0.8503401360544218
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 2.7072136402130127
+obj value 268.7627998254797
+Policy Regret train (Sum) 9.912030792665206
+Best Treatment Found train (%) 57.599999999999994
+treatment classification acc train (%) 70.19999999999999
+Policy Regret test (Sum) 38.72832714295484
+Best Treatment Found test (%) 81.04
+treatment classification acc test (%) 65.7

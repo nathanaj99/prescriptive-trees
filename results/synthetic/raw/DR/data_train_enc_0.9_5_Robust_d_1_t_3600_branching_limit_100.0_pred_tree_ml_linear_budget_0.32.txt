@@ -1,0 +1,81 @@
+Set parameter TokenServer to value "hpc-licenses.hpcc.usc.edu"
+Set parameter TimeLimit to value 3600
+Gurobi Optimizer version 9.5.1 build v9.5.1rc2 (linux64)
+Thread count: 20 physical cores, 20 logical processors, using up to 20 threads
+Optimize a model with 6007 rows, 4529 columns and 24534 nonzeros
+Model fingerprint: 0x20fba574
+Variable types: 4506 continuous, 23 integer (23 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [2e-04, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 2e+02]
+Presolve removed 1520 rows and 1515 columns
+Presolve time: 0.06s
+Presolved: 4487 rows, 3014 columns, 21975 nonzeros
+Variable types: 2994 continuous, 20 integer (20 binary)
+Found heuristic solution: objective 279.0627894
+
+Root relaxation: objective 2.904759e+02, 3148 iterations, 0.14 seconds (0.18 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  290.47587    0    2  279.06279  290.47587  4.09%     -    0s
+     0     0  290.32833    0    2  279.06279  290.32833  4.04%     -    0s
+H    0     0                     279.4664336  290.32833  3.89%     -    0s
+     0     0  290.18935    0    2  279.46643  290.18935  3.84%     -    0s
+     0     0  289.38200    0    3  279.46643  289.38200  3.55%     -    0s
+     0     0  288.73305    0    3  279.46643  288.73305  3.32%     -    0s
+     0     0  288.72913    0    3  279.46643  288.72913  3.31%     -    0s
+     0     0  288.72913    0    3  279.46643  288.72913  3.31%     -    0s
+     0     0  288.72913    0    3  279.46643  288.72913  3.31%     -    0s
+     0     0  288.72913    0    3  279.46643  288.72913  3.31%     -    0s
+     0     0  288.72913    0    2  279.46643  288.72913  3.31%     -    0s
+     0     0  288.68316    0    3  279.46643  288.68316  3.30%     -    0s
+     0     0  288.68316    0    3  279.46643  288.68316  3.30%     -    0s
+     0     0  288.68316    0    3  279.46643  288.68316  3.30%     -    0s
+H    0     0                     288.1288323  288.61529  0.17%     -    0s
+     0     0  288.61529    0    3  288.12883  288.61529  0.17%     -    0s
+     0     0  288.61529    0    2  288.12883  288.61529  0.17%     -    1s
+     0     0  288.61529    0    2  288.12883  288.61529  0.17%     -    2s
+     0     0  288.61529    0    2  288.12883  288.61529  0.17%     -    2s
+     0     0  288.61529    0    2  288.12883  288.61529  0.17%     -    2s
+     0     0  288.61529    0    2  288.12883  288.61529  0.17%     -    2s
+     0     0  288.61529    0    2  288.12883  288.61529  0.17%     -    2s
+     0     0  288.61529    0    2  288.12883  288.61529  0.17%     -    2s
+     0     0  288.28279    0    3  288.12883  288.28279  0.05%     -    2s
+     0     0  288.28279    0    3  288.12883  288.28279  0.05%     -    2s
+     0     0  288.28279    0    4  288.12883  288.28279  0.05%     -    2s
+     0     0  288.28279    0    2  288.12883  288.28279  0.05%     -    2s
+     0     0  288.27753    0    4  288.12883  288.27753  0.05%     -    2s
+     0     0  288.27753    0    2  288.12883  288.27753  0.05%     -    2s
+     0     0  288.27753    0    2  288.12883  288.27753  0.05%     -    2s
+     0     0     cutoff    0       288.12883  288.12883  0.00%     -    3s
+
+Explored 1 nodes (8616 simplex iterations) in 3.11 seconds (1.45 work units)
+Thread count was 20 (of 20 available processors)
+
+Solution count 4: 288.129 279.466 279.063 279.063 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 2.881288323164e+02, best bound 2.881288323164e+02, gap 0.0000%
+
+
+
+#########node  1
+V1.7
+#########node  2
+0.0,1.0
+#########node  3
+1.0,0.0
+
+
+Total Solving Time 3.523944139480591
+obj value 288.1288323163918
+Policy Regret train (Sum) 2.0340319405192426
+Best Treatment Found train (%) 82.8
+treatment classification acc train (%) 76.2
+Policy Regret test (Sum) 23.056351074388168
+Best Treatment Found test (%) 86.09
+treatment classification acc test (%) 73.76
